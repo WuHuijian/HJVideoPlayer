@@ -14,6 +14,8 @@
 @interface HJVideoMaskView ()
 
 @property (nonatomic ,strong) UIButton * playBtn;
+// 当前显示的视图
+@property (nonatomic, strong) UIView *currentShowV;
 
 @end
 
@@ -59,6 +61,7 @@
     self.hidden = NO;
     self.playBtn.hidden = NO;
     self.playBtn.center = self.center;
+    self.currentShowV = self.playBtn;
 }
 
 #pragma mark - Event response
@@ -100,6 +103,14 @@
         default:
             
             break;
+    }
+}
+
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    
+    if (_currentShowV) {
+        self.currentShowV.center = self.center;
     }
 }
 

@@ -15,6 +15,8 @@
 
 @property (nonatomic ,strong) UIButton * listBtn;
 
+@property (nonatomic, strong) UILabel  * titleLabel;
+
 @end
 
 #define imgBack [UIImage imageFromBundleWithName:@"video_back"]
@@ -24,6 +26,8 @@
 -(instancetype)initWithFrame:(CGRect)frame;{
     self = [super initWithFrame:frame];
     if(self){
+        [self addObservers];
+        
         [self setupUI];
     }
     return self;
@@ -33,6 +37,8 @@
 {
     self = [super init];
     if (self) {
+        [self addObservers];
+        
         [self setupUI];
     }
     return self;
@@ -43,6 +49,12 @@
     [self addSubview:self.backBtn];
     
     [self addSubview:self.listBtn];
+}
+
+- (void)addObservers{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFullScreenAction:) name:kNotificationChangeScreen object:nil];
+    
 }
 
 #pragma mark - getters / setters
@@ -59,8 +71,7 @@
 }
 
 
-- (UIButton *)listBtn
-{
+- (UIButton *)listBtn{
     if (!_listBtn) {
         _listBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_listBtn setTitle:@"···" forState:UIControlStateNormal];
@@ -70,12 +81,37 @@
     return _listBtn;
 }
 
+
+- (UILabel *)titleLabel{
+    if (!_titleLabel) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = [UIFont systemFontOfSize:14];
+        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.hidden = YES;
+        _titleLabel.numberOfLines = 1;
+        [self addSubview:_titleLabel];
+    }
+    return _titleLabel;
+}
+
+
+
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
     
     self.backBtn.frame = CGRectMake(0, 0, self.height, self.height);
     
     self.listBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
+    
+    self.titleLabel.frame = CGRectMake(CGRectGetMaxX(self.backBtn.frame)+10, 0, self.width-CGRectGetMaxX(self.backBtn.frame)-self.listBtn.origin.y-20, self.height);
+    
+}
+
+- (void)setTitle:(NSString *)title{
+   
+    _title = title;
+    
+    self.titleLabel.text = title;
 }
 
 #pragma mark - Event Response
@@ -95,4 +131,10 @@
     }
 }
 
+
+- (void)changeFullScreenAction:(NSNotification *)notif{
+    
+    BOOL isFullScreen = [[notif object] boolValue];
+    self.titleLabel.hidden = !isFullScreen;
+}
 @end

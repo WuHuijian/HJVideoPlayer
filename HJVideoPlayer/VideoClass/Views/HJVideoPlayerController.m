@@ -16,6 +16,7 @@
 #import "HJViewFactory.h"
 #import "HJVideoMaskView.h"
 #import "HJVideoPlayerHeader.h"
+#import "AppDelegate+HJExtendion.h"
 
 typedef NS_ENUM(NSUInteger, MoveDirection) {
     MoveDirection_none = 0,
@@ -62,12 +63,14 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 
 /** 进度调节 */
 @property (nonatomic, assign) CGFloat currentTime;
+/** 定时器 */
+@property (nonatomic, strong) NSTimer *timer;
 
 
 @end
 
-#define kToolBarHalfHeight Ratio_X(30.f)
-#define kToolBarFullHeight Ratio_X(40.f)
+#define kToolBarHalfHeight 30.f
+#define kToolBarFullHeight 40.f
 #define kFullScreenFrame CGRectMake(0 , 0, kScreenHeight, kScreenWidth)
 
 #define imgVideoBackImg [UIImage imageFromBundleWithName:@"video_backImg.jpeg"]
@@ -102,17 +105,21 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.allowRotation = YES;
 
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    delegate.allowRotation = NO;
 }
 
 - (void)dealloc{
 
-    
+    NSLog(@"播放器视图已销毁");
 }
 
 
@@ -162,6 +169,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     // 设置topView
     self.topView.frame = CGRectMake(0, 0, self.maskView.frame.size.width, kToolBarHalfHeight);
+    self.topView.title = @"吴辉建的视频播放器";
     [self.maskView addSubview:self.topView];
     
     // 设置BottomView
@@ -184,18 +192,23 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
         CGFloat toolBarHeight = 0;
         if (changeFull) {
-            self.view.transform = CGAffineTransformMakeRotation(M_PI_2);
+            NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+            [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+            
             self.view.frame = kFrame;
             toolBarHeight = kToolBarFullHeight;
         }else{
-            self.view.transform = CGAffineTransformIdentity;
+            NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+            [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+            
             self.view.frame = self.originFrame;
             toolBarHeight = kToolBarHalfHeight;
         }
         
         self.playerView.frame = self.view.bounds;
-        self.topView.frame = CGRectMake(0, 0, self.view.width, toolBarHeight);
-        self.bottomView.frame = CGRectMake(0, self.view.height-toolBarHeight, self.view.width, toolBarHeight);
+        self.maskView.frame = self.playerView.bounds;
+        self.topView.frame = CGRectMake(0, 0, self.maskView.width, toolBarHeight);
+        self.bottomView.frame = CGRectMake(0, self.maskView.height-toolBarHeight, self.maskView.width, toolBarHeight);
         self.isFullScreen = changeFull;
         // 发送屏幕改变通知
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationChangeScreen object:@(changeFull)];
@@ -205,11 +218,13 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 
 
+
+
 #pragma mark - 底部栏显示/隐藏
 
 - (void)addTapGesture
 {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showBottomAction)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startTimer)];
     [self.view addGestureRecognizer:tap];
     [self startTimer];
 }
@@ -229,18 +244,36 @@ static const NSInteger maxSecondsForBottom = 5.f;
         self.bottomView.alpha = 1.f;
     } completion:^(BOOL finished) {
         
-        [self startTimer];
+//        [self startTimer];
     }];
 }
 
 - (void)startTimer
 {
-    [self setSecondsForBottom:maxSecondsForBottom];
-    [self.maskView setMaskViewStatus:VideoMaskViewStatus_showPlayBtn];
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self
-                                   selector:@selector(hideMaskViewWithTimer:)
-                                   userInfo:nil
-                                    repeats:YES];
+    //看是否正在计时，若是则结束计时 否则开始计时
+    if (self.timer) {
+    
+        [self cancelTimer:self.timer];
+        
+    }else{
+        [self setSecondsForBottom:maxSecondsForBottom];
+        [self showBottomView];
+        [self.maskView setMaskViewStatus:VideoMaskViewStatus_showPlayBtn];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self
+                                                    selector:@selector(hideMaskViewWithTimer:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+    }
+}
+
+- (void)cancelTimer:(NSTimer *)timer{
+    
+    [timer invalidate];
+    timer = nil;
+    self.timer = nil;
+    [self hideBottomView];
+    self.maskView.maskViewStatus = VideoMaskViewStatus_hide;
+    self.secondsForBottom = 0;
 }
 
 - (void)hideBottomView
@@ -266,17 +299,12 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 
 - (void)hideMaskViewWithTimer:(NSTimer *)timer{
-    if (self.maskView.hidden) {
-        [timer invalidate];
-        timer = nil;
-    }else{
+    
         self.secondsForBottom --;
         NSLog(@"隐藏底部栏:%zd",self.secondsForBottom);
         if (self.secondsForBottom <= 0) {
-            [self hideBottomView];
-            self.maskView.maskViewStatus = VideoMaskViewStatus_hide;
+            [self cancelTimer:timer];
         }
-    }
 }
 
 
@@ -458,6 +486,40 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [super touchesEnded:touches withEvent:event];
     [self setMoveDirection:MoveDirection_none];
     [self setCurrentTime:0];
+}
+
+
+#pragma mark - 系统方法
+// 返回是否支持设备自动旋转
+- (BOOL)shouldAutorotate
+{
+    if (kAppDelegate.allowRotation) {
+        return YES;
+    }else{
+        return NO;
+    }
+    
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // do something before rotation
+        if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+            //屏幕从竖屏变为横屏时执行
+            [self changeFullScreen:YES];
+        }else{
+            //屏幕从横屏变为竖屏时执行
+            [self changeFullScreen:NO];
+        }
+    });
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    
+    
 }
 
 @end

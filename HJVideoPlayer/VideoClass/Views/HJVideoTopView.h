@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^videoBackBlock)();
+typedef void(^videoBackBlock)(void);
 
 typedef void(^videoShowListBlock)(BOOL show);
 
@@ -18,5 +18,7 @@ typedef void(^videoShowListBlock)(BOOL show);
 @property (nonatomic, copy) videoBackBlock  backBlock;
 
 @property (nonatomic, copy) videoShowListBlock  showListBlock;
+
+@property (nonatomic, copy) NSString *title;
 
 @end
