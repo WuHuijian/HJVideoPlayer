@@ -14,6 +14,8 @@
 @interface HJVideoMaskView ()
 
 @property (nonatomic ,strong) UIButton * playBtn;
+
+@property (nonatomic ,strong) UIButton * replayBtn;
 // 当前显示的视图
 @property (nonatomic, strong) UIView *currentShowV;
 
@@ -51,6 +53,11 @@
     
 }
 
+- (void)show{
+    
+    self.hidden = NO;
+}
+
 - (void)hide{
  
     self.hidden = YES;
@@ -58,10 +65,22 @@
 
 - (void)showPlayBtn{
     
+    self.replayBtn.hidden = YES;
+    
     self.hidden = NO;
     self.playBtn.hidden = NO;
     self.playBtn.center = self.center;
     self.currentShowV = self.playBtn;
+}
+
+
+- (void)showReplayBtn{
+    self.playBtn.hidden = YES;
+    
+    self.hidden = NO;
+    self.replayBtn.hidden = NO;
+    self.replayBtn.center = self.center;
+    self.currentShowV = self.replayBtn;
 }
 
 #pragma mark - Event response
@@ -69,6 +88,12 @@
     sender.selected = !sender.selected;
     if (self.playBlock) {
         self.playBlock(sender.selected);
+    }
+}
+
+- (void)replayAction{
+    if(self.replayBlock){
+        self.replayBlock();
     }
 }
 #pragma mark - Private methods
@@ -89,6 +114,24 @@
 }
 
 
+- (UIButton *)replayBtn
+{
+    if (!_replayBtn) {
+//        _replayBtn = [HJViewFactory buttonWithNormalImage:imgPlay selectedImage:imgPause];
+        _replayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_replayBtn addTarget:self action:@selector(replayAction) forControlEvents:UIControlEventTouchUpInside];
+        [_replayBtn setFrame:CGRectMake(0, 0, 100, 50)];
+        [_replayBtn setHidden:YES];
+        [_replayBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_replayBtn setTitle:@"重新播放" forState:UIControlStateNormal];
+        [_replayBtn setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.6]];
+        _replayBtn.layer.cornerRadius = 4.f;
+        _replayBtn.layer.masksToBounds = YES;
+        [self addSubview:_replayBtn];
+    }
+    return _replayBtn;
+}
+
 - (void)setMaskViewStatus:(VideoMaskViewStatus)maskViewStatus
 {
     _maskViewStatus = maskViewStatus;
@@ -99,6 +142,9 @@
             break;
         case VideoMaskViewStatus_showPlayBtn:
             [self showPlayBtn];
+            break;
+        case VideoMaskViewStatus_showReplayBtn:
+            [self showReplayBtn];
             break;
         default:
             

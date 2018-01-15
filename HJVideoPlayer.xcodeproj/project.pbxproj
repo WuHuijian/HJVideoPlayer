@@ -28,6 +28,7 @@
 		D29B1CBE200C41BE00E37C21 /* HJVideoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA5200C41BE00E37C21 /* HJVideoBottomView.m */; };
 		D29B1CBF200C41BE00E37C21 /* HJVideoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA6200C41BE00E37C21 /* HJVideoTopView.m */; };
 		D29B1CCA200C52D000E37C21 /* AppDelegate+HJExtendion.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */; };
+		D29B1CCE200C82B200E37C21 /* HJVideoListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CCD200C82B200E37C21 /* HJVideoListController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,8 @@
 		D29B1CC7200C444000E37C21 /* HJVideoPlayerHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerHeader.h; sourceTree = "<group>"; };
 		D29B1CC8200C52D000E37C21 /* AppDelegate+HJExtendion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+HJExtendion.h"; path = "../../../../../../Documents/AppDelegate+HJExtendion.h"; sourceTree = "<group>"; };
 		D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+HJExtendion.m"; path = "../../../../../../Documents/AppDelegate+HJExtendion.m"; sourceTree = "<group>"; };
+		D29B1CCC200C82B200E37C21 /* HJVideoListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HJVideoListController.h; path = ../../../../../Documents/HJVideoListController.h; sourceTree = "<group>"; };
+		D29B1CCD200C82B200E37C21 /* HJVideoListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HJVideoListController.m; path = ../../../../../Documents/HJVideoListController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +167,7 @@
 				D29B1C93200C41BE00E37C21 /* VideoClass */,
 				D29B1C7E200C41BD00E37C21 /* Resources */,
 				D29B1C88200C41BE00E37C21 /* Dependent */,
+				D29B1CCB200C825400E37C21 /* ExampleDemo */,
 				D29B1C84200C41BE00E37C21 /* Assets.xcassets */,
 				D29B1C85200C41BE00E37C21 /* ViewController.m */,
 				D29B1C7D200C41BD00E37C21 /* AppDelegate.h */,
@@ -241,6 +245,15 @@
 				D29B1CA1200C41BE00E37C21 /* HJVideoPlayerController.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D29B1CCB200C825400E37C21 /* ExampleDemo */ = {
+			isa = PBXGroup;
+			children = (
+				D29B1CCC200C82B200E37C21 /* HJVideoListController.h */,
+				D29B1CCD200C82B200E37C21 /* HJVideoListController.m */,
+			);
+			path = ExampleDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +397,7 @@
 				D29B1CBE200C41BE00E37C21 /* HJVideoBottomView.m in Sources */,
 				D29B1CBB200C41BE00E37C21 /* HJVideoMaskView.m in Sources */,
 				D29B1CB0200C41BE00E37C21 /* ViewController.m in Sources */,
+				D29B1CCE200C82B200E37C21 /* HJVideoListController.m in Sources */,
 				D29B1CB7200C41BE00E37C21 /* HJViewFactory.m in Sources */,
 				D29B1CB3200C41BE00E37C21 /* HJBufferSlider.m in Sources */,
 				D29B1CB8200C41BE00E37C21 /* HJTimeUtil.m in Sources */,

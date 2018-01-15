@@ -40,4 +40,6 @@ ServiceSingletonH(HJVideoPlayManager)
 
 - (void)seekToTime:(CGFloat)second;
 
+- (void)reset;
+
 @end

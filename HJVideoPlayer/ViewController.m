@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "HJVideoPlayerController.h"
 #import "HJDefines.h"
+#import "HJVideoListController.h"
 
 @interface ViewController ()
 
@@ -18,21 +19,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    HJVideoPlayerController *videoPlayer = [[HJVideoPlayerController alloc]initWithFrame:CGRectMake(0, 20, kScreenWidth, kHalfScreenVideoHeight)];
-    [self.view addSubview:videoPlayer.view];
-    [self addChildViewController:videoPlayer];
-//    @"http://v1.jiyoutang.com/source/publicvideo/20160521/2/YW/BZYWRJGB4020701.mp4"
-//    @"http://data.vod.itc.cn/?rb=1&prot=1&key=jbZhEJhlqlUN-Wj_HEI8BjaVqKNFvDrn&prod=flash&pt=1&new=/24/130/hy0Jstq9J9itor8u88OnBgA.mp4"
     
-    [videoPlayer setUrl:@"http://hc34.aipai.com/user/20/21066020/1006/card/44203707/card.mp4"];
+    UIButton * enterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [enterBtn setTitle:@"进入视频播放列表" forState:UIControlStateNormal];
+    [enterBtn setFrame:CGRectMake(0, 0, 200, 44)];
+    [enterBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [enterBtn setCenter:self.view.center];
+    [enterBtn addTarget:self action:@selector(enterAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:enterBtn];
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)enterAction{
+    
+    HJVideoListController *listVC = [[HJVideoListController alloc] init];
+    [self.navigationController pushViewController:listVC animated:YES];
 }
+
 
 
 @end
