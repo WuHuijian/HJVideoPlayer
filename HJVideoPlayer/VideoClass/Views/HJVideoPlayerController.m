@@ -501,6 +501,8 @@ static const NSInteger maxSecondsForBottom = 5.f;
     if (self.moveDirection == MoveDirection_right || self.moveDirection == MoveDirection_left) {//快进
         CGFloat offsetSeconds = self.bottomView.maximumValue*subX/width;
         [self.bottomView seekTo:self.currentTime + offsetSeconds];
+        self.maskView.maskViewStatus = VideoMaskViewStatus_showFastForward;
+        [self.maskView.fastForwardView moveRight:offsetSeconds>0];
     }else if (self.moveDirection == MoveDirection_up || self.moveDirection == MoveDirection_down){
         if (startInLeft) {//上调亮度
             [UIScreen mainScreen].brightness = self.brightness - subY/height;//10;

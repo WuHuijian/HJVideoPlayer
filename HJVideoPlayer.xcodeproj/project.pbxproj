@@ -29,6 +29,7 @@
 		D29B1CBF200C41BE00E37C21 /* HJVideoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA6200C41BE00E37C21 /* HJVideoTopView.m */; };
 		D29B1CCA200C52D000E37C21 /* AppDelegate+HJExtendion.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */; };
 		D29B1CCE200C82B200E37C21 /* HJVideoListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CCD200C82B200E37C21 /* HJVideoListController.m */; };
+		D29B1CD1200CA60000E37C21 /* HJFastForwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CD0200CA60000E37C21 /* HJFastForwardView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,8 @@
 		D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+HJExtendion.m"; path = "../../../../../../Documents/AppDelegate+HJExtendion.m"; sourceTree = "<group>"; };
 		D29B1CCC200C82B200E37C21 /* HJVideoListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HJVideoListController.h; path = ../../../../../Documents/HJVideoListController.h; sourceTree = "<group>"; };
 		D29B1CCD200C82B200E37C21 /* HJVideoListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HJVideoListController.m; path = ../../../../../Documents/HJVideoListController.m; sourceTree = "<group>"; };
+		D29B1CCF200CA60000E37C21 /* HJFastForwardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HJFastForwardView.h; path = ../../../../../../Documents/HJFastForwardView.h; sourceTree = "<group>"; };
+		D29B1CD0200CA60000E37C21 /* HJFastForwardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HJFastForwardView.m; path = ../../../../../../Documents/HJFastForwardView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +246,8 @@
 				D29B1CA3200C41BE00E37C21 /* HJPlayerView.m */,
 				D29B1CA7200C41BE00E37C21 /* HJVideoPlayerController.h */,
 				D29B1CA1200C41BE00E37C21 /* HJVideoPlayerController.m */,
+				D29B1CCF200CA60000E37C21 /* HJFastForwardView.h */,
+				D29B1CD0200CA60000E37C21 /* HJFastForwardView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 				D29B1CB0200C41BE00E37C21 /* ViewController.m in Sources */,
 				D29B1CCE200C82B200E37C21 /* HJVideoListController.m in Sources */,
 				D29B1CB7200C41BE00E37C21 /* HJViewFactory.m in Sources */,
+				D29B1CD1200CA60000E37C21 /* HJFastForwardView.m in Sources */,
 				D29B1CB3200C41BE00E37C21 /* HJBufferSlider.m in Sources */,
 				D29B1CB8200C41BE00E37C21 /* HJTimeUtil.m in Sources */,
 				D29B1CCA200C52D000E37C21 /* AppDelegate+HJExtendion.m in Sources */,

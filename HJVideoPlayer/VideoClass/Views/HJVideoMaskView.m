@@ -7,8 +7,7 @@
 //
 
 #import "HJVideoMaskView.h"
-#import "HJViewFactory.h"
-#import "UIImage+getImage.h"
+#import "HJVideoPlayerHeader.h"
 
 
 @interface HJVideoMaskView ()
@@ -18,6 +17,7 @@
 @property (nonatomic ,strong) UIButton * replayBtn;
 // 当前显示的视图
 @property (nonatomic, strong) UIView *currentShowV;
+
 
 @end
 
@@ -65,23 +65,35 @@
 
 - (void)showPlayBtn{
     
-    self.replayBtn.hidden = YES;
-    
-    self.hidden = NO;
-    self.playBtn.hidden = NO;
-    self.playBtn.center = self.center;
-    self.currentShowV = self.playBtn;
+    [self showSomeView:self.playBtn];
 }
 
 
 - (void)showReplayBtn{
+    
+    [self showSomeView:self.replayBtn];
+}
+
+- (void)showFastForward{
+    
+    [self showSomeView:self.fastForwardView];
+}
+
+
+
+- (void)showSomeView:(UIView *)showView{
+    
     self.playBtn.hidden = YES;
+    self.replayBtn.hidden = YES;
+    self.fastForwardView.hidden = YES;
     
     self.hidden = NO;
-    self.replayBtn.hidden = NO;
-    self.replayBtn.center = self.center;
-    self.currentShowV = self.replayBtn;
+    self.currentShowV = showView;
+    
+    showView.hidden = NO;
+    showView.center = self.center;
 }
+
 
 #pragma mark - Event response
 - (void)playOrPauseAction:(UIButton *)sender{
@@ -97,6 +109,8 @@
     }
 }
 #pragma mark - Private methods
+
+#pragma mark - Public methods
 
 #pragma mark - Delegate methods
 
@@ -132,6 +146,18 @@
     return _replayBtn;
 }
 
+- (HJFastForwardView *)fastForwardView{
+    if (!_fastForwardView) {
+        _fastForwardView = [[HJFastForwardView alloc] init];
+        [_fastForwardView setFrame:CGRectMake(0, 0, 200, 200)];
+        [_fastForwardView setBackgroundColor:[UIColor darkGrayColor]];
+        [_fastForwardView setHidden:YES];
+        [_fastForwardView configForwardLeftImage:[UIImage imageFromBundleWithName:@"video_farword_left.png"] forwardRightImage:[UIImage imageFromBundleWithName:@"video_farword_right.png"]];
+        [self addSubview:_fastForwardView];
+    }
+    return _fastForwardView;
+}
+
 - (void)setMaskViewStatus:(VideoMaskViewStatus)maskViewStatus
 {
     _maskViewStatus = maskViewStatus;
@@ -145,6 +171,9 @@
             break;
         case VideoMaskViewStatus_showReplayBtn:
             [self showReplayBtn];
+            break;
+        case VideoMaskViewStatus_showFastForward:
+            [self showFastForward];
             break;
         default:
             
