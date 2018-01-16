@@ -8,7 +8,7 @@
 
 #import "HJVideoMaskView.h"
 #import "HJVideoPlayerHeader.h"
-
+#import "HJCircleLoading.h"
 
 @interface HJVideoMaskView ()
 
@@ -17,7 +17,10 @@
 @property (nonatomic ,strong) UIButton * replayBtn;
 // 当前显示的视图
 @property (nonatomic, strong) UIView *currentShowV;
-
+/** 快进视图 */
+@property (nonatomic, strong) HJFastForwardView *fastForwardView;
+/** 加载视图 */
+@property (nonatomic, strong) HJCircleLoading *circleLoading;
 
 @end
 
@@ -79,13 +82,19 @@
     [self showSomeView:self.fastForwardView];
 }
 
-
+- (void)showLoading{
+    
+    [self showSomeView:self.circleLoading];
+    [self.circleLoading startAnimating];
+}
 
 - (void)showSomeView:(UIView *)showView{
     
     self.playBtn.hidden = YES;
     self.replayBtn.hidden = YES;
     self.fastForwardView.hidden = YES;
+    self.circleLoading.hidden = YES;
+    [self.circleLoading stopAnimating];
     
     self.hidden = NO;
     self.currentShowV = showView;
@@ -149,19 +158,33 @@
 - (HJFastForwardView *)fastForwardView{
     if (!_fastForwardView) {
         _fastForwardView = [[HJFastForwardView alloc] init];
-        [_fastForwardView setFrame:CGRectMake(0, 0, 200, 200)];
-        [_fastForwardView setBackgroundColor:[UIColor darkGrayColor]];
+        [_fastForwardView setFrame:CGRectMake(0, 0, 150, 100)];
+        [_fastForwardView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.7]];
         [_fastForwardView setHidden:YES];
         [_fastForwardView configForwardLeftImage:[UIImage imageFromBundleWithName:@"video_farword_left.png"] forwardRightImage:[UIImage imageFromBundleWithName:@"video_farword_right.png"]];
+        _fastForwardView.layer.cornerRadius = 8.f;
+        _fastForwardView.layer.masksToBounds = YES;
         [self addSubview:_fastForwardView];
     }
     return _fastForwardView;
 }
 
+
+- (HJCircleLoading *)circleLoading{
+    if (!_circleLoading) {
+        _circleLoading = [[HJCircleLoading alloc] init];
+        _circleLoading.frame = CGRectMake(0, 0, 80, 80);
+        _circleLoading.backgroundColor = [UIColor clearColor];
+        _circleLoading.hidden = YES;
+        [self addSubview:_circleLoading];
+    }
+    return _circleLoading;
+}
+
 - (void)setMaskViewStatus:(VideoMaskViewStatus)maskViewStatus
 {
     _maskViewStatus = maskViewStatus;
-
+    
     switch (maskViewStatus) {
         case VideoMaskViewStatus_hide:
             [self hide];
@@ -174,6 +197,9 @@
             break;
         case VideoMaskViewStatus_showFastForward:
             [self showFastForward];
+            break;
+        case VideoMaskViewStatus_showLoading:
+            [self showLoading];
             break;
         default:
             

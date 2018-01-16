@@ -66,6 +66,9 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 /** 定时器 */
 @property (nonatomic, strong) NSTimer *timer;
 
+/** 当前播放时长 */
+@property (nonatomic, assign) CGFloat currentDuration;
+
 
 @end
 
@@ -330,8 +333,15 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [kVideoPlayerManager readyBlock:^(CGFloat totoalDuration) {
         NSLog(@"[%@]:准备播放",[self class]);
         weakSelf.playStatus = videoPlayer_readyToPlay;
+        weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
         [weakSelf startTimer];
     } monitoringBlock:^(CGFloat currentDuration) {
+        if (weakSelf.currentDuration == currentDuration) {
+             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
+        }else{
+             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
+        }
+        weakSelf.currentDuration = currentDuration;
         weakSelf.playStatus = videoPlayer_playing;
     } endBlock:^{
         NSLog(@"[%@]:播放结束",[self class]);
@@ -452,6 +462,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     if (!url) return;
     _url = url;
     [self.playerView setPlayer:[kVideoPlayerManager setUrl:_url]];
+    self.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
 }
 
 - (void)setPlayStatus:(VideoPlayerStatus)playStatus{
@@ -499,10 +510,13 @@ static const NSInteger maxSecondsForBottom = 5.f;
     }
     
     if (self.moveDirection == MoveDirection_right || self.moveDirection == MoveDirection_left) {//快进
-        CGFloat offsetSeconds = self.bottomView.maximumValue*subX/width;
-        [self.bottomView seekTo:self.currentTime + offsetSeconds];
+        CGFloat ratio = subX/width;
+        CGFloat offsetSeconds = self.bottomView.maximumValue*ratio;
+        CGFloat seekTime = self.currentTime + offsetSeconds;
+        [self.maskView.fastForwardView setMaxDuration:self.bottomView.maximumValue];
         self.maskView.maskViewStatus = VideoMaskViewStatus_showFastForward;
         [self.maskView.fastForwardView moveRight:offsetSeconds>0];
+        [self.maskView.fastForwardView setProgress:seekTime/self.bottomView.maximumValue];
     }else if (self.moveDirection == MoveDirection_up || self.moveDirection == MoveDirection_down){
         if (startInLeft) {//上调亮度
             [UIScreen mainScreen].brightness = self.brightness - subY/height;//10;
@@ -515,6 +529,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     [super touchesEnded:touches withEvent:event];
+    if (self.moveDirection == MoveDirection_left || self.moveDirection == MoveDirection_right) {
+        [self.bottomView seekTo:self.maskView.fastForwardView.currentDuration];
+        [self.maskView setMaskViewStatus:VideoMaskViewStatus_showPlayBtn];
+    }
     [self setMoveDirection:MoveDirection_none];
     [self setCurrentTime:0];
 }

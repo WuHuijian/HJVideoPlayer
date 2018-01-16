@@ -13,7 +13,8 @@ typedef NS_ENUM(NSUInteger, VideoMaskViewStatus) {
     VideoMaskViewStatus_hide             = 0,
     VideoMaskViewStatus_showPlayBtn      = 1,
     VideoMaskViewStatus_showReplayBtn    = 2,
-    VideoMaskViewStatus_showFastForward  = 3
+    VideoMaskViewStatus_showFastForward  = 3,
+    VideoMaskViewStatus_showLoading      = 4
 };
 
 typedef void(^videoPlayerPlayBlock)(BOOL isPlay);
@@ -29,13 +30,13 @@ typedef void(^videoPlayerReplayClickBlock)(void);
 @property (nonatomic, copy) videoPlayerReplayClickBlock replayBlock;
 
 /** 快进视图 */
-@property (nonatomic, strong) HJFastForwardView *fastForwardView;
+@property (nonatomic, strong, readonly) HJFastForwardView *fastForwardView;
 
 /** 遮罩层显示状态 */
 @property (nonatomic, assign) VideoMaskViewStatus maskViewStatus;
 
-- (void)moveRight:(BOOL)isRight;
-
 - (void)show;
+
+- (void)hide;
 
 @end
