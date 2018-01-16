@@ -12,17 +12,21 @@
 
 
 typedef void(^videoPlayerFullScreenBlock)(BOOL isFull);
+typedef void(^videoPlayerLoadingBlock)(void);
 
 @interface HJVideoBottomView : UIView
 
-/** 大小屏切换回调*/
-@property (nonatomic, copy) videoPlayerFullScreenBlock fullScreenBlock;
+
 /** 进度*/
 @property (nonatomic, assign ,readonly) CGFloat progressValue;
 /** 缓冲进度*/
 @property (nonatomic, assign ,readonly) CGFloat bufferValue;
 /** 最大进度 */
 @property (nonatomic, assign ,readonly) CGFloat maximumValue;
+/** 大小屏切换回调*/
+@property (nonatomic, copy) videoPlayerFullScreenBlock fullScreenBlock;
+/** 加载中回调*/
+@property (nonatomic, copy) videoPlayerLoadingBlock loadingBlock;
 
 
 

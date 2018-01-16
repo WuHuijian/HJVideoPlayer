@@ -66,10 +66,6 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 /** 定时器 */
 @property (nonatomic, strong) NSTimer *timer;
 
-/** 当前播放时长 */
-@property (nonatomic, assign) CGFloat currentDuration;
-
-
 @end
 
 #define kToolBarHalfHeight 44.f
@@ -169,12 +165,15 @@ static const NSInteger maxSecondsForBottom = 5.f;
     self.maskView = [[HJVideoMaskView alloc] initWithFrame:self.playerView.bounds];
     self.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.3];
     self.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
+    WS(weakSelf);
     self.maskView.playBlock = ^(BOOL isPlay) {
         if (isPlay) {
-            [kVideoPlayerManager play];
+            [weakSelf play];
         }else{
-            [kVideoPlayerManager pause];
+            [weakSelf pause];
         }
+        
+        [weakSelf resetTimer];
     };
     
     __weak HJVideoMaskView * weakMaskView = self.maskView;
@@ -187,14 +186,14 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
     
     // 设置topView
-    self.topView.frame = CGRectMake(0, 0, self.maskView.frame.size.width, kToolBarHalfHeight);
+    self.topView.frame = CGRectMake(0, 0, self.view.frame.size.width, kToolBarHalfHeight);
     self.topView.title = @"吴辉建的视频播放器";
-    [self.maskView addSubview:self.topView];
+    [self.view addSubview:self.topView];
     
     // 设置BottomView
     self.bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
-    self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.maskView.frame) - kToolBarHalfHeight, self.maskView.frame.size.width, kToolBarHalfHeight);
-    [self.maskView addSubview:self.bottomView];
+    self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - kToolBarHalfHeight, self.view.frame.size.width, kToolBarHalfHeight);
+    [self.view addSubview:self.bottomView];
     
     //
     kHJVideoUIManager.topView = self.topView;
@@ -273,12 +272,23 @@ static const NSInteger maxSecondsForBottom = 5.f;
         
     }else{
         [self setSecondsForBottom:maxSecondsForBottom];
+        self.topView.hidden = NO;
         [self showBottomView];
         [self.maskView show];
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self
                                                     selector:@selector(hideMaskViewWithTimer:)
                                                     userInfo:nil
                                                      repeats:YES];
+    }
+}
+
+
+- (void)resetTimer{
+    
+    if ([self.timer isValid]) {
+        self.secondsForBottom = 5.f;
+    }else{
+        [self startTimer];
     }
 }
 
@@ -289,8 +299,27 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     [self.timer invalidate];
     self.timer = nil;
+    
+    [self hideSomeViews];
+    
+}
+
+- (void)hideSomeViews{
+    
+    //顶部视图隐藏
+    if (self.isFullScreen) {
+        self.topView.hidden = YES;
+    }
+    
+    //底部视图隐藏
     [self hideBottomView];
-    self.maskView.maskViewStatus = VideoMaskViewStatus_hide;
+    
+    //中间内容隐藏 暂停 播放失败 和播放结束 无需隐藏显示内容
+    if(self.playStatus != videoPlayer_pause &&
+       self.playStatus != videoPlayer_readyToPlay){
+        [self.maskView hide];
+    }
+    
     self.secondsForBottom = 0;
 }
 
@@ -299,20 +328,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [UIView animateWithDuration:0.25 animations:^{
         self.bottomView.alpha = 0.f;
     }];
-}
-
-- (void)hideBottomWithTimer:(NSTimer *)timer{
-    
-    if (self.bottomView.alpha == 0) {
-        [timer invalidate];
-        timer = nil;
-    }else{
-        self.secondsForBottom --;
-        NSLog(@"隐藏底部栏:%zd",self.secondsForBottom);
-        if (self.secondsForBottom <= 0) {
-            [self hideBottomView];
-        }
-    }
 }
 
 
@@ -336,13 +351,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
         [weakSelf startTimer];
     } monitoringBlock:^(CGFloat currentDuration) {
-        if (weakSelf.currentDuration == currentDuration) {
-             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
-        }else{
-             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
-        }
-        weakSelf.currentDuration = currentDuration;
         weakSelf.playStatus = videoPlayer_playing;
+        if (weakSelf.maskView.maskViewStatus != VideoMaskViewStatus_showPlayBtn) {
+            weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
+        };
     } endBlock:^{
         NSLog(@"[%@]:播放结束",[self class]);
         weakSelf.playStatus = videoPlayer_playEnd;
@@ -382,7 +394,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)pause{
     NSLog(@"暂停播放");
     [kVideoPlayerManager pause];
-    [self setPlayStatus:videoPlayer_pause];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self setPlayStatus:videoPlayer_pause];
+    });
 }
 
 #pragma mark - Event Methods
@@ -445,6 +459,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
         _bottomView = [[HJVideoBottomView alloc] init];
         _bottomView.fullScreenBlock = ^(BOOL isFull){
             [weakSelf changeFullScreen:isFull];
+        };
+        
+        _bottomView.loadingBlock = ^{
+            weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
         };
     }
     return _bottomView;
@@ -517,6 +535,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         self.maskView.maskViewStatus = VideoMaskViewStatus_showFastForward;
         [self.maskView.fastForwardView moveRight:offsetSeconds>0];
         [self.maskView.fastForwardView setProgress:seekTime/self.bottomView.maximumValue];
+        [self resetTimer];
     }else if (self.moveDirection == MoveDirection_up || self.moveDirection == MoveDirection_down){
         if (startInLeft) {//上调亮度
             [UIScreen mainScreen].brightness = self.brightness - subY/height;//10;
@@ -531,7 +550,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [super touchesEnded:touches withEvent:event];
     if (self.moveDirection == MoveDirection_left || self.moveDirection == MoveDirection_right) {
         [self.bottomView seekTo:self.maskView.fastForwardView.currentDuration];
-        [self.maskView setMaskViewStatus:VideoMaskViewStatus_showPlayBtn];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.playStatus = self.prePlayStatus;
+            [self resetTimer];
+        });
     }
     [self setMoveDirection:MoveDirection_none];
     [self setCurrentTime:0];
