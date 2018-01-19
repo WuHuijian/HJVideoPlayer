@@ -129,8 +129,11 @@
     if (!_playBtn) {
         _playBtn = [HJViewFactory buttonWithNormalImage:imgPlay selectedImage:imgPause];
         [_playBtn addTarget:self action:@selector(playOrPauseAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_playBtn setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.3f]];
         [_playBtn setFrame:CGRectMake(0, 0, 44, 44)];
         [_playBtn setHidden:YES];
+        _playBtn.layer.cornerRadius = CGRectGetWidth(_playBtn.frame)/2.f;
+        _playBtn.layer.masksToBounds = YES;
         [self addSubview:_playBtn];
     }
     return _playBtn;
@@ -140,7 +143,6 @@
 - (UIButton *)replayBtn
 {
     if (!_replayBtn) {
-//        _replayBtn = [HJViewFactory buttonWithNormalImage:imgPlay selectedImage:imgPause];
         _replayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_replayBtn addTarget:self action:@selector(replayAction) forControlEvents:UIControlEventTouchUpInside];
         [_replayBtn setFrame:CGRectMake(0, 0, 100, 50)];
