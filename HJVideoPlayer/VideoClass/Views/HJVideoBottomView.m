@@ -14,8 +14,6 @@
 #import "HJVideoConst.h"
 
 #define imgBack         [UIImage imageFromBundleWithName:@"video_back"]
-#define imgPlay         [UIImage imageFromBundleWithName:@"video_play"]
-#define imgPause        [UIImage imageFromBundleWithName:@"video_pause"]
 #define imgFullScreen   [UIImage imageFromBundleWithName:@"video_toFullScreen_white"]
 #define imgHalfScreen   [UIImage imageFromBundleWithName:@"video_toHalfScreen_white"]
 #define imgSliderThumb  [UIImage imageFromBundleWithName:@"video_slider_thumb"]

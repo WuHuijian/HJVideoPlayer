@@ -16,6 +16,8 @@
 @property (nonatomic ,strong) UIButton * listBtn;
 
 @property (nonatomic, strong) UILabel  * titleLabel;
+/** 渐变layer */
+@property (nonatomic, strong) CAGradientLayer* gradientLayer;
 
 @end
 
@@ -46,10 +48,27 @@
 
 - (void)setupUI
 {
+    [self.layer addSublayer:self.gradientLayer];
+    
     [self addSubview:self.backBtn];
     
     [self addSubview:self.listBtn];
 }
+
+
+- (void)changeGradientRect{
+    
+    self.gradientLayer.frame = self.bounds;
+    //设置渐变区域的起始和终止位置（范围为0-1）
+    self.gradientLayer.startPoint = CGPointMake(0, 0);
+    self.gradientLayer.endPoint = CGPointMake(0, 1);
+    //设置颜色数组
+    self.gradientLayer.colors = @[(__bridge id)kVideoBottomGradientColor.CGColor,
+                                  (__bridge id)[UIColor clearColor].CGColor];
+    //设置颜色分割点（范围：0-1）
+    self.gradientLayer.locations = @[@(0.f), @(1.0f)];
+}
+
 
 - (void)addObservers{
     
@@ -94,6 +113,14 @@
     return _titleLabel;
 }
 
+- (CAGradientLayer *)gradientLayer{
+    if (!_gradientLayer) {
+        _gradientLayer = [[CAGradientLayer alloc] init];
+    }
+    return _gradientLayer;
+}
+
+
 
 
 - (void)setFrame:(CGRect)frame{
@@ -104,6 +131,8 @@
     self.listBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
     
     self.titleLabel.frame = CGRectMake(CGRectGetMaxX(self.backBtn.frame)+10, 0, self.width-CGRectGetMaxX(self.backBtn.frame)-self.listBtn.origin.y-20, self.height);
+    
+    [self changeGradientRect];
     
 }
 
