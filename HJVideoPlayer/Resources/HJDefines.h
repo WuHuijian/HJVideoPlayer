@@ -19,6 +19,15 @@
 #define kHalfScreenVideoHeight       kScreenHeight/3.f
 
 
+
+#define kToolBarHalfHeight 44.f
+#define kToolBarFullHeight 44.f
+
+#define kVideoMaskViewBGColor [[UIColor blackColor] colorWithAlphaComponent:.3]
+
+
+#define kVideoBottomGradientColor [[UIColor blackColor] colorWithAlphaComponent:.5]
+
 /**********************  STATIC CONSTS  ***********************/
 static float const kNavigationBarHeight = 64;
 static float const kTabBarHeight = 49;

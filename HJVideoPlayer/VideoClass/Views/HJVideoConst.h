@@ -10,8 +10,7 @@
 #define HJVideoConst_h
 
 
-#define kToolBarHalfHeight 44.f
-#define kToolBarFullHeight 44.f
+
 
 
 

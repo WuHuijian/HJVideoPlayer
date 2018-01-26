@@ -41,6 +41,9 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 /** 是否全屏 */
 @property (nonatomic, assign) BOOL fullScreen;
 
+/** 渐变layer */
+@property (nonatomic, strong) CAGradientLayer* gradientLayer;
+
 @end
 
 @implementation HJVideoBottomView
@@ -49,6 +52,9 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 -(instancetype)initWithFrame:(CGRect)frame;{
     self = [super initWithFrame:frame];
     if(self){
+        
+        [self addNotification];
+        
         [self setupUI];
     }
     return self;
@@ -69,6 +75,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 
 
 
+
 - (void)addNotification
 {
     //屏幕切换通知
@@ -80,6 +87,8 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 
 - (void)setupUI
 {
+    [self.layer addSublayer:self.gradientLayer];
+    
     [self addSubview:self.playTimeLbl];
     
     [self addSubview:self.totalDurationLbl];
@@ -142,7 +151,18 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 }
 
 
-
+- (void)changeGradientRect{
+    
+    self.gradientLayer.frame = self.bounds;
+    //设置渐变区域的起始和终止位置（范围为0-1）
+    self.gradientLayer.startPoint = CGPointMake(0, 0);
+    self.gradientLayer.endPoint = CGPointMake(0, 1);
+    //设置颜色数组
+    self.gradientLayer.colors = @[(__bridge id)[UIColor clearColor].CGColor,
+                                  (__bridge id)kVideoBottomGradientColor.CGColor];
+    //设置颜色分割点（范围：0-1）
+    self.gradientLayer.locations = @[@(0.f), @(1.0f)];
+}
 
 #define mark - getters /setters
 
@@ -193,6 +213,13 @@ static const CGFloat kTimeLabelFontSize = 12.f;
         [_bufferSlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
     return _bufferSlider;
+}
+
+- (CAGradientLayer *)gradientLayer{
+    if (!_gradientLayer) {
+        _gradientLayer = [[CAGradientLayer alloc] init];
+    }
+    return _gradientLayer;
 }
 
 - (CGFloat)progressValue
@@ -291,6 +318,8 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     
     [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
         self.frame = CGRectMake(0, originY, width, height);
+    } completion:^(BOOL finished) {
+        [self changeGradientRect];
     }];
     
     

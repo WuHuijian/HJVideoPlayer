@@ -164,7 +164,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     //设置遮罩层
     self.maskView = [[HJVideoMaskView alloc] initWithFrame:self.playerView.bounds];
-    self.maskView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.3];
+    self.maskView.backgroundColor = kVideoMaskViewBGColor;
     self.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
     WS(weakSelf);
     self.maskView.playBlock = ^(BOOL isPlay) {
@@ -192,7 +192,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self.view addSubview:self.topView];
     
     // 设置BottomView
-    self.bottomView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - kToolBarHalfHeight, self.view.frame.size.width, kToolBarHalfHeight);
     [self.view addSubview:self.bottomView];
     
