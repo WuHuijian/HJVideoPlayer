@@ -247,21 +247,13 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 - (void)showBottomAction
 {
-    if (self.bottomView.alpha) {
-        [self hideBottomView];
+    if (!self.bottomView.onlySlider) {
+        [self.bottomView hide];
     }else{
-        [self showBottomView];
+        [self.bottomView show];
     }
 }
 
-- (void)showBottomView
-{
-    [UIView animateWithDuration:0.25 animations:^{
-        self.bottomView.alpha = 1.f;
-    } completion:^(BOOL finished) {
-    
-    }];
-}
 
 - (void)startTimer
 {
@@ -273,7 +265,8 @@ static const NSInteger maxSecondsForBottom = 5.f;
     }else{
         [self setSecondsForBottom:maxSecondsForBottom];
         self.topView.hidden = NO;
-        [self showBottomView];
+        [self.bottomView show];
+        
         [self.maskView show];
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self
                                                     selector:@selector(hideMaskViewWithTimer:)
@@ -312,7 +305,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     }
     
     //底部视图隐藏
-    [self hideBottomView];
+    [self.bottomView hide];
     
     //中间内容隐藏 暂停 播放失败 和播放结束 无需隐藏显示内容
     if(self.playStatus != videoPlayer_pause &&
@@ -322,14 +315,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     self.secondsForBottom = 0;
 }
-
-- (void)hideBottomView
-{
-    [UIView animateWithDuration:0.25 animations:^{
-        self.bottomView.alpha = 0.f;
-    }];
-}
-
 
 - (void)hideMaskViewWithTimer:(NSTimer *)timer{
     
@@ -487,6 +472,13 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     self.prePlayStatus = _playStatus;
     _playStatus = playStatus;
+}
+
+- (void)setIsFullScreen:(BOOL)isFullScreen{
+    
+    _isFullScreen = isFullScreen;
+    self.bottomView.fullScreen = isFullScreen;
+    
 }
 
 #pragma mark - 触摸方法

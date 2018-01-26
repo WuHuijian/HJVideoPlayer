@@ -25,9 +25,8 @@
 @end
 
 
-#define imgPlay         [UIImage imageFromBundleWithName:@"video_play"]
-#define imgPause        [UIImage imageFromBundleWithName:@"video_pause"]
-
+#define imgPlay         [UIImage imageNamed:@"video_play"]
+#define imgPause        [UIImage imageNamed:@"video_pause"]
 
 @implementation HJVideoMaskView
 
@@ -36,6 +35,7 @@
     self = [super initWithFrame:frame];
     if(self){
         [self setupUI];
+
     }
     return self;
 }
@@ -129,11 +129,9 @@
     if (!_playBtn) {
         _playBtn = [HJViewFactory buttonWithNormalImage:imgPlay selectedImage:imgPause];
         [_playBtn addTarget:self action:@selector(playOrPauseAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_playBtn setBackgroundColor:[[UIColor grayColor] colorWithAlphaComponent:0.3f]];
-        [_playBtn setFrame:CGRectMake(0, 0, 44, 44)];
+        [_playBtn setImageEdgeInsets:UIEdgeInsetsZero];
+        [_playBtn setFrame:CGRectMake(0, 0, 60, 60)];
         [_playBtn setHidden:YES];
-        _playBtn.layer.cornerRadius = CGRectGetWidth(_playBtn.frame)/2.f;
-        _playBtn.layer.masksToBounds = YES;
         [self addSubview:_playBtn];
     }
     return _playBtn;
@@ -163,7 +161,7 @@
         [_fastForwardView setFrame:CGRectMake(0, 0, 150, 100)];
         [_fastForwardView setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.7]];
         [_fastForwardView setHidden:YES];
-        [_fastForwardView configForwardLeftImage:[UIImage imageFromBundleWithName:@"video_farword_left.png"] forwardRightImage:[UIImage imageFromBundleWithName:@"video_farword_right.png"]];
+        [_fastForwardView configForwardLeftImage:[UIImage imageNamed:@"video_farword_left"] forwardRightImage:[UIImage imageNamed:@"video_farword_right"]];
         _fastForwardView.layer.cornerRadius = 8.f;
         _fastForwardView.layer.masksToBounds = YES;
         [self addSubview:_fastForwardView];

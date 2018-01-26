@@ -14,8 +14,8 @@
 typedef void(^videoPlayerFullScreenBlock)(BOOL isFull);
 typedef void(^videoPlayerLoadingBlock)(void);
 
-@interface HJVideoBottomView : UIView
 
+@interface HJVideoBottomView : UIView
 
 /** 进度*/
 @property (nonatomic, assign ,readonly) CGFloat progressValue;
@@ -27,9 +27,17 @@ typedef void(^videoPlayerLoadingBlock)(void);
 @property (nonatomic, copy) videoPlayerFullScreenBlock fullScreenBlock;
 /** 加载中回调*/
 @property (nonatomic, copy) videoPlayerLoadingBlock loadingBlock;
+/** 是否全屏 */
+@property (nonatomic, assign) BOOL fullScreen;
+/** 是否仅显示slider */
+@property (nonatomic, assign, readonly) BOOL onlySlider;
 
 
+// 显示底部视图
+- (void)show;
 
+// 隐藏底部视图
+- (void)hide;
 
 // 设置进度
 - (void)setProgress:(CGFloat)progressValue;

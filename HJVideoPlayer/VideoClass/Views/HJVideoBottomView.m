@@ -11,7 +11,7 @@
 #import "HJBufferSlider.h"
 #import "HJTimeUtil.h"
 #import "HJVideoPlayerHeader.h"
-
+#import "HJVideoConst.h"
 
 #define imgBack         [UIImage imageFromBundleWithName:@"video_back"]
 #define imgPlay         [UIImage imageFromBundleWithName:@"video_play"]
@@ -21,19 +21,21 @@
 #define imgSliderThumb  [UIImage imageFromBundleWithName:@"video_slider_thumb"]
 
 
+
 static const CGFloat kSliderHeight = 4.f;
-static const CGFloat kTimeLabelWidth = 40.f;
-static const CGFloat kTimeLabelHeight = 13.f;
+static const CGFloat kTimeLabelWidth = 50.f;
+static const CGFloat kTimeLabelFontSize = 12.f;
 
 @interface HJVideoBottomView ()
 
+/** 全屏按钮 */
 @property (nonatomic ,strong) UIButton *fullScreenBtn;
-
-@property (nonatomic ,strong) UILabel *progressLbl;
-
+/** 播放时长Label */
+@property (nonatomic ,strong) UILabel *playTimeLbl;
+/** 总时长Label */
 @property (nonatomic ,strong) UILabel *totalDurationLbl;
-
-@property (nonatomic ,strong) HJBufferSlider *bufferSlider;
+/** 是否仅显示slider */
+@property (nonatomic, assign) BOOL onlySlider;
 
 @end
 
@@ -74,7 +76,7 @@ static const CGFloat kTimeLabelHeight = 13.f;
 
 - (void)setupUI
 {
-    [self addSubview:self.progressLbl];
+    [self addSubview:self.playTimeLbl];
     
     [self addSubview:self.totalDurationLbl];
     
@@ -82,6 +84,61 @@ static const CGFloat kTimeLabelHeight = 13.f;
     
     [self addSubview:self.bufferSlider];
 }
+
+- (void)showOnlySlider:(BOOL)show{
+
+    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj setHidden:show];
+    }];
+    [self.bufferSlider setHidden:NO];
+}
+
+
+- (void)refreshUI{
+    
+    
+    if (!self.onlySlider && !self.fullScreen){
+        
+        [self showOnlySlider:NO];
+        
+        self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
+        
+        self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, self.height);
+        self.playTimeLbl.centerY = self.fullScreenBtn.centerY;
+        self.playTimeLbl.font = [UIFont systemFontOfSize:kTimeLabelFontSize];
+        
+        self.totalDurationLbl.frame = CGRectMake(self.fullScreenBtn.left - kTimeLabelWidth, 0, kTimeLabelWidth, self.height);
+        self.totalDurationLbl.centerY = self.playTimeLbl.centerY;
+        self.totalDurationLbl.font = self.playTimeLbl.font;
+        
+        self.bufferSlider.frame = CGRectMake(self.playTimeLbl.right, 0, self.totalDurationLbl.left-self.playTimeLbl.right, kSliderHeight);
+        self.bufferSlider.centerY = self.fullScreenBtn.centerY;
+        
+    }else if (!self.onlySlider && self.fullScreen) {
+      
+        [self showOnlySlider:NO];
+        self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
+        
+        self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, self.height);
+        self.playTimeLbl.centerY = self.fullScreenBtn.centerY;
+        self.playTimeLbl.font = [UIFont systemFontOfSize:kTimeLabelFontSize];
+        
+        self.totalDurationLbl.frame = CGRectMake(self.fullScreenBtn.left - kTimeLabelWidth, 0, kTimeLabelWidth, self.height);
+        self.totalDurationLbl.centerY = self.playTimeLbl.centerY;
+        self.totalDurationLbl.font = self.playTimeLbl.font;
+        
+        self.bufferSlider.frame = CGRectMake(self.playTimeLbl.right, 0, self.totalDurationLbl.left-self.playTimeLbl.right, kSliderHeight);
+        self.bufferSlider.centerY = self.fullScreenBtn.centerY;
+    
+    }else{
+        
+        [self showOnlySlider:YES];
+    }
+    
+}
+
+
+
 
 #define mark - getters /setters
 
@@ -95,16 +152,17 @@ static const CGFloat kTimeLabelHeight = 13.f;
     return _fullScreenBtn;
 }
 
-- (UILabel *)progressLbl
+- (UILabel *)playTimeLbl
 {
-    if (!_progressLbl) {
-        _progressLbl = [[UILabel alloc]init];
-        [_progressLbl setBackgroundColor:[UIColor clearColor]];
-        [_progressLbl setText:@"00:00"];
-        [_progressLbl setTextColor:[UIColor whiteColor]];
-        [_progressLbl setTextAlignment:NSTextAlignmentRight];
+    if (!_playTimeLbl) {
+        _playTimeLbl = [[UILabel alloc]init];
+        [_playTimeLbl setBackgroundColor:[UIColor clearColor]];
+        [_playTimeLbl setText:@"00:00"];
+        [_playTimeLbl setTextColor:[UIColor whiteColor]];
+        [_playTimeLbl setTextAlignment:NSTextAlignmentRight];
+        [_playTimeLbl setTextAlignment:NSTextAlignmentCenter];
     }
-    return _progressLbl;
+    return _playTimeLbl;
 }
 
 
@@ -113,8 +171,9 @@ static const CGFloat kTimeLabelHeight = 13.f;
     if (!_totalDurationLbl) {
         _totalDurationLbl = [[UILabel alloc]init];
         [_totalDurationLbl setBackgroundColor:[UIColor clearColor]];
-        [_totalDurationLbl setText:@"/00:00"];
-        [_totalDurationLbl setTextColor:[UIColor colorWithRed:200 green:200 blue:200 alpha:1]];
+        [_totalDurationLbl setText:@"00:00"];
+        [_totalDurationLbl setTextColor:[UIColor whiteColor]];
+        [_totalDurationLbl setTextAlignment:NSTextAlignmentCenter];
     }
     return _totalDurationLbl;
 }
@@ -152,18 +211,7 @@ static const CGFloat kTimeLabelHeight = 13.f;
     
     [super setFrame:frame];
     
-    
-    self.bufferSlider.frame = CGRectMake(0, -kSliderHeight/2.f, self.width, kSliderHeight);
-    
-    self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
-    
-    self.progressLbl.frame = CGRectMake(20, 0, kTimeLabelWidth, kTimeLabelHeight);
-    self.progressLbl.centerY = self.fullScreenBtn.centerY;
-    self.progressLbl.font = [UIFont systemFontOfSize:kTimeLabelHeight-2.f];
-    
-    self.totalDurationLbl.frame = CGRectMake(self.progressLbl.right, 0, kTimeLabelWidth, kTimeLabelHeight);
-    self.totalDurationLbl.centerY = self.progressLbl.centerY;
-    self.totalDurationLbl.font = self.progressLbl.font;
+   
 }
 
 #pragma mark - Event Response
@@ -182,11 +230,14 @@ static const CGFloat kTimeLabelHeight = 13.f;
 
 
 - (void)changeScreenAction:(NSNotification *)notif{
-
+    
     BOOL isFullScreen = [notif.object boolValue];
+    
+    [self setFullScreen:isFullScreen];
     // 修改切换屏幕按钮图片
     [self.fullScreenBtn setSelected:isFullScreen];
-
+    
+    [self refreshUI];
 }
 
 #pragma mark - Public Methods
@@ -194,7 +245,7 @@ static const CGFloat kTimeLabelHeight = 13.f;
     
     [self.bufferSlider setProgressValue:progressValue];
     
-    [self.progressLbl setText:[NSString stringWithFormat:@"%@",[HJTimeUtil hmsStringWithFloat:progressValue]]];
+    [self.playTimeLbl setText:[NSString stringWithFormat:@"%@",[HJTimeUtil hmsStringWithFloat:progressValue]]];
     
     //加载中回调
     if(self.progressValue>self.bufferValue){
@@ -213,7 +264,7 @@ static const CGFloat kTimeLabelHeight = 13.f;
     
     [self.bufferSlider setMaximumValue:value];
     
-    [self.totalDurationLbl setText:[NSString stringWithFormat:@"/%@",[HJTimeUtil hmsStringWithFloat:value]]];
+    [self.totalDurationLbl setText:[NSString stringWithFormat:@"%@",[HJTimeUtil hmsStringWithFloat:value]]];
 }
 
 - (void)seekTo:(CGFloat)playTime{
@@ -222,4 +273,43 @@ static const CGFloat kTimeLabelHeight = 13.f;
     NSLog(@"SeekTo:%zds",playTime);
 }
 
+- (void)setBottomViewStatus:(VideoBottomViewStatus)bottomViewStatus{
+    
+    _bottomViewStatus = bottomViewStatus;
+    
+    [self refreshUI];
+}
+
+
+- (void)show{
+
+    CGFloat height = self.fullScreen?kToolBarFullHeight:kToolBarHalfHeight;
+    CGFloat width = CGRectGetWidth(self.superview.frame);
+    CGFloat originY = CGRectGetHeight(self.superview.frame) - height;
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        self.frame = CGRectMake(0, originY, width, height);
+    }];
+    
+    
+    self.onlySlider = NO;
+    
+    [self refreshUI];
+}
+
+
+- (void)hide{
+    
+    CGFloat width = CGRectGetWidth(self.superview.frame);
+    CGFloat originY = CGRectGetHeight(self.superview.frame) - kSliderHeight;
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        self.frame = CGRectMake(0, originY, width, kSliderHeight);
+        self.bufferSlider.frame = self.bounds;
+    }];
+    
+    self.onlySlider = YES;
+    
+    [self refreshUI];
+}
 @end
