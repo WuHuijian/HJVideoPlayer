@@ -152,6 +152,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
 {
     // 设置self
     [self.view setFrame:self.originFrame];
+    [self.view setClipsToBounds:YES];
     
     // 设置player
     [self.playerView setFrame:self.view.frame];
@@ -524,6 +525,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         [self.maskView.fastForwardView moveRight:offsetSeconds>0];
         [self.maskView.fastForwardView setProgress:seekTime/self.bottomView.maximumValue];
         [self resetTimer];
+        [self.bottomView hide];
     }else if (self.moveDirection == MoveDirection_up || self.moveDirection == MoveDirection_down){
         if (startInLeft) {//上调亮度
             [UIScreen mainScreen].brightness = self.brightness - subY/height;//10;
@@ -540,7 +542,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         [self.bottomView seekTo:self.maskView.fastForwardView.currentDuration];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.playStatus = self.prePlayStatus;
-            [self resetTimer];
+            [self cancelTimer];
         });
     }
     [self setMoveDirection:MoveDirection_none];
