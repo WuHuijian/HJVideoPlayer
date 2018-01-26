@@ -125,6 +125,7 @@ ServiceSingletonM(HJVideoPlayManager)
 
 - (void)removeObserver
 {
+
     [[self.player currentItem] removeObserver:self forKeyPath:@"status"];
     [[self.player currentItem] removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [self.player removeTimeObserver:self.playbackTimeObserver];
@@ -226,8 +227,11 @@ ServiceSingletonM(HJVideoPlayManager)
 - (void)reset
 {
     [self removeObserver];
+    [[self.player currentItem] cancelPendingSeeks];
+    [[self.player currentItem].asset cancelLoading];
     [self setAsset:nil];
     [self setUrlAsset:nil];
     [self setPlayerItem:nil];
+    [self.player replaceCurrentItemWithPlayerItem:nil];
 }
 @end

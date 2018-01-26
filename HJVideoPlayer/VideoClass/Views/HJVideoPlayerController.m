@@ -477,7 +477,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
 }
 
 
-#pragma mark - 触摸方法
+#pragma mark - 触摸事件
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     [super touchesBegan:touches withEvent:event];
