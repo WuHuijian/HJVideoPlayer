@@ -34,8 +34,12 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 @property (nonatomic ,strong) UILabel *playTimeLbl;
 /** 总时长Label */
 @property (nonatomic ,strong) UILabel *totalDurationLbl;
+/** 缓冲进度条 */
+@property (nonatomic, strong) HJBufferSlider *bufferSlider;
 /** 是否仅显示slider */
 @property (nonatomic, assign) BOOL onlySlider;
+/** 是否全屏 */
+@property (nonatomic, assign) BOOL fullScreen;
 
 @end
 
@@ -237,7 +241,12 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     // 修改切换屏幕按钮图片
     [self.fullScreenBtn setSelected:isFullScreen];
     
-    [self refreshUI];
+    //刷新界面
+    if (self.onlySlider) {
+        [self hide];
+    }else{
+        [self show];
+    }
 }
 
 #pragma mark - Public Methods
@@ -273,13 +282,6 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     NSLog(@"SeekTo:%zds",playTime);
 }
 
-- (void)setBottomViewStatus:(VideoBottomViewStatus)bottomViewStatus{
-    
-    _bottomViewStatus = bottomViewStatus;
-    
-    [self refreshUI];
-}
-
 
 - (void)show{
 
@@ -287,7 +289,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     CGFloat width = CGRectGetWidth(self.superview.frame);
     CGFloat originY = CGRectGetHeight(self.superview.frame) - height;
     
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
         self.frame = CGRectMake(0, originY, width, height);
     }];
     
@@ -303,7 +305,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     CGFloat width = CGRectGetWidth(self.superview.frame);
     CGFloat originY = CGRectGetHeight(self.superview.frame) - kSliderHeight;
     
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
         self.frame = CGRectMake(0, originY, width, kSliderHeight);
         self.bufferSlider.frame = self.bounds;
     }];

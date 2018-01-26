@@ -27,8 +27,6 @@ typedef void(^videoPlayerLoadingBlock)(void);
 @property (nonatomic, copy) videoPlayerFullScreenBlock fullScreenBlock;
 /** 加载中回调*/
 @property (nonatomic, copy) videoPlayerLoadingBlock loadingBlock;
-/** 是否全屏 */
-@property (nonatomic, assign) BOOL fullScreen;
 /** 是否仅显示slider */
 @property (nonatomic, assign, readonly) BOOL onlySlider;
 

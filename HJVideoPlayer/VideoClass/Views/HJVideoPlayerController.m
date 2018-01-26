@@ -203,6 +203,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 - (void)changeFullScreen:(BOOL)changeFull{
     
+    
+    self.isFullScreen = changeFull;
+    
     [self.view.superview bringSubviewToFront:self.view];
     
     [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
@@ -224,8 +227,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         self.playerView.frame = self.view.bounds;
         self.maskView.frame = self.playerView.bounds;
         self.topView.frame = CGRectMake(0, 0, self.maskView.width, toolBarHeight);
-        self.bottomView.frame = CGRectMake(0, self.maskView.height-toolBarHeight, self.maskView.width, toolBarHeight);
-        self.isFullScreen = changeFull;
+        
         // 发送屏幕改变通知
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationChangeScreen object:@(changeFull)];
     }];
@@ -474,12 +476,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     _playStatus = playStatus;
 }
 
-- (void)setIsFullScreen:(BOOL)isFullScreen{
-    
-    _isFullScreen = isFullScreen;
-    self.bottomView.fullScreen = isFullScreen;
-    
-}
 
 #pragma mark - 触摸方法
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
