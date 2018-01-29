@@ -406,7 +406,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)applicationDidEnterBackground {
 
     if (self.playStatus == videoPlayer_playing) {
-        [kVideoPlayerManager pause];
+        [self pause];
     }
 }
 
@@ -414,7 +414,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)applicationWillEnterForeground {
    
     if (self.prePlayStatus == videoPlayer_playing) {
-        [kVideoPlayerManager play];
+        [self play];
     }
 }
 
