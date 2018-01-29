@@ -306,7 +306,8 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     //中间内容隐藏 暂停 播放失败 和播放结束 无需隐藏显示内容
     if(self.playStatus != videoPlayer_pause &&
-       self.playStatus != videoPlayer_readyToPlay){
+       self.playStatus != videoPlayer_readyToPlay && 
+       self.maskView.maskViewStatus != VideoMaskViewStatus_showLoading){
         [self.maskView hide];
     }
     
