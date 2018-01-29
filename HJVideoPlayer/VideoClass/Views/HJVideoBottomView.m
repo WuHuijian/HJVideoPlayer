@@ -42,6 +42,8 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 /** 渐变layer */
 @property (nonatomic, strong) CAGradientLayer* gradientLayer;
 
+
+
 @end
 
 @implementation HJVideoBottomView

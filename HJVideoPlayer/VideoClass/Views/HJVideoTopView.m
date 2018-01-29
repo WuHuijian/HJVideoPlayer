@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UILabel  * titleLabel;
 /** 渐变layer */
 @property (nonatomic, strong) CAGradientLayer* gradientLayer;
+/** 是否全屏 */
+@property (nonatomic, assign) BOOL fullScreen;
 
 @end
 
@@ -56,9 +58,9 @@
 }
 
 
-- (void)changeGradientRect{
+- (void)changeGradientWithRect:(CGRect)rect{
     
-    self.gradientLayer.frame = self.bounds;
+    self.gradientLayer.frame = rect;
     //设置渐变区域的起始和终止位置（范围为0-1）
     self.gradientLayer.startPoint = CGPointMake(0, 0);
     self.gradientLayer.endPoint = CGPointMake(0, 1);
@@ -131,9 +133,6 @@
     self.listBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
     
     self.titleLabel.frame = CGRectMake(CGRectGetMaxX(self.backBtn.frame)+10, 0, self.width-CGRectGetMaxX(self.backBtn.frame)-self.listBtn.origin.y-20, self.height);
-    
-    [self changeGradientRect];
-    
 }
 
 - (void)setTitle:(NSString *)title{
@@ -164,6 +163,27 @@
 - (void)changeFullScreenAction:(NSNotification *)notif{
     
     BOOL isFullScreen = [[notif object] boolValue];
-    self.titleLabel.hidden = !isFullScreen;
+    
+    [self setFullScreen:isFullScreen];
+    
+  
 }
+
+
+- (void)setFullScreen:(BOOL)fullScreen{
+    
+    _fullScreen = fullScreen;
+    // 小屏隐藏标题
+    self.titleLabel.hidden = !fullScreen;
+    
+    // 调整frame
+    CGFloat height = fullScreen?kTopBarFullHeight:kTopBarHalfHeight;
+    self.frame = CGRectMake(0, 0, CGRectGetWidth(self.superview.frame), height);
+    
+    // 调整渐变范围
+    CGRect rect = fullScreen?self.bounds:CGRectMake(0, 0, self.bounds.size.width, 0);
+    [self changeGradientWithRect:rect];
+    
+}
+
 @end

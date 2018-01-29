@@ -32,6 +32,7 @@
 		D29B1CCE200C82B200E37C21 /* HJVideoListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CCD200C82B200E37C21 /* HJVideoListController.m */; };
 		D29B1CD1200CA60000E37C21 /* HJFastForwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CD0200CA60000E37C21 /* HJFastForwardView.m */; };
 		D29B1CD4200DA00B00E37C21 /* HJCircleLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CD3200DA00B00E37C21 /* HJCircleLoading.m */; };
+		D2A44E85201EC21900A2D2C3 /* HJVideoSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A44E84201EC21900A2D2C3 /* HJVideoSettingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,8 @@
 		D29B1CD2200DA00B00E37C21 /* HJCircleLoading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HJCircleLoading.h; path = ../../../../../../Documents/HJCircleLoading.h; sourceTree = "<group>"; };
 		D29B1CD3200DA00B00E37C21 /* HJCircleLoading.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HJCircleLoading.m; path = ../../../../../../Documents/HJCircleLoading.m; sourceTree = "<group>"; };
 		D2A44E81201AD24100A2D2C3 /* HJVideoConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoConst.h; sourceTree = "<group>"; };
+		D2A44E83201EC21900A2D2C3 /* HJVideoSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoSettingView.h; sourceTree = "<group>"; };
+		D2A44E84201EC21900A2D2C3 /* HJVideoSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoSettingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +261,8 @@
 				D29B1CD2200DA00B00E37C21 /* HJCircleLoading.h */,
 				D29B1CD3200DA00B00E37C21 /* HJCircleLoading.m */,
 				D2A44E81201AD24100A2D2C3 /* HJVideoConst.h */,
+				D2A44E83201EC21900A2D2C3 /* HJVideoSettingView.h */,
+				D2A44E84201EC21900A2D2C3 /* HJVideoSettingView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				D29B1CBB200C41BE00E37C21 /* HJVideoMaskView.m in Sources */,
 				D29B1CB0200C41BE00E37C21 /* ViewController.m in Sources */,
 				D29B1CCE200C82B200E37C21 /* HJVideoListController.m in Sources */,
+				D2A44E85201EC21900A2D2C3 /* HJVideoSettingView.m in Sources */,
 				D29B1CB7200C41BE00E37C21 /* HJViewFactory.m in Sources */,
 				D29B1CD1200CA60000E37C21 /* HJFastForwardView.m in Sources */,
 				D29B1CB3200C41BE00E37C21 /* HJBufferSlider.m in Sources */,

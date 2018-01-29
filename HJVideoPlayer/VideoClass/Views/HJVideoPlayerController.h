@@ -14,6 +14,7 @@ typedef NS_ENUM(NSUInteger, VideoPlayerStatus) {
     videoPlayer_readyToPlay,
     videoPlayer_playing,
     videoPlayer_pause,
+    videoPlayer_loading,
     videoPlayer_playEnd,
     videoPlayer_playFailed
 };

@@ -23,6 +23,9 @@
 #define kToolBarHalfHeight 44.f
 #define kToolBarFullHeight 44.f
 
+#define kTopBarHalfHeight  44.f
+#define kTopBarFullHeight  44.f
+
 #define kVideoMaskViewBGColor [[UIColor blackColor] colorWithAlphaComponent:.3]
 
 

@@ -123,12 +123,17 @@ static const NSInteger maxSecondsForBottom = 5.f;
     delegate.allowRotation = NO;
     //关闭屏幕长亮
     [UIApplication sharedApplication].idleTimerDisabled = NO;
+    //暂停播放
+    [self pause];
+    
 }
 
 
 - (void)dealloc{
 
-    NSLog(@"播放器视图已销毁");
+    NSLog(@"播放器已销毁");
+    [self cancelTimer];
+    [kVideoPlayerManager reset];
 }
 
 
@@ -226,7 +231,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
         
         self.playerView.frame = self.view.bounds;
         self.maskView.frame = self.playerView.bounds;
-        self.topView.frame = CGRectMake(0, 0, self.maskView.width, toolBarHeight);
         
         // 发送屏幕改变通知
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationChangeScreen object:@(changeFull)];
@@ -342,7 +346,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
         if (weakSelf.maskView.maskViewStatus != VideoMaskViewStatus_showPlayBtn) {
             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
         };
-    } endBlock:^{
+    }loadingBlock:^{
+        NSLog(@"[%@]:加载中",[self class]);
+        weakSelf.playStatus = videoPlayer_loading;
+        weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
+    }endBlock:^{
         NSLog(@"[%@]:播放结束",[self class]);
         weakSelf.playStatus = videoPlayer_playEnd;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showReplayBtn;
@@ -413,8 +421,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 
 - (void)popAction{
-    [self cancelTimer];
-    [kVideoPlayerManager reset];
     [self.navigationController popViewControllerAnimated:YES];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];

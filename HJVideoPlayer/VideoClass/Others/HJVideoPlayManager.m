@@ -33,6 +33,8 @@
 
 @property (nonatomic ,copy) VideoPlayerManagerMonitoringBlock monitoringBlock;
 
+@property (nonatomic ,copy) VideoPlayerManagerLoadingBlock loadingBlock;
+
 @property (nonatomic ,copy) VideoPlayerManagerPlayEndBlock endBlock;
 
 @property (nonatomic ,copy) VideoPlayerManagerPlayFailedBlock failedBlock;
@@ -49,11 +51,13 @@ ServiceSingletonM(HJVideoPlayManager)
 
 - (void)readyBlock:(VideoPlayerManagerReadyBlock)readyBlock
    monitoringBlock:(VideoPlayerManagerMonitoringBlock)monitoringBlock
+      loadingBlock:(VideoPlayerManagerLoadingBlock)loadingBlock 
           endBlock:(VideoPlayerManagerPlayEndBlock)endBlock
-       failedBlock:(VideoPlayerManagerPlayFailedBlock)faildBlock;{
+       failedBlock:(VideoPlayerManagerPlayFailedBlock)faildBlock{
 
     [self setReadyBlock:readyBlock];
     [self setMonitoringBlock:monitoringBlock];
+    [self setLoadingBlock:loadingBlock];
     [self setEndBlock:endBlock];
     [self setFailedBlock:faildBlock];
 }
@@ -159,7 +163,13 @@ ServiceSingletonM(HJVideoPlayManager)
             self.bufferDuration = startSeconds + durationSeconds;// 计算缓冲总进度
         
     } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) { //监听播放器在缓冲数据的状态
-
+            NSLog(@"VideoPlayer : [playbackBufferEmpty]");
+            if (playerItem.playbackBufferEmpty) {
+                //缓冲中
+                if (self.loadingBlock) {
+                    self.loadingBlock();
+                }
+            }
     }
 }
 
