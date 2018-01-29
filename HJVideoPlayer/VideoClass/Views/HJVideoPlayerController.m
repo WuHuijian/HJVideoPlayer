@@ -337,7 +337,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     WS(weakSelf);
     [kVideoPlayerManager readyBlock:^(CGFloat totoalDuration) {
-        NSLog(@"[%@]:准备播放",[self class]);
+        NSLog(@"[%@]:准备播放",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_readyToPlay;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
         [weakSelf startTimer];
@@ -347,16 +347,16 @@ static const NSInteger maxSecondsForBottom = 5.f;
             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
         };
     }loadingBlock:^{
-        NSLog(@"[%@]:加载中",[self class]);
+        NSLog(@"[%@]:加载中",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_loading;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
     }endBlock:^{
-        NSLog(@"[%@]:播放结束",[self class]);
+        NSLog(@"[%@]:播放结束",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_playEnd;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showReplayBtn;
         [weakSelf startTimer];
     } failedBlock:^{
-        NSLog(@"[%@]:播放失败",[self class]);
+        NSLog(@"[%@]:播放失败",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_playFailed;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showReplayBtn;
         [weakSelf startTimer];

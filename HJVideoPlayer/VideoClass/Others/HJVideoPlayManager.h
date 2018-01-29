@@ -16,9 +16,9 @@
 
 typedef void(^VideoPlayerManagerReadyBlock)(CGFloat totoalDuration);//准备播放回调
 typedef void(^VideoPlayerManagerMonitoringBlock)(CGFloat currentDuration);//播放监听回调
-typedef void(^VideoPlayerManagerLoadingBlock)();//loading回调
-typedef void(^VideoPlayerManagerPlayFailedBlock)();//播放失败回调
-typedef void(^VideoPlayerManagerPlayEndBlock)();//播放结束回调
+typedef void(^VideoPlayerManagerLoadingBlock)(void);//loading回调
+typedef void(^VideoPlayerManagerPlayFailedBlock)(void);//播放失败回调
+typedef void(^VideoPlayerManagerPlayEndBlock)(void);//播放结束回调
 
 
 @interface HJVideoPlayManager : NSObject

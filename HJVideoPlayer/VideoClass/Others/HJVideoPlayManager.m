@@ -132,7 +132,10 @@ ServiceSingletonM(HJVideoPlayManager)
 
     [[self.player currentItem] removeObserver:self forKeyPath:@"status"];
     [[self.player currentItem] removeObserver:self forKeyPath:@"loadedTimeRanges"];
-    [self.player removeTimeObserver:self.playbackTimeObserver];
+    if (self.playbackTimeObserver) {
+        [self.player removeTimeObserver:self.playbackTimeObserver];
+        self.playbackTimeObserver = nil;
+    }
 }
 
 #pragma mark - Event Response
