@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D21D155B2019E49B001D17E5 /* HJVideoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */; };
+		D298D394201F030500AB2DD4 /* HJVideoPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */; };
 		D29B1C64200C404900E37C21 /* HJVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C63200C404900E37C21 /* HJVideoPlayerTests.m */; };
 		D29B1C6F200C404900E37C21 /* HJVideoPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C6E200C404900E37C21 /* HJVideoPlayerUITests.m */; };
 		D29B1CAE200C41BE00E37C21 /* images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D29B1C80200C41BD00E37C21 /* images.bundle */; };
@@ -54,6 +55,8 @@
 
 /* Begin PBXFileReference section */
 		D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HJVideoAssets.xcassets; sourceTree = "<group>"; };
+		D298D392201F030500AB2DD4 /* HJVideoPlayerUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerUtil.h; sourceTree = "<group>"; };
+		D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerUtil.m; sourceTree = "<group>"; };
 		D29B1C47200C404900E37C21 /* HJVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HJVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B1C5F200C404900E37C21 /* HJVideoPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HJVideoPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B1C63200C404900E37C21 /* HJVideoPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerTests.m; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				D29B1C9B200C41BE00E37C21 /* HJVideoUIManager.m */,
 				D29B1CC8200C52D000E37C21 /* AppDelegate+HJExtendion.h */,
 				D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */,
+				D298D392201F030500AB2DD4 /* HJVideoPlayerUtil.h */,
+				D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 				D29B1CD1200CA60000E37C21 /* HJFastForwardView.m in Sources */,
 				D29B1CB3200C41BE00E37C21 /* HJBufferSlider.m in Sources */,
 				D29B1CB8200C41BE00E37C21 /* HJTimeUtil.m in Sources */,
+				D298D394201F030500AB2DD4 /* HJVideoPlayerUtil.m in Sources */,
 				D29B1CCA200C52D000E37C21 /* AppDelegate+HJExtendion.m in Sources */,
 				D29B1CD4200DA00B00E37C21 /* HJCircleLoading.m in Sources */,
 				D29B1CB2200C41BE00E37C21 /* AppDelegate.m in Sources */,

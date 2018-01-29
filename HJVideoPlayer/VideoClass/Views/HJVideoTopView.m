@@ -23,7 +23,7 @@
 
 @end
 
-#define imgBack [UIImage imageFromBundleWithName:@"video_back"]
+#define imgBack [UIImage imageNamed:@"video_back"]
 
 @implementation HJVideoTopView
 

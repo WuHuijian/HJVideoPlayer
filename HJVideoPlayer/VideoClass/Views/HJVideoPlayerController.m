@@ -17,6 +17,7 @@
 #import "HJVideoMaskView.h"
 #import "HJVideoPlayerHeader.h"
 #import "AppDelegate+HJExtendion.h"
+#import "HJVideoPlayerUtil.h"
 
 typedef NS_ENUM(NSUInteger, MoveDirection) {
     MoveDirection_none = 0,
@@ -328,6 +329,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
     WS(weakSelf);
     [kVideoPlayerManager readyBlock:^(CGFloat totoalDuration) {
         NSLog(@"[%@]:准备播放",[weakSelf class]);
+//        if (!weakSelf.auoPlay) {
+//           weakSelf.playerView.image = [HJVideoPlayerUtil getImageWithVideoUrl:weakSelf.url];
+//        }
         weakSelf.playStatus = videoPlayer_readyToPlay;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
         [weakSelf startTimer];
@@ -436,6 +440,8 @@ static const NSInteger maxSecondsForBottom = 5.f;
         _topView.backBlock = ^(){
             
             if(weakSelf.isFullScreen){//全屏返回
+              NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+                [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
                 [weakSelf changeFullScreen:NO];
             }else{//半屏返回操作
                 [weakSelf popAction];

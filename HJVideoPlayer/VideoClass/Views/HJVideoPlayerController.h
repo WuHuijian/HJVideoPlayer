@@ -27,6 +27,13 @@ typedef NS_ENUM(NSUInteger, VideoPlayerStatus) {
 
 @property (nonatomic, assign , readonly) VideoPlayerStatus playStatus;
 
+
+/** 设置URL后自动播放 */
+@property (nonatomic, assign) BOOL auoPlay;
+/** 是否仅支持全屏 */
+@property (nonatomic, assign) BOOL onlyFullScreen;
+
+
 - (instancetype)initWithFrame:(CGRect)frame;
 
 @end
