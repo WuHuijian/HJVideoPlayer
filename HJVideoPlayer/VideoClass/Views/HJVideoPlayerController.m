@@ -216,15 +216,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
         CGFloat toolBarHeight = 0;
         if (changeFull) {
-            NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
-            [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-            
             self.view.frame = kFrame;
             toolBarHeight = kToolBarFullHeight;
         }else{
-            NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-            [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-            
             self.view.frame = self.originFrame;
             toolBarHeight = kToolBarHalfHeight;
         }
@@ -451,6 +445,13 @@ static const NSInteger maxSecondsForBottom = 5.f;
         WS(weakSelf);
         _bottomView = [[HJVideoBottomView alloc] init];
         _bottomView.fullScreenBlock = ^(BOOL isFull){
+            if(isFull){
+                NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+                [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+            }else{
+                NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+                [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+            }
             [weakSelf changeFullScreen:isFull];
         };
         
@@ -569,6 +570,8 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
             //屏幕从竖屏变为横屏时执行
