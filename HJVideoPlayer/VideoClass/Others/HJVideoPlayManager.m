@@ -28,7 +28,7 @@
 /** 是否正在播放*/
 @property (nonatomic ,assign) BOOL isPlaying;
 
-
+//播放状态回调
 @property (nonatomic ,copy) VideoPlayerManagerReadyBlock readyBlock;
 
 @property (nonatomic ,copy) VideoPlayerManagerMonitoringBlock monitoringBlock;
@@ -38,6 +38,14 @@
 @property (nonatomic ,copy) VideoPlayerManagerPlayEndBlock endBlock;
 
 @property (nonatomic ,copy) VideoPlayerManagerPlayFailedBlock failedBlock;
+
+
+//时长回调
+@property (nonatomic, copy) VideoPlayerManagerCurrentDurationBlock currentDurationBlock;
+
+@property (nonatomic, copy) VideoPlayerManagerTotalDurationBlock totalDurationBlock;
+
+@property (nonatomic, copy) VideoPlayerManagerBufferDurationBlock bufferDurationBlock;
 
 @end
 
@@ -62,6 +70,15 @@ ServiceSingletonM(HJVideoPlayManager)
     [self setFailedBlock:faildBlock];
 }
 
+
+- (void)totalDurationBlock:(VideoPlayerManagerTotalDurationBlock)totalBlock
+      currentDurationBlock:(VideoPlayerManagerCurrentDurationBlock)currentBlock
+       bufferDurationBlock:(VideoPlayerManagerBufferDurationBlock)bufferBlock;{
+    
+    [self setTotalDurationBlock:totalBlock];
+    [self setCurrentDurationBlock:currentBlock];
+    [self setBufferDurationBlock:bufferBlock];
+}
 
 
 - (AVPlayer *)setUrl:(NSString *)url{
@@ -181,24 +198,31 @@ ServiceSingletonM(HJVideoPlayManager)
 - (void)setCurrentDuration:(CGFloat)currentDuration
 {
     _currentDuration = currentDuration;
-    [[kHJVideoUIManager bottomView] setProgress:_currentDuration];
     NSLog(@"当前播放时间 %.2f秒",currentDuration);
+    if (self.currentDurationBlock) {
+        self.currentDurationBlock(currentDuration);
+    }
 }
 
 
 - (void)setTotalDuration:(CGFloat)totalDuration
 {
     _totalDuration = totalDuration;
-    [[kHJVideoUIManager bottomView] setMaximumValue:_totalDuration];
     NSLog(@"当前播放时间 %.2f秒",totalDuration);
+    if(self.totalDurationBlock){
+        self.totalDurationBlock(totalDuration);
+    }
+    
 }
 
 
 - (void)setBufferDuration:(CGFloat)bufferDuration
 {
     _bufferDuration = bufferDuration;
-    //TODO: 设置缓冲进度
-    [[kHJVideoUIManager bottomView] setBufferValue:bufferDuration];
+    NSLog(@"当前缓冲时间 %.2f秒",bufferDuration);
+    if (self.bufferDurationBlock) {
+        self.bufferDurationBlock(bufferDuration);
+    }
 
 }
 - (AVPlayer *)player

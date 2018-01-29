@@ -94,6 +94,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self setupUI];
     [self initW];
     [self handleVideoPlayerStatus];
+    [self handleProgress];
     [self addObservers];
     [self addTapGesture];
 }
@@ -199,11 +200,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     // 设置BottomView
     self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - kToolBarHalfHeight, self.view.frame.size.width, kToolBarHalfHeight);
     [self.view addSubview:self.bottomView];
-    
-    //
-    kHJVideoUIManager.topView = self.topView;
-    kHJVideoUIManager.bottomView = self.bottomView;
-    
 }
 
 - (void)changeFullScreen:(BOOL)changeFull{
@@ -356,7 +352,20 @@ static const NSInteger maxSecondsForBottom = 5.f;
         [weakSelf startTimer];
     }];
 }
-
+/**
+ *  设置时长
+ */
+- (void)handleProgress{
+    
+    WS(weakSelf);
+    [kVideoPlayerManager totalDurationBlock:^(CGFloat totalDuration) {
+        [weakSelf.bottomView setMaximumValue:totalDuration];
+    } currentDurationBlock:^(CGFloat currentDuration) {
+        [weakSelf.bottomView setProgress:currentDuration];
+    } bufferDurationBlock:^(CGFloat bufferDuration) {
+        [weakSelf.bottomView setBufferValue:bufferDuration];
+    }];
+}
 
 - (void)addObservers{
     
@@ -556,7 +565,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
 }
 
 
-#pragma mark - 系统方法
+#pragma mark - 屏幕旋转
 // 返回是否支持设备自动旋转
 - (BOOL)shouldAutorotate
 {

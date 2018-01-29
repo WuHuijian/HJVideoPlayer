@@ -230,13 +230,13 @@
 			isa = PBXGroup;
 			children = (
 				D29B1C95200C41BE00E37C21 /* HJViewFactory.m */,
-				D29B1C96200C41BE00E37C21 /* HJVideoUIManager.h */,
+				D29B1C9A200C41BE00E37C21 /* HJTimeUtil.h */,
 				D29B1C97200C41BE00E37C21 /* HJTimeUtil.m */,
 				D29B1C98200C41BE00E37C21 /* HJVideoPlayManager.h */,
-				D29B1C99200C41BE00E37C21 /* HJViewFactory.h */,
-				D29B1C9A200C41BE00E37C21 /* HJTimeUtil.h */,
-				D29B1C9B200C41BE00E37C21 /* HJVideoUIManager.m */,
 				D29B1C9C200C41BE00E37C21 /* HJVideoPlayManager.m */,
+				D29B1C99200C41BE00E37C21 /* HJViewFactory.h */,
+				D29B1C96200C41BE00E37C21 /* HJVideoUIManager.h */,
+				D29B1C9B200C41BE00E37C21 /* HJVideoUIManager.m */,
 				D29B1CC8200C52D000E37C21 /* AppDelegate+HJExtendion.h */,
 				D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */,
 			);
