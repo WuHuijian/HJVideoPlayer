@@ -98,12 +98,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self handleProgress];
     [self addObservers];
     [self addTapGesture];
-    
-    if (self.onlyFullScreen) {
-        NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
-        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-        [self changeFullScreen:YES];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,6 +113,14 @@ static const NSInteger maxSecondsForBottom = 5.f;
     //开启屏幕长亮
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 
+    if (self.onlyFullScreen) {
+        NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //等方向切换完成后 进行旋转
+            [self changeFullScreen:YES];
+        });
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -177,7 +179,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     if (!self.onlyFullScreen) {
         [self.view setFrame:self.originFrame];
     }else{
-        [self.view setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
+        [self.view setFrame:CGRectMake(0, 0,kScreenHeight, kScreenWidth)];
     }
     [self.view setClipsToBounds:YES];
     
