@@ -27,6 +27,15 @@
     [enterBtn setCenter:self.view.center];
     [enterBtn addTarget:self action:@selector(enterAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:enterBtn];
+    
+    UIButton * fullBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [fullBtn setTitle:@"进入全屏播放" forState:UIControlStateNormal];
+    CGRect fullBtnFrame = enterBtn.frame;
+    fullBtnFrame.origin.y = CGRectGetMaxY(enterBtn.frame)+20;
+    [fullBtn setFrame:fullBtnFrame];
+    [fullBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [fullBtn addTarget:self action:@selector(enterFull) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:fullBtn];
 }
 
 
@@ -38,5 +47,12 @@
 }
 
 
+- (void)enterFull{
+
+    HJVideoPlayerController * videoC = [[HJVideoPlayerController alloc] init];
+    [videoC setOnlyFullScreen:YES];
+    [videoC setUrl:@"http://hc46.aipai.com/user/128/31977128/1006/card/46946073/card.mp4?l=o"];
+    [self.navigationController pushViewController:videoC animated:YES];
+}
 
 @end

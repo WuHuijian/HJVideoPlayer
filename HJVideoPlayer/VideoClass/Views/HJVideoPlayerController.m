@@ -98,6 +98,12 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self handleProgress];
     [self addObservers];
     [self addTapGesture];
+    
+    if (self.onlyFullScreen) {
+        NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
+        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+        [self changeFullScreen:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,19 +113,17 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
     //允许屏幕旋转
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     delegate.allowRotation = YES;
     //开启屏幕长亮
-    [UIApplication sharedApplication].idleTimerDisabled =YES;
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     //关闭屏幕旋转
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     delegate.allowRotation = NO;
@@ -170,7 +174,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)setupUI
 {
     // 设置self
-    [self.view setFrame:self.originFrame];
+    if (!self.onlyFullScreen) {
+        [self.view setFrame:self.originFrame];
+    }else{
+        [self.view setFrame:CGRectMake(0, 0, kScreenHeight, kScreenWidth)];
+    }
     [self.view setClipsToBounds:YES];
     
     // 设置player
@@ -221,7 +229,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
 }
 
 - (void)changeFullScreen:(BOOL)changeFull{
-    
     
     self.isFullScreen = changeFull;
     
@@ -331,6 +338,15 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     self.secondsForBottom = 0;
 }
+
+
+- (void)hideTopView:(BOOL)hide{
+
+    self.topView.hidden = hide;
+    //状态栏显示跟随topView
+    [[UIApplication sharedApplication] setStatusBarHidden:hide withAnimation:NO];
+}
+
 
 - (void)hideMaskViewForTimer{
     
@@ -452,13 +468,19 @@ static const NSInteger maxSecondsForBottom = 5.f;
         WS(weakSelf);
         _topView = [[HJVideoTopView alloc]init];
         _topView.backBlock = ^(){
-            
-            if(weakSelf.isFullScreen){//全屏返回
-              NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+            if (weakSelf.onlyFullScreen) {//仅支持全屏  直接返回
+                NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
                 [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-                [weakSelf changeFullScreen:NO];
-            }else{//半屏返回操作
-                [weakSelf popAction];
+                weakSelf.view.frame = CGRectZero;
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            }else{
+                if(weakSelf.isFullScreen){//全屏返回
+                  NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+                    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+                    [weakSelf changeFullScreen:NO];
+                }else{//半屏返回操作
+                    [weakSelf popAction];
+                }
             }
         };
         
@@ -509,7 +531,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     self.prePlayStatus = _playStatus;
     _playStatus = playStatus;
 }
-
 
 #pragma mark - 触摸事件
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -593,6 +614,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
 // 返回是否支持设备自动旋转
 - (BOOL)shouldAutorotate
 {
+    //全屏不支持屏幕旋转
+    if (self.onlyFullScreen) {
+        return NO;
+    }
+    
     if (kAppDelegate.allowRotation) {
         return YES;
     }else{
@@ -603,6 +629,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    //全屏不支持屏幕旋转
+    if (self.onlyFullScreen) {
+        return;
+    }
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
             //屏幕从竖屏变为横屏时执行
