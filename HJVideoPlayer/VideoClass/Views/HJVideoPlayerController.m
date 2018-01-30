@@ -154,6 +154,18 @@ static const NSInteger maxSecondsForBottom = 5.f;
     }
 }
 
+
+- (void)clearInfo{
+    
+    if (_bottomView) {
+        [self.bottomView setProgress:0];
+        [self.bottomView setMaximumValue:1];
+        [self.bottomView setBufferValue:0];
+    }
+    
+    self.playStatus = videoPlayer_unknown;
+    self.currentTime = 0;
+}
 #pragma mark - About UI
 - (void)setupUI
 {
@@ -189,6 +201,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
         [kVideoPlayerManager seekToTime:0];
         weakMaskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
         [weakSelf resetTimer];
+    };
+    
+    self.maskView.playFailedClickBlock = ^{
+        [weakSelf setUrl:weakSelf.url];
     };
     [self.playerView addSubview:self.maskView];
     
@@ -267,7 +283,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         
         [self.maskView show];
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self
-                                                    selector:@selector(hideMaskViewWithTimer:)
+                                                    selector:@selector(hideMaskViewForTimer)
                                                     userInfo:nil
                                                      repeats:YES];
     }
@@ -308,14 +324,15 @@ static const NSInteger maxSecondsForBottom = 5.f;
     //中间内容隐藏 暂停 播放失败 和播放结束 无需隐藏显示内容
     if(self.playStatus != videoPlayer_pause &&
        self.playStatus != videoPlayer_readyToPlay && 
-       self.maskView.maskViewStatus != VideoMaskViewStatus_showLoading){
+       self.maskView.maskViewStatus != VideoMaskViewStatus_showLoading &&
+       self.maskView.maskViewStatus != VideoMaskViewStatus_showPlayFailed){
         [self.maskView hide];
     }
     
     self.secondsForBottom = 0;
 }
 
-- (void)hideMaskViewWithTimer:(NSTimer *)timer{
+- (void)hideMaskViewForTimer{
     
         self.secondsForBottom --;
         NSLog(@"隐藏底部栏:%zd",self.secondsForBottom);
@@ -352,7 +369,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     } failedBlock:^{
         NSLog(@"[%@]:播放失败",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_playFailed;
-        weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showReplayBtn;
+        weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayFailed;
     }];
 }
 /**
@@ -466,10 +483,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
             }
             [weakSelf changeFullScreen:isFull];
         };
-        
-        _bottomView.loadingBlock = ^{
-            weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
-        };
     }
     return _bottomView;
 }
@@ -485,6 +498,8 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)setUrl:(NSString *)url{
     if (!url) return;
     _url = url;
+    
+    [self clearInfo];
     [self.playerView setPlayer:[kVideoPlayerManager setUrl:_url]];
     self.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
 }

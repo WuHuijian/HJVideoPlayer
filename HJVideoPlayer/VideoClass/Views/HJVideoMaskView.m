@@ -73,7 +73,18 @@
 
 
 - (void)showReplayBtn{
+   
+    [self.replayBtn removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [self.replayBtn addTarget:self action:@selector(playFailedClickAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.replayBtn setTitle:@"重新播放" forState:UIControlStateNormal];
+    [self showSomeView:self.replayBtn];
+}
+
+- (void)showPlayFailed{
     
+    [self.replayBtn removeTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [self.replayBtn addTarget:self action:@selector(replayAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.replayBtn setTitle:@"播放失败" forState:UIControlStateNormal];
     [self showSomeView:self.replayBtn];
 }
 
@@ -106,6 +117,7 @@
 
 #pragma mark - Event response
 - (void)playOrPauseAction:(UIButton *)sender{
+    
     sender.selected = !sender.selected;
     if (self.playBlock) {
         self.playBlock(sender.selected);
@@ -113,8 +125,16 @@
 }
 
 - (void)replayAction{
+    
     if(self.replayBlock){
         self.replayBlock();
+    }
+}
+
+- (void)playFailedClickAction{
+    
+    if (self.playFailedClickBlock) {
+        self.playFailedClickBlock();
     }
 }
 #pragma mark - Private methods
@@ -142,12 +162,11 @@
 {
     if (!_replayBtn) {
         _replayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_replayBtn addTarget:self action:@selector(replayAction) forControlEvents:UIControlEventTouchUpInside];
         [_replayBtn setFrame:CGRectMake(0, 0, 100, 50)];
         [_replayBtn setHidden:YES];
         [_replayBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_replayBtn setTitle:@"重新播放" forState:UIControlStateNormal];
         [_replayBtn setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.6]];
+        _replayBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         _replayBtn.layer.cornerRadius = 4.f;
         _replayBtn.layer.masksToBounds = YES;
         [self addSubview:_replayBtn];
@@ -194,6 +213,9 @@
             break;
         case VideoMaskViewStatus_showReplayBtn:
             [self showReplayBtn];
+            break;
+        case VideoMaskViewStatus_showPlayFailed:
+            [self showPlayFailed];
             break;
         case VideoMaskViewStatus_showFastForward:
             [self showFastForward];

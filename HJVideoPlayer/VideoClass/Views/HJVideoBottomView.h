@@ -12,7 +12,6 @@
 
 
 typedef void(^videoPlayerFullScreenBlock)(BOOL isFull);
-typedef void(^videoPlayerLoadingBlock)(void);
 
 
 @interface HJVideoBottomView : UIView
@@ -25,8 +24,6 @@ typedef void(^videoPlayerLoadingBlock)(void);
 @property (nonatomic, assign ,readonly) CGFloat maximumValue;
 /** 大小屏切换回调*/
 @property (nonatomic, copy) videoPlayerFullScreenBlock fullScreenBlock;
-/** 加载中回调*/
-@property (nonatomic, copy) videoPlayerLoadingBlock loadingBlock;
 /** 是否仅显示slider */
 @property (nonatomic, assign, readonly) BOOL onlySlider;
 

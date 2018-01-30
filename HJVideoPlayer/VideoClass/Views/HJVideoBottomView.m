@@ -282,13 +282,6 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     [self.bufferSlider setProgressValue:progressValue];
     
     [self.playTimeLbl setText:[NSString stringWithFormat:@"%@",[HJTimeUtil hmsStringWithFloat:progressValue]]];
-    
-    //加载中回调
-    if(self.progressValue>self.bufferValue){
-        if (self.loadingBlock) {
-            self.loadingBlock();
-        }
-    }
 }
 
 - (void)setBufferValue:(CGFloat)bufferValue{
