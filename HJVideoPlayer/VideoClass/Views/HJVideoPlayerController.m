@@ -18,6 +18,7 @@
 #import "HJVideoPlayerHeader.h"
 #import "AppDelegate+HJExtendion.h"
 #import "HJVideoPlayerUtil.h"
+#import "HJVideoConfigModel.h"
 
 typedef NS_ENUM(NSUInteger, MoveDirection) {
     MoveDirection_none = 0,
@@ -67,20 +68,23 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 /** 定时器 */
 @property (nonatomic, strong) NSTimer *timer;
 
+/** 配置模型 */
+@property (nonatomic, strong) HJVideoConfigModel *configModel;
+
 @end
 
 #define kToolBarHalfHeight 44.f
 #define kToolBarFullHeight 44.f
 #define kFullScreenFrame CGRectMake(0 , 0, kScreenHeight, kScreenWidth)
 
-#define imgVideoBackImg [UIImage imageFromBundleWithName:@"video_backImg.jpeg"]
+#define imgVideoBackImg [UIImage imageFromBundleWithName:@"video_bg.jpg"]
 #define imgPlay         [UIImage imageFromBundleWithName:@"video_play"]
 #define imgPause        [UIImage imageFromBundleWithName:@"video_pause"]
 static const NSInteger maxSecondsForBottom = 5.f;
 
 @implementation HJVideoPlayerController
 
-#pragma mark -lifeCycle
+#pragma mark - 生命周期
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super init];
@@ -230,6 +234,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self.view addSubview:self.bottomView];
 }
 
+
 - (void)changeFullScreen:(BOOL)changeFull{
     
     self.isFullScreen = changeFull;
@@ -292,7 +297,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         
         [self.maskView show];
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self
-                                                    selector:@selector(hideMaskViewForTimer)
+                                                    selector:@selector(timerAction)
                                                     userInfo:nil
                                                      repeats:YES];
     }
@@ -350,7 +355,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
 }
 
 
-- (void)hideMaskViewForTimer{
+- (void)timerAction{
     
         self.secondsForBottom --;
         NSLog(@"隐藏底部栏:%zd",self.secondsForBottom);
@@ -420,7 +425,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
 }
 
 
-#pragma mark - Public Methods
+#pragma mark - 公开方法
 - (void)play{
     [kVideoPlayerManager play];
     [self setPlayStatus:videoPlayer_playing];
@@ -433,7 +438,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     });
 }
 
-#pragma mark - Event Methods
+#pragma mark - 事件响应
 - (void)applicationDidEnterBackground {
 
     if (self.playStatus == videoPlayer_playing) {
@@ -532,6 +537,20 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     self.prePlayStatus = _playStatus;
     _playStatus = playStatus;
+}
+
+- (HJVideoConfigModel *)configModel{
+    
+    if (!_configModel) {
+        _configModel = [[HJVideoConfigModel alloc] init];
+    }
+    return _configModel;
+}
+
+- (void)setOnlyFullScreen:(BOOL)onlyFullScreen{
+    
+    _onlyFullScreen = onlyFullScreen;
+    self.configModel.onlyFullScreen = onlyFullScreen;
 }
 
 #pragma mark - 触摸事件

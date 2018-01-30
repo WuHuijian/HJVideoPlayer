@@ -12,6 +12,7 @@
 #import "HJTimeUtil.h"
 #import "HJVideoPlayerHeader.h"
 #import "HJVideoConst.h"
+#import "HJVideoConfigModel.h"
 
 #define imgBack         [UIImage imageFromBundleWithName:@"video_back"]
 #define imgFullScreen   [UIImage imageFromBundleWithName:@"video_toFullScreen_white"]
@@ -49,7 +50,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 @implementation HJVideoBottomView
 
 
--(instancetype)initWithFrame:(CGRect)frame;{
+- (instancetype)initWithFrame:(CGRect)frame;{
     self = [super initWithFrame:frame];
     if(self){
         
@@ -130,7 +131,11 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     }else if (!self.onlySlider && self.fullScreen) {
       
         [self showOnlySlider:NO];
-        self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
+        if (self.configModel && self.configModel.onlyFullScreen) {
+            self.fullScreenBtn.frame = CGRectMake(self.width, 0, self.height, self.height);
+        }else{
+            self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
+        }
         
         self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, self.height);
         self.playTimeLbl.centerY = self.fullScreenBtn.centerY;

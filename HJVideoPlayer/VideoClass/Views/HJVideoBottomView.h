@@ -13,7 +13,7 @@
 
 typedef void(^videoPlayerFullScreenBlock)(BOOL isFull);
 
-
+@class HJVideoConfigModel;
 @interface HJVideoBottomView : UIView
 
 /** 进度*/
@@ -26,6 +26,8 @@ typedef void(^videoPlayerFullScreenBlock)(BOOL isFull);
 @property (nonatomic, copy) videoPlayerFullScreenBlock fullScreenBlock;
 /** 是否仅显示slider */
 @property (nonatomic, assign, readonly) BOOL onlySlider;
+
+@property (nonatomic, strong) HJVideoConfigModel *configModel;
 
 
 // 显示底部视图

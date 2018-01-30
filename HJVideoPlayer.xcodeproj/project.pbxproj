@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D21D155B2019E49B001D17E5 /* HJVideoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */; };
 		D298D394201F030500AB2DD4 /* HJVideoPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */; };
+		D298D39820207D1300AB2DD4 /* HJVideoConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */; };
 		D29B1C64200C404900E37C21 /* HJVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C63200C404900E37C21 /* HJVideoPlayerTests.m */; };
 		D29B1C6F200C404900E37C21 /* HJVideoPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C6E200C404900E37C21 /* HJVideoPlayerUITests.m */; };
 		D29B1CAE200C41BE00E37C21 /* images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D29B1C80200C41BD00E37C21 /* images.bundle */; };
@@ -57,6 +58,8 @@
 		D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HJVideoAssets.xcassets; sourceTree = "<group>"; };
 		D298D392201F030500AB2DD4 /* HJVideoPlayerUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerUtil.h; sourceTree = "<group>"; };
 		D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerUtil.m; sourceTree = "<group>"; };
+		D298D39620207D1300AB2DD4 /* HJVideoConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoConfigModel.h; sourceTree = "<group>"; };
+		D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoConfigModel.m; sourceTree = "<group>"; };
 		D29B1C47200C404900E37C21 /* HJVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HJVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B1C5F200C404900E37C21 /* HJVideoPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HJVideoPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B1C63200C404900E37C21 /* HJVideoPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerTests.m; sourceTree = "<group>"; };
@@ -138,6 +141,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D298D39520207CF400AB2DD4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D298D39620207D1300AB2DD4 /* HJVideoConfigModel.h */,
+				D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		D29B1C3E200C404900E37C21 = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				D29B1CC7200C444000E37C21 /* HJVideoPlayerHeader.h */,
+				D298D39520207CF400AB2DD4 /* Models */,
 				D29B1C94200C41BE00E37C21 /* Others */,
 				D29B1C9D200C41BE00E37C21 /* Views */,
 				D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */,
@@ -436,6 +449,7 @@
 				D29B1CB9200C41BE00E37C21 /* HJVideoUIManager.m in Sources */,
 				D29B1CBF200C41BE00E37C21 /* HJVideoTopView.m in Sources */,
 				D29B1CBD200C41BE00E37C21 /* HJPlayerView.m in Sources */,
+				D298D39820207D1300AB2DD4 /* HJVideoConfigModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
