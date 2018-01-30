@@ -188,6 +188,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     self.maskView.replayBlock = ^{
         [kVideoPlayerManager seekToTime:0];
         weakMaskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
+        [weakSelf resetTimer];
     };
     [self.playerView addSubview:self.maskView];
     
@@ -283,15 +284,15 @@ static const NSInteger maxSecondsForBottom = 5.f;
 }
 
 - (void)cancelTimer{
+    
+    [self hideSomeViews];
+    
     if (!self.timer) {
         return;
     }
     
     [self.timer invalidate];
     self.timer = nil;
-    
-    [self hideSomeViews];
-    
 }
 
 - (void)hideSomeViews{
@@ -332,12 +333,13 @@ static const NSInteger maxSecondsForBottom = 5.f;
         NSLog(@"[%@]:准备播放",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_readyToPlay;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
-        [weakSelf startTimer];
     } monitoringBlock:^(CGFloat currentDuration) {
+    
         weakSelf.playStatus = videoPlayer_playing;
-        if (weakSelf.maskView.maskViewStatus != VideoMaskViewStatus_showPlayBtn) {
+
+        if(weakSelf.maskView.maskViewStatus != VideoMaskViewStatus_showPlayBtn) {
             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
-            [weakSelf.maskView hide];
+            [weakSelf hideSomeViews];
         };
     }loadingBlock:^{
         NSLog(@"[%@]:加载中",[weakSelf class]);
@@ -347,12 +349,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
         NSLog(@"[%@]:播放结束",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_playEnd;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showReplayBtn;
-        [weakSelf startTimer];
     } failedBlock:^{
         NSLog(@"[%@]:播放失败",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_playFailed;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showReplayBtn;
-        [weakSelf startTimer];
     }];
 }
 /**
@@ -387,13 +387,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 #pragma mark - Public Methods
 - (void)play{
-    NSLog(@"开始播放");
     [kVideoPlayerManager play];
     [self setPlayStatus:videoPlayer_playing];
 }
 
 - (void)pause{
-    NSLog(@"暂停播放");
     [kVideoPlayerManager pause];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setPlayStatus:videoPlayer_pause];
@@ -512,6 +510,12 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
 
     [super touchesMoved:touches withEvent:event];
+    
+    //状态未知时不可拖动 如（未进入准备状态）
+    if(self.playStatus == videoPlayer_unknown){
+        return;
+    }
+    
     [self setSecondsForBottom:maxSecondsForBottom];
     UITouch * touch = [touches anyObject];
     CGPoint movePoint = [touch locationInView:self.view];
@@ -584,8 +588,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
             //屏幕从竖屏变为横屏时执行

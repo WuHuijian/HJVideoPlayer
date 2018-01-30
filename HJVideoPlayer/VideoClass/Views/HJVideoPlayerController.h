@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, VideoPlayerStatus) {
 
 
 /** 设置URL后自动播放 */
-@property (nonatomic, assign) BOOL auoPlay;
+@property (nonatomic, assign) BOOL autoPlay;
 /** 是否仅支持全屏 */
 @property (nonatomic, assign) BOOL onlyFullScreen;
 

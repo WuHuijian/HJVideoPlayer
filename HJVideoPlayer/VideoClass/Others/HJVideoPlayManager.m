@@ -274,16 +274,10 @@ ServiceSingletonM(HJVideoPlayManager)
     __weak __typeof(self)weakSelf = self;
     self.playbackTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) {
         weakSelf.currentDuration = playerItem.currentTime.value/playerItem.currentTime.timescale;
-        
-        if(weakSelf.currentDuration != weakSelf.totalDuration){
+    
             if(weakSelf.monitoringBlock){
                 weakSelf.monitoringBlock(weakSelf.currentDuration);
             }
-        }else{
-            if (weakSelf.endBlock) {
-                weakSelf.endBlock();
-            }
-        }
     }];
 }
 
