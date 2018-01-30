@@ -48,7 +48,6 @@
 
 @end
 
-
 @implementation HJVideoPlayManager
 
 ServiceSingletonM(HJVideoPlayManager)
@@ -141,6 +140,13 @@ ServiceSingletonM(HJVideoPlayManager)
 {
     [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     [self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+
+    // 已缓冲
+    [self.playerItem addObserver:self forKeyPath:@"playbackBufferFull" options:NSKeyValueObservingOptionNew context:nil];
+    // 未缓冲
+    [self.playerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
+    // 可以播放
+    [self.playerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
     
     // 添加视频播放结束通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
@@ -150,7 +156,12 @@ ServiceSingletonM(HJVideoPlayManager)
 {
     [[self.player currentItem] removeObserver:self forKeyPath:@"status"];
     [[self.player currentItem] removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [[self.player currentItem] removeObserver:self forKeyPath:@"playbackBufferFull" context:nil];
+    [[self.player currentItem] removeObserver:self forKeyPath:@"playbackBufferEmpty" context:nil];
+    [[self.player currentItem] removeObserver:self forKeyPath:@"playbackLikelyToKeepUp" context:nil];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    
     if (self.playbackTimeObserver) {
         [self.player removeTimeObserver:self.playbackTimeObserver];
     }
@@ -191,6 +202,14 @@ ServiceSingletonM(HJVideoPlayManager)
                     self.loadingBlock();
                 }
             }
+    } else if ([keyPath isEqualToString:@"playbackBufferFull"]) {
+       
+        NSLog(@"VideoPlayer : [playbackBufferFull]");
+        
+    }else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
+        
+        NSLog(@"VideoPlayer : [playbackLikelyToKeepUp]");
+        
     }
 }
 

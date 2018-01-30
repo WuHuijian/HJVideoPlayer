@@ -330,9 +330,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     WS(weakSelf);
     [kVideoPlayerManager readyBlock:^(CGFloat totoalDuration) {
         NSLog(@"[%@]:准备播放",[weakSelf class]);
-//        if (!weakSelf.auoPlay) {
-//           weakSelf.playerView.image = [HJVideoPlayerUtil getImageWithVideoUrl:weakSelf.url];
-//        }
         weakSelf.playStatus = videoPlayer_readyToPlay;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
         [weakSelf startTimer];
@@ -340,6 +337,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         weakSelf.playStatus = videoPlayer_playing;
         if (weakSelf.maskView.maskViewStatus != VideoMaskViewStatus_showPlayBtn) {
             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
+            [weakSelf.maskView hide];
         };
     }loadingBlock:^{
         NSLog(@"[%@]:加载中",[weakSelf class]);
