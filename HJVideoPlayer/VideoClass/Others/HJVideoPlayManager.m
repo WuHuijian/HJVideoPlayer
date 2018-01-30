@@ -13,7 +13,6 @@
 @interface HJVideoPlayManager ()
 // 播放相关
 @property (nonatomic ,strong) AVURLAsset     *urlAsset;
-@property (nonatomic ,strong) AVAsset        *asset;
 @property (nonatomic, strong) AVPlayer       *player;
 @property (nonatomic, strong) AVPlayerItem   *playerItem;
 @property (nonatomic, strong) NSObject       *playbackTimeObserver;
@@ -89,7 +88,7 @@ ServiceSingletonM(HJVideoPlayManager)
     
     NSURL *urlAddress = nil;
     
-    if ([url hasPrefix:@"http://"]) {
+    if ([url hasPrefix:@"http"]) {
         urlAddress = [NSURL URLWithString:url];
         [self setIsLocalVideo:NO];
     }else{
@@ -142,16 +141,18 @@ ServiceSingletonM(HJVideoPlayManager)
 {
     [self.playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     [self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    
+    // 添加视频播放结束通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
 }
 
 - (void)removeObserver
 {
-
     [[self.player currentItem] removeObserver:self forKeyPath:@"status"];
     [[self.player currentItem] removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
     if (self.playbackTimeObserver) {
         [self.player removeTimeObserver:self.playbackTimeObserver];
-        self.playbackTimeObserver = nil;
     }
 }
 
@@ -193,6 +194,13 @@ ServiceSingletonM(HJVideoPlayManager)
     }
 }
 
+
+- (void)moviePlayDidEnd:(NSNotification *)notif{
+    
+    if (self.endBlock) {
+        self.endBlock();
+    }
+}
 
 #pragma mark - getters / setters
 - (void)setCurrentDuration:(CGFloat)currentDuration
@@ -263,12 +271,12 @@ ServiceSingletonM(HJVideoPlayManager)
 
 - (void)reset
 {
-    [self removeObserver];
     [[self.player currentItem] cancelPendingSeeks];
     [[self.player currentItem].asset cancelLoading];
-    [self setAsset:nil];
+    [self removeObserver];
     [self setUrlAsset:nil];
     [self setPlayerItem:nil];
+    [self setPlaybackTimeObserver:nil];
     [self.player replaceCurrentItemWithPlayerItem:nil];
 }
 @end
