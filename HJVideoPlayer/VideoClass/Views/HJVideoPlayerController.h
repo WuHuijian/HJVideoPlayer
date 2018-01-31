@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HJVideoConfigModel.h"
 
 typedef NS_ENUM(NSUInteger, VideoPlayerStatus) {
     videoPlayer_unknown,
@@ -21,17 +21,15 @@ typedef NS_ENUM(NSUInteger, VideoPlayerStatus) {
 
 @interface HJVideoPlayerController : UIViewController
 
-@property (nonatomic ,strong) NSString *url;
-
+@property (nonatomic ,copy) NSString *url;
+/** 视频标题 */
+@property (nonatomic, copy) NSString *videoTitle;
+/** 是否全屏状态 */
 @property (nonatomic, assign , readonly) BOOL isFullScreen;
-
+/** 播放状态 */
 @property (nonatomic, assign , readonly) VideoPlayerStatus playStatus;
-
-
-/** 设置URL后自动播放 */
-@property (nonatomic, assign) BOOL autoPlay;
-/** 是否仅支持全屏 */
-@property (nonatomic, assign) BOOL onlyFullScreen;
+/** 配置模型 */
+@property (nonatomic, strong) HJVideoConfigModel *configModel;
 
 
 - (instancetype)initWithFrame:(CGRect)frame;

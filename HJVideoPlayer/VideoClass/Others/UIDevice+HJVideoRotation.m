@@ -11,9 +11,6 @@
 @implementation UIDevice (HJVideoRotation)
 
 + (void)rotateToOrientation:(UIInterfaceOrientation)orientation{
-//    // 清除方向
-//    NSNumber *resetOrientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationUnknown];
-//    [[UIDevice currentDevice] setValue:resetOrientationTarget forKey:@"orientation"];
     // 设置方向
     NSNumber *orientationTarget = [NSNumber numberWithInt:orientation];
     [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];

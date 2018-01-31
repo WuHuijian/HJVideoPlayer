@@ -18,7 +18,6 @@
 #import "HJVideoPlayerHeader.h"
 #import "AppDelegate+HJExtendion.h"
 #import "HJVideoPlayerUtil.h"
-#import "HJVideoConfigModel.h"
 #import "UIDevice+HJVideoRotation.h"
 
 typedef NS_ENUM(NSUInteger, MoveDirection) {
@@ -40,8 +39,6 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 @property (nonatomic ,strong) HJVideoBottomView * bottomView;
 
 @property (nonatomic ,assign) CGRect originFrame;
-
-@property (nonatomic ,assign) CGFloat toolBarHeight;
 
 @property (nonatomic, assign) BOOL isFullScreen;
 
@@ -69,13 +66,10 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 /** 定时器 */
 @property (nonatomic, strong) NSTimer *timer;
 
-/** 配置模型 */
-@property (nonatomic, strong) HJVideoConfigModel *configModel;
+
 
 @end
 
-#define kToolBarHalfHeight 44.f
-#define kToolBarFullHeight 44.f
 #define kFullScreenFrame CGRectMake(0 , 0, kScreenHeight, kScreenWidth)
 
 #define imgVideoBackImg [UIImage imageFromBundleWithName:@"video_bg.jpg"]
@@ -114,7 +108,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     //允许屏幕旋转
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    if (self.onlyFullScreen) {
+    if (self.configModel.onlyFullScreen) {
         delegate.orientationMask = UIInterfaceOrientationMaskLandscape;
         [UIDevice rotateToOrientation:UIInterfaceOrientationLandscapeRight];
         [self changeFullScreen:YES];
@@ -182,7 +176,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)setupUI
 {
     // 设置self
-    if (!self.onlyFullScreen) {
+    if (!self.configModel.onlyFullScreen) {
         [self.view setFrame:self.originFrame];
     }else{
         [self.view setFrame:CGRectMake(0, 0,kScreenWidth, kScreenHeight)];
@@ -229,7 +223,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     // 设置topView
     self.topView.frame = CGRectMake(0, 0, self.view.frame.size.width, kToolBarHalfHeight);
-    self.topView.title = @"吴辉建的视频播放器";
     [self.view addSubview:self.topView];
     
     // 设置BottomView
@@ -246,13 +239,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self.view.superview bringSubviewToFront:self.view];
     
     [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
-        CGFloat toolBarHeight = 0;
         if (changeFull) {
             self.view.frame = kFrame;
-            toolBarHeight = kToolBarFullHeight;
         }else{
             self.view.frame = self.originFrame;
-            toolBarHeight = kToolBarHalfHeight;
         }
         
         self.playerView.frame = self.view.bounds;
@@ -387,7 +377,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [kVideoPlayerManager readyBlock:^(CGFloat totoalDuration) {
         NSLog(@"[%@]:准备播放",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_readyToPlay;
-        weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
+        if (weakSelf.configModel.autoPlay) {//是否自动播放
+            [weakSelf play];
+        }else{
+            weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
+        }
     } monitoringBlock:^(CGFloat currentDuration) {
     
         weakSelf.playStatus = videoPlayer_playing;
@@ -490,7 +484,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         WS(weakSelf);
         _topView = [[HJVideoTopView alloc]init];
         _topView.backBlock = ^(){
-            if (weakSelf.onlyFullScreen) {//仅支持全屏  直接返回
+            if (weakSelf.configModel.onlyFullScreen) {//仅支持全屏  直接返回
                 weakSelf.view.frame = CGRectZero;
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }else{
@@ -543,6 +537,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
     self.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
 }
 
+- (void)setVideoTitle:(NSString *)videoTitle{
+    _videoTitle = videoTitle;
+    self.topView.title = videoTitle;
+}
+
 - (void)setPlayStatus:(VideoPlayerStatus)playStatus{
     
     self.prePlayStatus = _playStatus;
@@ -553,14 +552,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     if (!_configModel) {
         _configModel = [[HJVideoConfigModel alloc] init];
+        _configModel.autoPlay = YES;//默认设置url自动播放
     }
     return _configModel;
-}
-
-- (void)setOnlyFullScreen:(BOOL)onlyFullScreen{
-    
-    _onlyFullScreen = onlyFullScreen;
-    self.configModel.onlyFullScreen = onlyFullScreen;
 }
 
 #pragma mark - 触摸事件
@@ -579,7 +573,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [super touchesMoved:touches withEvent:event];
     
     //状态未知时不可拖动 如（未进入准备状态）
-    if(self.playStatus == videoPlayer_unknown){
+    if(self.playStatus == videoPlayer_unknown ||
+       self.playStatus == videoPlayer_playFailed ||
+       self.playStatus == videoPlayer_playEnd ||
+       self.playStatus == videoPlayer_loading){
         return;
     }
     

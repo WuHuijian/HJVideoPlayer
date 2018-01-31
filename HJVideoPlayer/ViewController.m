@@ -50,7 +50,7 @@
 - (void)enterFull{
 
     HJVideoPlayerController * videoC = [[HJVideoPlayerController alloc] init];
-    [videoC setOnlyFullScreen:YES];
+    [videoC.configModel setOnlyFullScreen:YES];
     [videoC setUrl:@"http://hc46.aipai.com/user/128/31977128/1006/card/46946073/card.mp4?l=o"];
     [self.navigationController pushViewController:videoC animated:YES];
 
