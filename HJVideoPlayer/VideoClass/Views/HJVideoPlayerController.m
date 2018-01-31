@@ -438,12 +438,14 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)play{
     [kVideoPlayerManager play];
     [self setPlayStatus:videoPlayer_playing];
+    [self.maskView setPlayStatus:YES];
 }
 
 - (void)pause{
     [kVideoPlayerManager pause];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setPlayStatus:videoPlayer_pause];
+        [self.maskView setPlayStatus:NO];
     });
 }
 

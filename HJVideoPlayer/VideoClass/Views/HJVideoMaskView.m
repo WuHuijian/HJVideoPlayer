@@ -116,6 +116,11 @@
 
 
 #pragma mark - Event response
+- (void)setPlayStatus:(BOOL)play;{
+    
+    self.playBtn.selected = play;
+    
+}
 - (void)playOrPauseAction:(UIButton *)sender{
     
     sender.selected = !sender.selected;

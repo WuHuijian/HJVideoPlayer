@@ -39,6 +39,8 @@ typedef void(^videoPlayerPlayFailedClickBlock)(void);
 /** 遮罩层显示状态 */
 @property (nonatomic, assign) VideoMaskViewStatus maskViewStatus;
 
+- (void)setPlayStatus:(BOOL)play;
+
 - (void)show;
 
 - (void)hide;
