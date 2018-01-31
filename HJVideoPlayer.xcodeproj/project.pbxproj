@@ -10,6 +10,7 @@
 		D21D155B2019E49B001D17E5 /* HJVideoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */; };
 		D298D394201F030500AB2DD4 /* HJVideoPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */; };
 		D298D39820207D1300AB2DD4 /* HJVideoConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */; };
+		D298D39E2021905500AB2DD4 /* UIDevice+HJVideoRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D39D2021905500AB2DD4 /* UIDevice+HJVideoRotation.m */; };
 		D29B1C64200C404900E37C21 /* HJVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C63200C404900E37C21 /* HJVideoPlayerTests.m */; };
 		D29B1C6F200C404900E37C21 /* HJVideoPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C6E200C404900E37C21 /* HJVideoPlayerUITests.m */; };
 		D29B1CAE200C41BE00E37C21 /* images.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D29B1C80200C41BD00E37C21 /* images.bundle */; };
@@ -60,6 +61,8 @@
 		D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerUtil.m; sourceTree = "<group>"; };
 		D298D39620207D1300AB2DD4 /* HJVideoConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoConfigModel.h; sourceTree = "<group>"; };
 		D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoConfigModel.m; sourceTree = "<group>"; };
+		D298D39C2021905500AB2DD4 /* UIDevice+HJVideoRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+HJVideoRotation.h"; sourceTree = "<group>"; };
+		D298D39D2021905500AB2DD4 /* UIDevice+HJVideoRotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+HJVideoRotation.m"; sourceTree = "<group>"; };
 		D29B1C47200C404900E37C21 /* HJVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HJVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B1C5F200C404900E37C21 /* HJVideoPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HJVideoPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B1C63200C404900E37C21 /* HJVideoPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerTests.m; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 				D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */,
 				D298D392201F030500AB2DD4 /* HJVideoPlayerUtil.h */,
 				D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */,
+				D298D39C2021905500AB2DD4 /* UIDevice+HJVideoRotation.h */,
+				D298D39D2021905500AB2DD4 /* UIDevice+HJVideoRotation.m */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 				D29B1CBE200C41BE00E37C21 /* HJVideoBottomView.m in Sources */,
 				D29B1CBB200C41BE00E37C21 /* HJVideoMaskView.m in Sources */,
 				D29B1CB0200C41BE00E37C21 /* ViewController.m in Sources */,
+				D298D39E2021905500AB2DD4 /* UIDevice+HJVideoRotation.m in Sources */,
 				D29B1CCE200C82B200E37C21 /* HJVideoListController.m in Sources */,
 				D2A44E85201EC21900A2D2C3 /* HJVideoSettingView.m in Sources */,
 				D29B1CB7200C41BE00E37C21 /* HJViewFactory.m in Sources */,

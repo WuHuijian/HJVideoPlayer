@@ -19,6 +19,7 @@
 #import "AppDelegate+HJExtendion.h"
 #import "HJVideoPlayerUtil.h"
 #import "HJVideoConfigModel.h"
+#import "UIDevice+HJVideoRotation.h"
 
 typedef NS_ENUM(NSUInteger, MoveDirection) {
     MoveDirection_none = 0,
@@ -113,18 +114,17 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     //允许屏幕旋转
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    delegate.allowRotation = YES;
+    if (self.onlyFullScreen) {
+        delegate.orientationMask = UIInterfaceOrientationMaskLandscape;
+        [UIDevice rotateToOrientation:UIInterfaceOrientationLandscapeRight];
+        [self changeFullScreen:YES];
+    }else{
+        delegate.orientationMask = UIInterfaceOrientationMaskAllButUpsideDown;
+    }
+    //禁用侧滑手势方法
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     //开启屏幕长亮
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-
-    if (self.onlyFullScreen) {
-        NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
-        [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //等方向切换完成后 进行旋转
-            [self changeFullScreen:YES];
-        });
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -132,12 +132,14 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     //关闭屏幕旋转
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    delegate.allowRotation = NO;
+    delegate.orientationMask = UIInterfaceOrientationMaskPortrait;
+    [UIDevice rotateToOrientation:UIInterfaceOrientationPortrait];
     //关闭屏幕长亮
     [UIApplication sharedApplication].idleTimerDisabled = NO;
+    //禁用侧滑手势方法
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     //暂停播放
     [self pause];
-    
 }
 
 
@@ -183,8 +185,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
     if (!self.onlyFullScreen) {
         [self.view setFrame:self.originFrame];
     }else{
-        [self.view setFrame:CGRectMake(0, 0,kScreenHeight, kScreenWidth)];
+        [self.view setFrame:CGRectMake(0, 0,kScreenWidth, kScreenHeight)];
     }
+    
     [self.view setClipsToBounds:YES];
     
     // 设置player
@@ -231,6 +234,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     // 设置BottomView
     self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - kToolBarHalfHeight, self.view.frame.size.width, kToolBarHalfHeight);
+    self.bottomView.configModel = self.configModel;
     [self.view addSubview:self.bottomView];
 }
 
@@ -261,7 +265,18 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 
 
-
+- (void)rotateScreenToPortrait{
+    
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        int val = UIInterfaceOrientationPortrait;
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+    }
+}
 
 
 #pragma mark - 底部栏显示/隐藏
@@ -476,14 +491,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
         _topView = [[HJVideoTopView alloc]init];
         _topView.backBlock = ^(){
             if (weakSelf.onlyFullScreen) {//仅支持全屏  直接返回
-                NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-                [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
                 weakSelf.view.frame = CGRectZero;
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }else{
                 if(weakSelf.isFullScreen){//全屏返回
-                  NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-                    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+                    [UIDevice rotateToOrientation:UIInterfaceOrientationPortrait];
                     [weakSelf changeFullScreen:NO];
                 }else{//半屏返回操作
                     [weakSelf popAction];
@@ -504,11 +516,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
         _bottomView = [[HJVideoBottomView alloc] init];
         _bottomView.fullScreenBlock = ^(BOOL isFull){
             if(isFull){
-                NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeRight];
-                [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+                [UIDevice rotateToOrientation:UIInterfaceOrientationLandscapeRight];
             }else{
-                NSNumber * value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-                [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+                [UIDevice rotateToOrientation:UIInterfaceOrientationPortrait];
             }
             [weakSelf changeFullScreen:isFull];
         };
@@ -632,29 +642,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 
 #pragma mark - 屏幕旋转
-// 返回是否支持设备自动旋转
-- (BOOL)shouldAutorotate
-{
-    //全屏不支持屏幕旋转
-    if (self.onlyFullScreen) {
-        return NO;
-    }
-    
-    if (kAppDelegate.allowRotation) {
-        return YES;
-    }else{
-        return NO;
-    }
-    
-}
-
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     //全屏不支持屏幕旋转
-    if (self.onlyFullScreen) {
-        return;
-    }
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight) {
             //屏幕从竖屏变为横屏时执行

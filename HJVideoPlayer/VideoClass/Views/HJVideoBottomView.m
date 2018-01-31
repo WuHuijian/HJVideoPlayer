@@ -110,8 +110,21 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 
 - (void)refreshUI{
     
-    
-    if (!self.onlySlider && !self.fullScreen){
+    if (self.configModel && self.configModel.onlyFullScreen && !self.onlySlider){
+        [self showOnlySlider:NO];
+        self.fullScreenBtn.frame = CGRectMake(self.width, 0, self.height, self.height);
+        self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, self.height);
+        self.playTimeLbl.centerY = self.fullScreenBtn.centerY;
+        self.playTimeLbl.font = [UIFont systemFontOfSize:kTimeLabelFontSize];
+        
+        self.totalDurationLbl.frame = CGRectMake(self.fullScreenBtn.left - kTimeLabelWidth, 0, kTimeLabelWidth, self.height);
+        self.totalDurationLbl.centerY = self.playTimeLbl.centerY;
+        self.totalDurationLbl.font = self.playTimeLbl.font;
+        
+        self.bufferSlider.frame = CGRectMake(self.playTimeLbl.right, 0, self.totalDurationLbl.left-self.playTimeLbl.right, kSliderHeight);
+        self.bufferSlider.centerY = self.fullScreenBtn.centerY;
+        
+    }else if (!self.onlySlider && !self.fullScreen){
         
         [self showOnlySlider:NO];
         
@@ -131,11 +144,8 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     }else if (!self.onlySlider && self.fullScreen) {
       
         [self showOnlySlider:NO];
-        if (self.configModel && self.configModel.onlyFullScreen) {
-            self.fullScreenBtn.frame = CGRectMake(self.width, 0, self.height, self.height);
-        }else{
-            self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
-        }
+    
+        self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
         
         self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, self.height);
         self.playTimeLbl.centerY = self.fullScreenBtn.centerY;
