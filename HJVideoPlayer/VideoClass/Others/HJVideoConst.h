@@ -29,6 +29,17 @@ static CGFloat const kTopBarFullHeight = 44.f;
 static CGFloat const kBottomBarHalfHeight = 44.f;
 static CGFloat const kBottomBarFullHeight = 44.f;
 
+/**********************   Images  ***********************/
+
+#define imgFullScreen   [UIImage imageFromBundleWithName:@"video_toFullScreen_white"]
+#define imgHalfScreen   [UIImage imageFromBundleWithName:@"video_toHalfScreen_white"]
+#define imgSliderThumb  [UIImage imageFromBundleWithName:@"video_slider_thumb"]
+
+#define imgVideoBackImg [UIImage imageFromBundleWithName:@"video_bg.jpg"]
+
+#define imgPlay         [UIImage imageNamed:@"video_play"]
+#define imgPause        [UIImage imageNamed:@"video_pause"]
+#define imgBack         [UIImage imageNamed:@"video_back"]
 
 /**********************   methods  ***********************/
 // weakSelf
@@ -42,6 +53,8 @@ static CGFloat const kBottomBarFullHeight = 44.f;
 #define kNotificationChangeScreen  @"NotificationChangeScreen"
 #define kNotificationPlayVideo     @"NotificationPlayVideo"
 #define kNotificationPauseVideo    @"NotificationPauseVideo"
+
+
 
 
 

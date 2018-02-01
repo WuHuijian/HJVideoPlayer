@@ -71,9 +71,7 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 
 #define kFullScreenFrame CGRectMake(0 , 0, kVideoScreenH, kVideoScreenW)
 
-#define imgVideoBackImg [UIImage imageFromBundleWithName:@"video_bg.jpg"]
-#define imgPlay         [UIImage imageFromBundleWithName:@"video_play"]
-#define imgPause        [UIImage imageFromBundleWithName:@"video_pause"]
+
 static const NSInteger maxSecondsForBottom = 5.f;
 
 @implementation HJVideoPlayerController

@@ -25,7 +25,7 @@
 
 @end
 
-#define imgBack [UIImage imageNamed:@"video_back"]
+
 
 @implementation HJVideoTopView
 

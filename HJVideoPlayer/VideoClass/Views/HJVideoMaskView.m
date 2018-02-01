@@ -9,6 +9,7 @@
 #import "HJVideoMaskView.h"
 #import "HJVideoPlayerHeader.h"
 #import "HJCircleLoading.h"
+#import "HJVideoConst.h"
 
 @interface HJVideoMaskView ()
 
@@ -25,8 +26,7 @@
 @end
 
 
-#define imgPlay         [UIImage imageNamed:@"video_play"]
-#define imgPause        [UIImage imageNamed:@"video_pause"]
+
 
 @implementation HJVideoMaskView
 
