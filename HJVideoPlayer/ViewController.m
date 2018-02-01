@@ -51,7 +51,7 @@
 
     HJVideoPlayerController * videoC = [[HJVideoPlayerController alloc] init];
     [videoC.configModel setOnlyFullScreen:YES];
-    [videoC setUrl:@"http://hc46.aipai.com/user/128/31977128/1006/card/46946073/card.mp4?l=o"];
+    [videoC setUrl:@"http://hc31.aipai.com/user/128/31977128/1006/card/44340096/card.mp4?l=f"];
     [self.navigationController pushViewController:videoC animated:YES];
 
 }

@@ -47,20 +47,18 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 @property (nonatomic, assign) VideoPlayerStatus playStatus;
 
 @property (nonatomic, assign) VideoPlayerStatus prePlayStatus;
-
+/** 隐藏时间 */
 @property (nonatomic, assign) NSInteger secondsForBottom;
-
+/** 开始移动 */
 @property (nonatomic, assign) CGPoint startPoint;
-
+/** 移动方向 */
 @property (nonatomic, assign) MoveDirection moveDirection;
-
 /** 音量调节 */
 @property (nonatomic, strong) UISlider *volumeSlider;
-
+/** 系统音量 */
 @property (nonatomic, assign) CGFloat sysVolume;
 /** 亮度调节 */
 @property (nonatomic, assign) CGFloat brightness;
-
 /** 进度调节 */
 @property (nonatomic, assign) CGFloat currentTime;
 /** 定时器 */
@@ -252,23 +250,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationChangeScreen object:@(changeFull)];
     }];
 }
-
-
-
-- (void)rotateScreenToPortrait{
-    
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-        SEL selector = NSSelectorFromString(@"setOrientation:");
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
-        [invocation setSelector:selector];
-        [invocation setTarget:[UIDevice currentDevice]];
-        int val = UIInterfaceOrientationPortrait;
-        [invocation setArgument:&val atIndex:2];
-        [invocation invoke];
-    }
-}
-
-
 #pragma mark - 底部栏显示/隐藏
 
 - (void)addTapGesture
@@ -400,6 +381,9 @@ static const NSInteger maxSecondsForBottom = 5.f;
         NSLog(@"[%@]:播放结束",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_playEnd;
         weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showReplayBtn;
+        if (weakSelf.playEndBlock) {
+            weakSelf.playEndBlock();
+        }
     } failedBlock:^{
         NSLog(@"[%@]:播放失败",[weakSelf class]);
         weakSelf.playStatus = videoPlayer_playFailed;
@@ -534,8 +518,13 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 - (void)setUrl:(NSString *)url{
     if (!url) return;
-    _url = url;
     
+    if (![_url isEqualToString:url]) {//若切换URL
+        //清除视频标题
+        self.videoTitle = @"";
+    }
+    _url = url;
+
     [self clearInfo];
     [self.playerView setPlayer:[kVideoPlayerManager setUrl:_url]];
     self.maskView.maskViewStatus = VideoMaskViewStatus_showLoading;
@@ -561,6 +550,17 @@ static const NSInteger maxSecondsForBottom = 5.f;
     return _configModel;
 }
 
+
+- (void)setIsFullScreen:(BOOL)isFullScreen{
+    
+    if (_isFullScreen != isFullScreen) {
+        _isFullScreen = isFullScreen;
+        //屏幕切换回调
+        if (self.screenChangedBlock) {
+            self.screenChangedBlock(isFullScreen);
+        }
+    }
+}
 #pragma mark - 触摸事件
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     

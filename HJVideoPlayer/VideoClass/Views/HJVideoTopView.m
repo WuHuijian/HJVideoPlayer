@@ -8,6 +8,7 @@
 
 #import "HJVideoTopView.h"
 #import "HJVideoPlayerHeader.h"
+#import "HJVideoConfigModel.h"
 
 @interface HJVideoTopView ()
 
@@ -165,8 +166,6 @@
     BOOL isFullScreen = [[notif object] boolValue];
     
     [self setFullScreen:isFullScreen];
-    
-  
 }
 
 
