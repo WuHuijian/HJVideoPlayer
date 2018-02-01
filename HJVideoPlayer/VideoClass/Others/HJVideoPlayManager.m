@@ -10,7 +10,7 @@
 #import "HJVideoUIManager.h"
 #import "HJVideoPlayerHeader.h"
 #import "HJVideoConst.h"
-
+#import "HJVideoPlayTimeRecord.h"
 @interface HJVideoPlayManager ()
 // 播放相关
 @property (nonatomic ,strong) AVURLAsset     *urlAsset;
@@ -19,6 +19,14 @@
 @property (nonatomic, strong) NSObject       *playbackTimeObserver;
 /** 是否为本地视频*/
 @property (nonatomic ,assign) BOOL            isLocalVideo;
+
+
+/** 播放地址 */
+@property (nonatomic, copy) NSString * videoUrl;
+/** 播放记录 */
+@property (nonatomic, strong) NSMutableArray<HJVideoPlayTimeRecord *> *playRecords;
+
+
 /** 视频时长(秒)*/
 @property (nonatomic ,assign) CGFloat  totalDuration;
 /** 当前播放时长*/
@@ -85,6 +93,8 @@ ServiceSingletonM(HJVideoPlayManager)
     
     //Reset player
     [self reset];
+    
+    _videoUrl = url;
     
     NSURL *urlAddress = nil;
     
@@ -261,6 +271,14 @@ ServiceSingletonM(HJVideoPlayManager)
     return _player;
 }
 
+- (NSMutableArray<HJVideoPlayTimeRecord *> *)playRecords{
+    
+    if (!_playRecords) {
+        _playRecords = [NSMutableArray array];
+    }
+    return _playRecords;
+}
+
 #pragma mark - Private Methods
 - (void)monitoringPlayback:(AVPlayerItem *)playerItem
 {
@@ -292,5 +310,58 @@ ServiceSingletonM(HJVideoPlayManager)
     [self setPlayerItem:nil];
     [self setPlaybackTimeObserver:nil];
     [self.player replaceCurrentItemWithPlayerItem:nil];
+}
+
+
+#pragma mark - 播放记录
+- (void)recordUrl:(NSString *)url playTime:(float)playTime{
+    
+    if(!url || url.length==0) return;
+    
+    HJVideoPlayTimeRecord * record = [self recordWithUrl:url];
+    if(!record){
+        record = [[HJVideoPlayTimeRecord alloc] init];
+    }
+    record.url = url;
+    record.playTime = playTime;
+    [self record:record];
+}
+
+
+- (HJVideoPlayTimeRecord *)recordWithUrl:(NSString *)url{
+    
+    __block HJVideoPlayTimeRecord * record = nil;
+    [self.playRecords enumerateObjectsUsingBlock:^(HJVideoPlayTimeRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.url isEqualToString:url]) {
+            record = obj;
+            * stop = YES;
+        }
+    }];
+    
+    return record;
+}
+
+
+- (void)record:(HJVideoPlayTimeRecord *)record{
+    
+    if (![self.playRecords containsObject:record]) {
+        if (self.playRecords.count == self.maxRecordCount && self.playRecords.count != 0) {
+            [self.playRecords removeObjectAtIndex:0];
+        }
+        [self.playRecords addObject:record];
+    }
+}
+
+
+- (void)removeRecord:(HJVideoPlayTimeRecord *)record{
+    
+    if ([self.playRecords containsObject:record]) {
+        [self.playRecords removeObject:record];
+    }
+}
+
+- (void)removeAllPlayRecords{
+    
+    [self.playRecords removeAllObjects];
 }
 @end

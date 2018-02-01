@@ -25,11 +25,14 @@ typedef void(^VideoPlayerManagerCurrentDurationBlock)(CGFloat currentDuration);/
 typedef void(^VideoPlayerManagerTotalDurationBlock)(CGFloat totalDuration);//视频总时长回调
 typedef void(^VideoPlayerManagerBufferDurationBlock)(CGFloat bufferDuration);//缓冲时长回调
 
-
+@class HJVideoPlayTimeRecord;
 
 @interface HJVideoPlayManager : NSObject
 
 @property (nonatomic, strong, readonly) AVPlayer       *player;
+
+/** 最大播放记录数 */
+@property (nonatomic, assign) NSInteger maxRecordCount;
 
 
 ServiceSingletonH(HJVideoPlayManager)
@@ -55,5 +58,17 @@ ServiceSingletonH(HJVideoPlayManager)
 - (void)seekToTime:(CGFloat)second;
 
 - (void)reset;
+
+/** 记录播放时长*/
+- (void)recordUrl:(NSString *)url playTime:(float)playTime;
+
+/** 获取是否有记录*/
+- (HJVideoPlayTimeRecord *)recordWithUrl:(NSString *)url;
+
+/** 移除播放记录*/
+- (void)removeRecord:(HJVideoPlayTimeRecord *)record;
+
+/** 移除所有播放记录*/
+- (void)removeAllPlayRecords;
 
 @end

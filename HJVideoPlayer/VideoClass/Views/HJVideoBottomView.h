@@ -45,8 +45,5 @@ typedef void(^videoPlayerFullScreenBlock)(BOOL isFull);
 // 设置最大进度
 - (void)setMaximumValue:(CGFloat)value;
 
-// seekTo
-- (void)seekTo:(CGFloat)playTime;
-
 
 @end

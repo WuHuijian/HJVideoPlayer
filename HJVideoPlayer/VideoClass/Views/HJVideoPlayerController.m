@@ -20,6 +20,7 @@
 #import "HJVideoPlayerUtil.h"
 #import "UIDevice+HJVideoRotation.h"
 #import "HJVideoConst.h"
+#import "HJVideoPlayTimeRecord.h"
 
 typedef NS_ENUM(NSUInteger, MoveDirection) {
     MoveDirection_none = 0,
@@ -277,7 +278,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         
     }else{
         [self setSecondsForBottom:maxSecondsForBottom];
-        self.topView.hidden = NO;
+        [self hideTopView:NO];
         [self.bottomView show];
         
         [self.maskView show];
@@ -314,7 +315,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     //顶部视图隐藏
     if (self.isFullScreen) {
-        self.topView.hidden = YES;
+        [self hideTopView:YES];
     }
     
     //底部视图隐藏
@@ -421,12 +422,21 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
 #pragma mark - 公开方法
 - (void)play{
+    
+    //若有记录则从记录播放
+    if ([kVideoPlayerManager recordWithUrl:self.url]) {
+        HJVideoPlayTimeRecord * record = [kVideoPlayerManager recordWithUrl:self.url];
+        [kVideoPlayerManager seekToTime:record.playTime];
+        [kVideoPlayerManager removeRecord:record];
+    }
+    
     [kVideoPlayerManager play];
     [self setPlayStatus:videoPlayer_playing];
     [self.maskView setPlayStatus:YES];
 }
 
 - (void)pause{
+    
     [kVideoPlayerManager pause];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setPlayStatus:videoPlayer_pause];
@@ -522,6 +532,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
         //清除视频标题
         self.videoTitle = @"";
     }
+    
+    //记录播放时长
+    [kVideoPlayerManager recordUrl:_url playTime:self.bottomView.progressValue];
+    
     _url = url;
 
     [self clearInfo];
@@ -630,7 +644,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     [super touchesEnded:touches withEvent:event];
     if (self.moveDirection == MoveDirection_left || self.moveDirection == MoveDirection_right) {
-        [self.bottomView seekTo:self.maskView.fastForwardView.currentDuration];
+        [kVideoPlayerManager seekToTime:self.maskView.fastForwardView.currentDuration];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.playStatus = self.prePlayStatus;
             [self cancelTimer];

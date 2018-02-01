@@ -10,6 +10,7 @@
 #import "HJVideoPlayerHeader.h"
 #import "HJCircleLoading.h"
 #import "HJVideoConst.h"
+#import "HJViewFactory.h"
 
 @interface HJVideoMaskView ()
 

@@ -10,6 +10,7 @@
 #import "HJVideoPlayerHeader.h"
 #import "HJVideoConfigModel.h"
 #import "HJVideoConst.h"
+#import "HJViewFactory.h"
 
 @interface HJVideoTopView ()
 

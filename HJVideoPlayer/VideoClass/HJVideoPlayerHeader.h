@@ -10,9 +10,8 @@
 #define HJVideoPlayerHeader_h
 
 
-#import "UIImage+getImage.h"
+#import "HJVideoPlayerController.h"
 
-#import "HJViewFactory.h"
-
+#import "HJVideoPlayManager.h"
 
 #endif /* HJVideoPlayerHeader_h */

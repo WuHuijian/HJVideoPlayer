@@ -13,10 +13,7 @@
 #import "HJVideoPlayerHeader.h"
 #import "HJVideoConst.h"
 #import "HJVideoConfigModel.h"
-
-
-
-
+#import "HJViewFactory.h"
 
 static const CGFloat kSliderHeight = 4.f;
 static const CGFloat kTimeLabelWidth = 50.f;
@@ -293,13 +290,6 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     
     [self.totalDurationLbl setText:[NSString stringWithFormat:@"%@",[HJVideoTimeUtil hmsStringWithFloat:value]]];
 }
-
-- (void)seekTo:(CGFloat)playTime{
-
-    [kVideoPlayerManager seekToTime:playTime];
-    NSLog(@"SeekTo:%zds",playTime);
-}
-
 
 - (void)show{
 

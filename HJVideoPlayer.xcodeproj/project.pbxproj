@@ -35,6 +35,7 @@
 		D2B1A91A2022E58D00619703 /* AppDelegate+HJVideoRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9192022E58D00619703 /* AppDelegate+HJVideoRotation.m */; };
 		D2B1A91F2022E5B700619703 /* HJFastForwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A91C2022E5B700619703 /* HJFastForwardView.m */; };
 		D2B1A9202022E5B700619703 /* HJCircleLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A91E2022E5B700619703 /* HJCircleLoading.m */; };
+		D2B1A9232022F24700619703 /* HJVideoPlayTimeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9222022F24700619703 /* HJVideoPlayTimeRecord.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,8 @@
 		D2B1A91C2022E5B700619703 /* HJFastForwardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJFastForwardView.m; sourceTree = "<group>"; };
 		D2B1A91D2022E5B700619703 /* HJFastForwardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJFastForwardView.h; sourceTree = "<group>"; };
 		D2B1A91E2022E5B700619703 /* HJCircleLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCircleLoading.m; sourceTree = "<group>"; };
+		D2B1A9212022F24700619703 /* HJVideoPlayTimeRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayTimeRecord.h; sourceTree = "<group>"; };
+		D2B1A9222022F24700619703 /* HJVideoPlayTimeRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayTimeRecord.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +148,8 @@
 			children = (
 				D298D39620207D1300AB2DD4 /* HJVideoConfigModel.h */,
 				D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */,
+				D2B1A9212022F24700619703 /* HJVideoPlayTimeRecord.h */,
+				D2B1A9222022F24700619703 /* HJVideoPlayTimeRecord.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -425,6 +430,7 @@
 				D2B1A91A2022E58D00619703 /* AppDelegate+HJVideoRotation.m in Sources */,
 				D29B1CBA200C41BE00E37C21 /* HJVideoPlayManager.m in Sources */,
 				D29B1CBE200C41BE00E37C21 /* HJVideoBottomView.m in Sources */,
+				D2B1A9232022F24700619703 /* HJVideoPlayTimeRecord.m in Sources */,
 				D29B1CBB200C41BE00E37C21 /* HJVideoMaskView.m in Sources */,
 				D298D39E2021905500AB2DD4 /* UIDevice+HJVideoRotation.m in Sources */,
 				D2A44E85201EC21900A2D2C3 /* HJVideoSettingView.m in Sources */,

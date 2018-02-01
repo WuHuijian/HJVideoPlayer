@@ -69,6 +69,7 @@
 #pragma mark - About UI
 - (void)setupUI{
     
+    kVideoPlayerManager.maxRecordCount = 2;
     HJVideoPlayerController *videoPlayer = [[HJVideoPlayerController alloc]initWithFrame:CGRectMake(0, 0, kVideoScreenW, VideoH(kVideoScreenW))];
     [self.view addSubview:videoPlayer.view];
     [self addChildViewController:videoPlayer];
