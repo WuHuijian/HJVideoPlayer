@@ -21,8 +21,6 @@
 @property (nonatomic, strong) HJFastForwardView *fastForwardView;
 /** 加载视图 */
 @property (nonatomic, strong) HJCircleLoading *circleLoading;
-/** 是否暂停中 */
-@property (nonatomic, assign) BOOL isPausing;
 
 @end
 

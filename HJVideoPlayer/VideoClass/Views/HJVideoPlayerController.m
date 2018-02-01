@@ -384,9 +384,8 @@ static const NSInteger maxSecondsForBottom = 5.f;
         }
     } monitoringBlock:^(CGFloat currentDuration) {
     
-        if(self.playStatus!= videoPlayer_pause){
+        if(weakSelf.playStatus!= videoPlayer_pause){
             weakSelf.playStatus = videoPlayer_playing;
-            
         }
 
         if(weakSelf.maskView.maskViewStatus != VideoMaskViewStatus_showPlayBtn) {
