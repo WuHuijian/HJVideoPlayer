@@ -35,9 +35,11 @@ typedef void(^videoPlayerPlayFailedClickBlock)(void);
 
 /** 快进视图 */
 @property (nonatomic, strong, readonly) HJFastForwardView *fastForwardView;
-
+/** 是否暂停中 */
+@property (nonatomic, assign, readonly) BOOL isPausing;
 /** 遮罩层显示状态 */
 @property (nonatomic, assign) VideoMaskViewStatus maskViewStatus;
+
 
 - (void)setPlayStatus:(BOOL)play;
 

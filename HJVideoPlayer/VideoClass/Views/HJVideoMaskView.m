@@ -21,6 +21,8 @@
 @property (nonatomic, strong) HJFastForwardView *fastForwardView;
 /** 加载视图 */
 @property (nonatomic, strong) HJCircleLoading *circleLoading;
+/** 是否暂停中 */
+@property (nonatomic, assign) BOOL isPausing;
 
 @end
 
@@ -145,7 +147,10 @@
 #pragma mark - Private methods
 
 #pragma mark - Public methods
-
+- (BOOL)isPausing{
+    
+    return !self.playBtn.selected;
+}
 #pragma mark - Delegate methods
 
 #pragma mark - getters and setters

@@ -341,10 +341,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
     [self.bottomView hide];
     
     //中间内容隐藏 暂停 播放失败 和播放结束 无需隐藏显示内容
-    if(self.playStatus != videoPlayer_pause &&
-       self.playStatus != videoPlayer_readyToPlay && 
+    if(self.playStatus != videoPlayer_readyToPlay && 
        self.maskView.maskViewStatus != VideoMaskViewStatus_showLoading &&
-       self.maskView.maskViewStatus != VideoMaskViewStatus_showPlayFailed){
+       self.maskView.maskViewStatus != VideoMaskViewStatus_showPlayFailed &&
+       !self.maskView.isPausing){
         [self.maskView hide];
     }
     
@@ -384,7 +384,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
         }
     } monitoringBlock:^(CGFloat currentDuration) {
     
-        weakSelf.playStatus = videoPlayer_playing;
+        if(self.playStatus!= videoPlayer_pause){
+            weakSelf.playStatus = videoPlayer_playing;
+            
+        }
 
         if(weakSelf.maskView.maskViewStatus != VideoMaskViewStatus_showPlayBtn) {
             weakSelf.maskView.maskViewStatus = VideoMaskViewStatus_showPlayBtn;
