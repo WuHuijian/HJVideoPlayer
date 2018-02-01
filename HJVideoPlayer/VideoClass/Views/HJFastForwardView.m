@@ -7,7 +7,7 @@
 //
 
 #import "HJFastForwardView.h"
-#import "HJTimeUtil.h"
+#import "HJVideoTimeUtil.h"
 
 @interface HJFastForwardView ()
 
@@ -118,7 +118,7 @@
 
     self.currentDuration = self.maxDuration * progress;
     
-    [self.progressLabel setText:[NSString stringWithFormat:@"%@/%@",[HJTimeUtil hmsStringWithFloat:self.currentDuration],[HJTimeUtil hmsStringWithFloat:self.maxDuration]]];
+    [self.progressLabel setText:[NSString stringWithFormat:@"%@/%@",[HJVideoTimeUtil hmsStringWithFloat:self.currentDuration],[HJVideoTimeUtil hmsStringWithFloat:self.maxDuration]]];
 }
 
 

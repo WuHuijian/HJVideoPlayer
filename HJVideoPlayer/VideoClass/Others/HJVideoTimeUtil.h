@@ -1,5 +1,5 @@
 //
-//  HJTimeUtil.h
+//  HJVideoTimeUtil.h
 //  HJVideoPlayer
 //
 //  Created by WHJ on 16/10/27.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface HJTimeUtil : NSObject
+@interface HJVideoTimeUtil : NSObject
 
 // 将秒数转换为时分秒字符串
 + (NSString *)hmsStringWithFloat:(CGFloat)seconds;

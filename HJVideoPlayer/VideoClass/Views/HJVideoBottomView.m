@@ -9,7 +9,7 @@
 #import "HJVideoBottomView.h"
 #import "HJVideoPlayManager.h"
 #import "HJBufferSlider.h"
-#import "HJTimeUtil.h"
+#import "HJVideoTimeUtil.h"
 #import "HJVideoPlayerHeader.h"
 #import "HJVideoConst.h"
 #import "HJVideoConfigModel.h"
@@ -282,7 +282,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     
     [self.bufferSlider setProgressValue:progressValue];
     
-    [self.playTimeLbl setText:[NSString stringWithFormat:@"%@",[HJTimeUtil hmsStringWithFloat:progressValue]]];
+    [self.playTimeLbl setText:[NSString stringWithFormat:@"%@",[HJVideoTimeUtil hmsStringWithFloat:progressValue]]];
 }
 
 - (void)setBufferValue:(CGFloat)bufferValue{
@@ -294,7 +294,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     
     [self.bufferSlider setMaximumValue:value];
     
-    [self.totalDurationLbl setText:[NSString stringWithFormat:@"%@",[HJTimeUtil hmsStringWithFloat:value]]];
+    [self.totalDurationLbl setText:[NSString stringWithFormat:@"%@",[HJVideoTimeUtil hmsStringWithFloat:value]]];
 }
 
 - (void)seekTo:(CGFloat)playTime{
