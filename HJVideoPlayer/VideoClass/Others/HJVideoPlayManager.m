@@ -9,6 +9,7 @@
 #import "HJVideoPlayManager.h"
 #import "HJVideoUIManager.h"
 #import "HJVideoPlayerHeader.h"
+#import "HJVideoConst.h"
 
 @interface HJVideoPlayManager ()
 // 播放相关

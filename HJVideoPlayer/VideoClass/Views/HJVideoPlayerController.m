@@ -16,9 +16,10 @@
 #import "HJViewFactory.h"
 #import "HJVideoMaskView.h"
 #import "HJVideoPlayerHeader.h"
-#import "AppDelegate+HJExtendion.h"
+#import "AppDelegate+HJVideoRotation.h"
 #import "HJVideoPlayerUtil.h"
 #import "UIDevice+HJVideoRotation.h"
+#import "HJVideoConst.h"
 
 typedef NS_ENUM(NSUInteger, MoveDirection) {
     MoveDirection_none = 0,
@@ -68,7 +69,7 @@ typedef NS_ENUM(NSUInteger, MoveDirection) {
 
 @end
 
-#define kFullScreenFrame CGRectMake(0 , 0, kScreenHeight, kScreenWidth)
+#define kFullScreenFrame CGRectMake(0 , 0, kVideoScreenH, kVideoScreenW)
 
 #define imgVideoBackImg [UIImage imageFromBundleWithName:@"video_bg.jpg"]
 #define imgPlay         [UIImage imageFromBundleWithName:@"video_play"]
@@ -177,7 +178,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     if (!self.configModel.onlyFullScreen) {
         [self.view setFrame:self.originFrame];
     }else{
-        [self.view setFrame:CGRectMake(0, 0,kScreenWidth, kScreenHeight)];
+        [self.view setFrame:CGRectMake(0, 0,kVideoScreenW, kVideoScreenH)];
     }
     
     [self.view setClipsToBounds:YES];
@@ -220,11 +221,11 @@ static const NSInteger maxSecondsForBottom = 5.f;
 
     
     // 设置topView
-    self.topView.frame = CGRectMake(0, 0, self.view.frame.size.width, kToolBarHalfHeight);
+    self.topView.frame = CGRectMake(0, 0, self.view.frame.size.width, kBottomBarHalfHeight);
     [self.view addSubview:self.topView];
     
     // 设置BottomView
-    self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - kToolBarHalfHeight, self.view.frame.size.width, kToolBarHalfHeight);
+    self.bottomView.frame = CGRectMake(0, CGRectGetHeight(self.view.frame) - kBottomBarHalfHeight, self.view.frame.size.width, kBottomBarHalfHeight);
     self.bottomView.configModel = self.configModel;
     [self.view addSubview:self.bottomView];
 }
@@ -238,7 +239,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     [UIView animateWithDuration:kDefaultAnimationDuration animations:^{
         if (changeFull) {
-            self.view.frame = kFrame;
+            self.view.frame = kVideoFullFrame;
         }else{
             self.view.frame = self.originFrame;
         }
@@ -590,10 +591,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     CGFloat subX = movePoint.x - self.startPoint.x;
     CGFloat subY = movePoint.y - self.startPoint.y;
-    CGFloat width  = self.view.width;
-    CGFloat height = self.view.height;
+    CGFloat width  = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height;
     
-    BOOL startInLeft = movePoint.x < self.view.width/2.f;
+    BOOL startInLeft = movePoint.x < width/2.f;
     
     
     if (self.moveDirection == MoveDirection_none) {

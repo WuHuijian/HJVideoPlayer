@@ -9,6 +9,7 @@
 #import "HJVideoTopView.h"
 #import "HJVideoPlayerHeader.h"
 #import "HJVideoConfigModel.h"
+#import "HJVideoConst.h"
 
 @interface HJVideoTopView ()
 
@@ -129,11 +130,14 @@
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
     
-    self.backBtn.frame = CGRectMake(0, 0, self.height, self.height);
+    CGFloat width = frame.size.width;
+    CGFloat height = frame.size.height;
+   
+    self.backBtn.frame = CGRectMake(0, 0, height, height);
     
-    self.listBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
+    self.listBtn.frame = CGRectMake(width-height, 0, height, height);
     
-    self.titleLabel.frame = CGRectMake(CGRectGetMaxX(self.backBtn.frame)+10, 0, self.width-CGRectGetMaxX(self.backBtn.frame)-self.listBtn.origin.y-20, self.height);
+    self.titleLabel.frame = CGRectMake(CGRectGetMaxX(self.backBtn.frame)+10, 0, width-CGRectGetMaxX(self.backBtn.frame)-self.listBtn.frame.origin.y-20, height);
 }
 
 - (void)setTitle:(NSString *)title{

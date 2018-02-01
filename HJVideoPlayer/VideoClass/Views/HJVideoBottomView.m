@@ -110,59 +110,49 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 
 - (void)refreshUI{
     
+    CGFloat width = CGRectGetWidth(self.frame);
+    CGFloat height = CGRectGetHeight(self.frame);
+    
     if (self.configModel && self.configModel.onlyFullScreen && !self.onlySlider){
         [self showOnlySlider:NO];
-        self.fullScreenBtn.frame = CGRectMake(self.width, 0, self.height, self.height);
-        self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, self.height);
-        self.playTimeLbl.centerY = self.fullScreenBtn.centerY;
-        self.playTimeLbl.font = [UIFont systemFontOfSize:kTimeLabelFontSize];
         
-        self.totalDurationLbl.frame = CGRectMake(self.fullScreenBtn.left - kTimeLabelWidth, 0, kTimeLabelWidth, self.height);
-        self.totalDurationLbl.centerY = self.playTimeLbl.centerY;
-        self.totalDurationLbl.font = self.playTimeLbl.font;
+        self.fullScreenBtn.frame = CGRectMake(width, 0, height, height);
         
-        self.bufferSlider.frame = CGRectMake(self.playTimeLbl.right, 0, self.totalDurationLbl.left-self.playTimeLbl.right, kSliderHeight);
-        self.bufferSlider.centerY = self.fullScreenBtn.centerY;
+        [self adjustSubvies];
         
     }else if (!self.onlySlider && !self.fullScreen){
         
         [self showOnlySlider:NO];
         
-        self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
+        self.fullScreenBtn.frame = CGRectMake(width-height, 0, height, height);
         
-        self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, self.height);
-        self.playTimeLbl.centerY = self.fullScreenBtn.centerY;
-        self.playTimeLbl.font = [UIFont systemFontOfSize:kTimeLabelFontSize];
-        
-        self.totalDurationLbl.frame = CGRectMake(self.fullScreenBtn.left - kTimeLabelWidth, 0, kTimeLabelWidth, self.height);
-        self.totalDurationLbl.centerY = self.playTimeLbl.centerY;
-        self.totalDurationLbl.font = self.playTimeLbl.font;
-        
-        self.bufferSlider.frame = CGRectMake(self.playTimeLbl.right, 0, self.totalDurationLbl.left-self.playTimeLbl.right, kSliderHeight);
-        self.bufferSlider.centerY = self.fullScreenBtn.centerY;
+        [self adjustSubvies];
         
     }else if (!self.onlySlider && self.fullScreen) {
       
         [self showOnlySlider:NO];
     
-        self.fullScreenBtn.frame = CGRectMake(self.width-self.height, 0, self.height, self.height);
+        self.fullScreenBtn.frame = CGRectMake(width-height, 0, height, height);
         
-        self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, self.height);
-        self.playTimeLbl.centerY = self.fullScreenBtn.centerY;
-        self.playTimeLbl.font = [UIFont systemFontOfSize:kTimeLabelFontSize];
+        [self adjustSubvies];
         
-        self.totalDurationLbl.frame = CGRectMake(self.fullScreenBtn.left - kTimeLabelWidth, 0, kTimeLabelWidth, self.height);
-        self.totalDurationLbl.centerY = self.playTimeLbl.centerY;
-        self.totalDurationLbl.font = self.playTimeLbl.font;
-        
-        self.bufferSlider.frame = CGRectMake(self.playTimeLbl.right, 0, self.totalDurationLbl.left-self.playTimeLbl.right, kSliderHeight);
-        self.bufferSlider.centerY = self.fullScreenBtn.centerY;
-    
     }else{
         
         [self showOnlySlider:YES];
     }
     
+}
+
+- (void)adjustSubvies{
+    
+    CGFloat width = CGRectGetWidth(self.frame);
+    CGFloat height = CGRectGetHeight(self.frame);
+    
+    self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, height);
+    
+    self.totalDurationLbl.frame = CGRectMake(width - height - kTimeLabelWidth, 0, kTimeLabelWidth, height);
+    
+    self.bufferSlider.frame = CGRectMake(CGRectGetMaxX(self.playTimeLbl.frame), (height - kSliderHeight)/2.f, CGRectGetMinX(self.totalDurationLbl.frame)-CGRectGetMaxX(self.playTimeLbl.frame), kSliderHeight);
 }
 
 
@@ -200,6 +190,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
         [_playTimeLbl setTextColor:[UIColor whiteColor]];
         [_playTimeLbl setTextAlignment:NSTextAlignmentRight];
         [_playTimeLbl setTextAlignment:NSTextAlignmentCenter];
+        [_playTimeLbl setFont:[UIFont systemFontOfSize:kTimeLabelFontSize]];
     }
     return _playTimeLbl;
 }
@@ -213,6 +204,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
         [_totalDurationLbl setText:@"00:00"];
         [_totalDurationLbl setTextColor:[UIColor whiteColor]];
         [_totalDurationLbl setTextAlignment:NSTextAlignmentCenter];
+        [_totalDurationLbl setFont:[UIFont systemFontOfSize:kTimeLabelFontSize]];
     }
     return _totalDurationLbl;
 }
@@ -220,7 +212,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 - (HJBufferSlider *)bufferSlider
 {
     if (!_bufferSlider) {
-        _bufferSlider = [[HJBufferSlider alloc]initWithFrame:CGRectMake(0, -kSliderHeight/2.f, self.width, kSliderHeight)];
+        _bufferSlider = [[HJBufferSlider alloc]initWithFrame:CGRectMake(0, -kSliderHeight/2.f, CGRectGetWidth(self.frame), kSliderHeight)];
         [_bufferSlider setProgressTrackColor:[UIColor yellowColor]];
         [_bufferSlider setBufferTrackColor:[UIColor whiteColor]];
         [_bufferSlider setMaxBufferTrackColor:[UIColor darkGrayColor]];
@@ -253,12 +245,6 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     return self.bufferSlider.maximumValue;
 }
 
-- (void)setFrame:(CGRect)frame{
-    
-    [super setFrame:frame];
-    
-   
-}
 
 #pragma mark - Event Response
 
@@ -320,7 +306,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 
 - (void)show{
 
-    CGFloat height = self.fullScreen?kToolBarFullHeight:kToolBarHalfHeight;
+    CGFloat height = self.fullScreen?kBottomBarFullHeight:kBottomBarHalfHeight;
     CGFloat width = CGRectGetWidth(self.superview.frame);
     CGFloat originY = CGRectGetHeight(self.superview.frame) - height;
     

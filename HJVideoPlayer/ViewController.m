@@ -8,7 +8,6 @@
 
 #import "ViewController.h"
 #import "HJVideoPlayerController.h"
-#import "HJDefines.h"
 #import "HJVideoListController.h"
 
 @interface ViewController ()

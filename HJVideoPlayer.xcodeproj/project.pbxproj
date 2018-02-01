@@ -19,7 +19,6 @@
 		D29B1CB1200C41BE00E37C21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C86200C41BE00E37C21 /* main.m */; };
 		D29B1CB2200C41BE00E37C21 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C87200C41BE00E37C21 /* AppDelegate.m */; };
 		D29B1CB3200C41BE00E37C21 /* HJBufferSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C8C200C41BE00E37C21 /* HJBufferSlider.m */; };
-		D29B1CB4200C41BE00E37C21 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C8E200C41BE00E37C21 /* UIView+Extension.m */; };
 		D29B1CB5200C41BE00E37C21 /* UIImage+getImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C8F200C41BE00E37C21 /* UIImage+getImage.m */; };
 		D29B1CB6200C41BE00E37C21 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D29B1C91200C41BE00E37C21 /* Info.plist */; };
 		D29B1CB7200C41BE00E37C21 /* HJViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C95200C41BE00E37C21 /* HJViewFactory.m */; };
@@ -31,7 +30,7 @@
 		D29B1CBD200C41BE00E37C21 /* HJPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA3200C41BE00E37C21 /* HJPlayerView.m */; };
 		D29B1CBE200C41BE00E37C21 /* HJVideoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA5200C41BE00E37C21 /* HJVideoBottomView.m */; };
 		D29B1CBF200C41BE00E37C21 /* HJVideoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA6200C41BE00E37C21 /* HJVideoTopView.m */; };
-		D29B1CCA200C52D000E37C21 /* AppDelegate+HJExtendion.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */; };
+		D29B1CCA200C52D000E37C21 /* AppDelegate+HJVideoRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CC9200C52D000E37C21 /* AppDelegate+HJVideoRotation.m */; };
 		D29B1CCE200C82B200E37C21 /* HJVideoListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CCD200C82B200E37C21 /* HJVideoListController.m */; };
 		D29B1CD1200CA60000E37C21 /* HJFastForwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CD0200CA60000E37C21 /* HJFastForwardView.m */; };
 		D29B1CD4200DA00B00E37C21 /* HJCircleLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CD3200DA00B00E37C21 /* HJCircleLoading.m */; };
@@ -71,18 +70,15 @@
 		D29B1C6E200C404900E37C21 /* HJVideoPlayerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerUITests.m; sourceTree = "<group>"; };
 		D29B1C70200C404900E37C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D29B1C7D200C41BD00E37C21 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D29B1C7F200C41BD00E37C21 /* HJDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJDefines.h; sourceTree = "<group>"; };
 		D29B1C80200C41BD00E37C21 /* images.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = images.bundle; sourceTree = "<group>"; };
 		D29B1C84200C41BE00E37C21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D29B1C85200C41BE00E37C21 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D29B1C86200C41BE00E37C21 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D29B1C87200C41BE00E37C21 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D29B1C89200C41BE00E37C21 /* HJBufferSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJBufferSlider.h; sourceTree = "<group>"; };
-		D29B1C8A200C41BE00E37C21 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		D29B1C8B200C41BE00E37C21 /* UIImage+getImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+getImage.h"; sourceTree = "<group>"; };
 		D29B1C8C200C41BE00E37C21 /* HJBufferSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJBufferSlider.m; sourceTree = "<group>"; };
 		D29B1C8D200C41BE00E37C21 /* HJSingletonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJSingletonService.h; sourceTree = "<group>"; };
-		D29B1C8E200C41BE00E37C21 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		D29B1C8F200C41BE00E37C21 /* UIImage+getImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+getImage.m"; sourceTree = "<group>"; };
 		D29B1C90200C41BE00E37C21 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		D29B1C91200C41BE00E37C21 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,8 +102,8 @@
 		D29B1CA6200C41BE00E37C21 /* HJVideoTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoTopView.m; sourceTree = "<group>"; };
 		D29B1CA7200C41BE00E37C21 /* HJVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerController.h; sourceTree = "<group>"; };
 		D29B1CC7200C444000E37C21 /* HJVideoPlayerHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerHeader.h; sourceTree = "<group>"; };
-		D29B1CC8200C52D000E37C21 /* AppDelegate+HJExtendion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+HJExtendion.h"; path = "../../../../../../Documents/AppDelegate+HJExtendion.h"; sourceTree = "<group>"; };
-		D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+HJExtendion.m"; path = "../../../../../../Documents/AppDelegate+HJExtendion.m"; sourceTree = "<group>"; };
+		D29B1CC8200C52D000E37C21 /* AppDelegate+HJVideoRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "AppDelegate+HJVideoRotation.h"; path = "../../../../../../Documents/AppDelegate+HJVideoRotation.h"; sourceTree = "<group>"; };
+		D29B1CC9200C52D000E37C21 /* AppDelegate+HJVideoRotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "AppDelegate+HJVideoRotation.m"; path = "../../../../../../Documents/AppDelegate+HJVideoRotation.m"; sourceTree = "<group>"; };
 		D29B1CCC200C82B200E37C21 /* HJVideoListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HJVideoListController.h; path = ../../../../../Documents/HJVideoListController.h; sourceTree = "<group>"; };
 		D29B1CCD200C82B200E37C21 /* HJVideoListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HJVideoListController.m; path = ../../../../../Documents/HJVideoListController.m; sourceTree = "<group>"; };
 		D29B1CCF200CA60000E37C21 /* HJFastForwardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HJFastForwardView.h; path = ../../../../../../Documents/HJFastForwardView.h; sourceTree = "<group>"; };
@@ -213,7 +209,6 @@
 		D29B1C7E200C41BD00E37C21 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D29B1C7F200C41BD00E37C21 /* HJDefines.h */,
 				D29B1C80200C41BD00E37C21 /* images.bundle */,
 			);
 			path = Resources;
@@ -223,11 +218,9 @@
 			isa = PBXGroup;
 			children = (
 				D29B1C89200C41BE00E37C21 /* HJBufferSlider.h */,
-				D29B1C8A200C41BE00E37C21 /* UIView+Extension.h */,
-				D29B1C8B200C41BE00E37C21 /* UIImage+getImage.h */,
 				D29B1C8C200C41BE00E37C21 /* HJBufferSlider.m */,
 				D29B1C8D200C41BE00E37C21 /* HJSingletonService.h */,
-				D29B1C8E200C41BE00E37C21 /* UIView+Extension.m */,
+				D29B1C8B200C41BE00E37C21 /* UIImage+getImage.h */,
 				D29B1C8F200C41BE00E37C21 /* UIImage+getImage.m */,
 			);
 			path = Dependent;
@@ -256,12 +249,13 @@
 				D29B1C99200C41BE00E37C21 /* HJViewFactory.h */,
 				D29B1C96200C41BE00E37C21 /* HJVideoUIManager.h */,
 				D29B1C9B200C41BE00E37C21 /* HJVideoUIManager.m */,
-				D29B1CC8200C52D000E37C21 /* AppDelegate+HJExtendion.h */,
-				D29B1CC9200C52D000E37C21 /* AppDelegate+HJExtendion.m */,
+				D29B1CC8200C52D000E37C21 /* AppDelegate+HJVideoRotation.h */,
+				D29B1CC9200C52D000E37C21 /* AppDelegate+HJVideoRotation.m */,
 				D298D392201F030500AB2DD4 /* HJVideoPlayerUtil.h */,
 				D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */,
 				D298D39C2021905500AB2DD4 /* UIDevice+HJVideoRotation.h */,
 				D298D39D2021905500AB2DD4 /* UIDevice+HJVideoRotation.m */,
+				D2A44E81201AD24100A2D2C3 /* HJVideoConst.h */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -283,7 +277,6 @@
 				D29B1CD0200CA60000E37C21 /* HJFastForwardView.m */,
 				D29B1CD2200DA00B00E37C21 /* HJCircleLoading.h */,
 				D29B1CD3200DA00B00E37C21 /* HJCircleLoading.m */,
-				D2A44E81201AD24100A2D2C3 /* HJVideoConst.h */,
 				D2A44E83201EC21900A2D2C3 /* HJVideoSettingView.h */,
 				D2A44E84201EC21900A2D2C3 /* HJVideoSettingView.m */,
 			);
@@ -434,7 +427,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29B1CB5200C41BE00E37C21 /* UIImage+getImage.m in Sources */,
-				D29B1CB4200C41BE00E37C21 /* UIView+Extension.m in Sources */,
 				D29B1CBC200C41BE00E37C21 /* HJVideoPlayerController.m in Sources */,
 				D29B1CB1200C41BE00E37C21 /* main.m in Sources */,
 				D29B1CBA200C41BE00E37C21 /* HJVideoPlayManager.m in Sources */,
@@ -449,7 +441,7 @@
 				D29B1CB3200C41BE00E37C21 /* HJBufferSlider.m in Sources */,
 				D29B1CB8200C41BE00E37C21 /* HJTimeUtil.m in Sources */,
 				D298D394201F030500AB2DD4 /* HJVideoPlayerUtil.m in Sources */,
-				D29B1CCA200C52D000E37C21 /* AppDelegate+HJExtendion.m in Sources */,
+				D29B1CCA200C52D000E37C21 /* AppDelegate+HJVideoRotation.m in Sources */,
 				D29B1CD4200DA00B00E37C21 /* HJCircleLoading.m in Sources */,
 				D29B1CB2200C41BE00E37C21 /* AppDelegate.m in Sources */,
 				D29B1CB9200C41BE00E37C21 /* HJVideoUIManager.m in Sources */,

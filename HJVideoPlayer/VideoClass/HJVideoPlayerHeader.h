@@ -9,9 +9,6 @@
 #ifndef HJVideoPlayerHeader_h
 #define HJVideoPlayerHeader_h
 
-#import "HJDefines.h"
-
-#import "UIView+Extension.h"
 
 #import "UIImage+getImage.h"
 
