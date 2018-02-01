@@ -14,7 +14,7 @@
 
 + (UIImage *)imageFromBundleWithName:(NSString *)imageName{
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"images" ofType:@".bundle"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"videoImages" ofType:@".bundle"];
     NSString *fullImageName = [path stringByAppendingPathComponent:imageName];
     return [UIImage imageNamed:fullImageName];
 }

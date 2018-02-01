@@ -204,10 +204,10 @@
 			isa = PBXGroup;
 			children = (
 				D29B1CC7200C444000E37C21 /* HJVideoPlayerHeader.h */,
-				D2B1A9042022E37E00619703 /* Resources */,
 				D298D39520207CF400AB2DD4 /* Models */,
 				D29B1C94200C41BE00E37C21 /* Others */,
 				D29B1C9D200C41BE00E37C21 /* Views */,
+				D2B1A9042022E37E00619703 /* Resources */,
 				D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */,
 			);
 			path = VideoClass;
