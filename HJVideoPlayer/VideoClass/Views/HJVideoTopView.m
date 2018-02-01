@@ -100,6 +100,7 @@
         [_listBtn setTitle:@"···" forState:UIControlStateNormal];
         [_listBtn setShowsTouchWhenHighlighted:NO];
         [_listBtn addTarget:self action:@selector(showOrCloseListAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_listBtn setHidden:YES];
     }
     return _listBtn;
 }
