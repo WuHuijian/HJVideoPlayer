@@ -34,6 +34,9 @@ typedef void(^VideoPlayerManagerBufferDurationBlock)(CGFloat bufferDuration);//�
 /** 最大播放记录数 */
 @property (nonatomic, assign) NSInteger maxRecordCount;
 
+/** 是否为本地视频*/
+@property (nonatomic, assign, readonly) BOOL            isLocalVideo;
+
 
 ServiceSingletonH(HJVideoPlayManager)
 
@@ -54,6 +57,8 @@ ServiceSingletonH(HJVideoPlayManager)
 - (void)play;
 
 - (void)pause;
+
+- (void)cancelBuffer;
 
 - (void)seekToTime:(CGFloat)second;
 

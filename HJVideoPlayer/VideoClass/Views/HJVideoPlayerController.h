@@ -53,6 +53,9 @@ typedef void (^VideoPlayerChangeScreenBtnClick)(BOOL changeFull);
 /** 暂停 */
 - (void)pause;
 
+/** 暂停播放和缓冲 */
+- (void)pausePlayAndBuffer;
+
 - (instancetype)initWithFrame:(CGRect)frame;
 
 @end

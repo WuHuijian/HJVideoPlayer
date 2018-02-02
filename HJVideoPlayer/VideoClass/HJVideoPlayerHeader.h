@@ -14,4 +14,6 @@
 
 #import "HJVideoPlayManager.h"
 
+#import "HJVideoConst.h"
+
 #endif /* HJVideoPlayerHeader_h */

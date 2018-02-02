@@ -10,9 +10,9 @@
 
 @interface HJBufferSlider : UIView
 
-@property (nonatomic, assign) float minimumValue;
+@property (nonatomic, assign) CGFloat minimumValue;
 
-@property (nonatomic, assign) float maximumValue;
+@property (nonatomic, assign) CGFloat maximumValue;
 
 @property (nonatomic, assign) CGFloat bufferValue;//缓冲进度值
 

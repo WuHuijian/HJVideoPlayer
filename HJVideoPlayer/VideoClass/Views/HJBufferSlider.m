@@ -15,6 +15,9 @@
 
 @property (nonatomic, strong) UISlider *bufferSlider;
 
+/** 缓冲slider背景色 */
+@property (nonatomic, strong) UIColor *bufferBgColor;
+
 @end
 
 @implementation HJBufferSlider
@@ -76,14 +79,14 @@
 
 #pragma mark - Setters/Getters
 
-- (void)setMinimumValue:(float)minimumValue{
+- (void)setMinimumValue:(CGFloat)minimumValue{
     
     _minimumValue = minimumValue;
     [self.progressSlider setMinimumValue:minimumValue];
     [self.bufferSlider setMinimumValue:minimumValue];
 }
 
-- (void)setMaximumValue:(float)maximumValue{
+- (void)setMaximumValue:(CGFloat)maximumValue{
     
     _maximumValue = maximumValue;
     [self.progressSlider setMaximumValue:maximumValue];
@@ -104,6 +107,12 @@
     
     _bufferValue = bufferValue;
     [self.bufferSlider setValue:bufferValue];
+    //临时解决缓冲完成但是进度条不充满问题
+    if(self.bufferSlider.maximumValue == bufferValue){
+        [self setMaxBufferTrackColor:self.bufferSlider.minimumTrackTintColor];
+    }else{
+        [self setMaxBufferTrackColor:self.bufferBgColor];
+    }
 }
 
 - (void)setBufferTrackColor:(UIColor *)bufferTrackColor{
@@ -117,6 +126,9 @@
     
     _maxBufferTrackColor = maxBufferTrackColor;
     [self.bufferSlider setMaximumTrackTintColor:maxBufferTrackColor];
+    if (!self.bufferBgColor) {
+        self.bufferBgColor = maxBufferTrackColor;
+    }
 }
 
 
@@ -125,7 +137,7 @@
     _bufferTrackImage = bufferTrackImage;
     [self.bufferSlider setMinimumTrackImage:bufferTrackImage forState:UIControlStateNormal];
 }
-
+ 
 
 - (void)setMaxBufferTrackImage:(UIImage *)maxBufferTrackImage{
 

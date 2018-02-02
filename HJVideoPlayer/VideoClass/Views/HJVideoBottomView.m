@@ -112,7 +112,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
         
         self.fullScreenBtn.frame = CGRectMake(width, 0, height, height);
         
-        [self adjustSubvies];
+        [self adjustSubviesOnlyFull:YES];
         
     }else if (!self.onlySlider && !self.fullScreen){
         
@@ -120,7 +120,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
         
         self.fullScreenBtn.frame = CGRectMake(width-height, 0, height, height);
         
-        [self adjustSubvies];
+        [self adjustSubviesOnlyFull:NO];
         
     }else if (!self.onlySlider && self.fullScreen) {
       
@@ -128,7 +128,7 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     
         self.fullScreenBtn.frame = CGRectMake(width-height, 0, height, height);
         
-        [self adjustSubvies];
+        [self adjustSubviesOnlyFull:NO];
         
     }else{
         
@@ -137,14 +137,14 @@ static const CGFloat kTimeLabelFontSize = 12.f;
     
 }
 
-- (void)adjustSubvies{
+- (void)adjustSubviesOnlyFull:(BOOL)onlyFull{
     
     CGFloat width = CGRectGetWidth(self.frame);
     CGFloat height = CGRectGetHeight(self.frame);
     
     self.playTimeLbl.frame = CGRectMake(0, 0, kTimeLabelWidth, height);
     
-    self.totalDurationLbl.frame = CGRectMake(width - height - kTimeLabelWidth, 0, kTimeLabelWidth, height);
+    self.totalDurationLbl.frame = CGRectMake(width - (onlyFull?0:height) - kTimeLabelWidth, 0, kTimeLabelWidth, height);
     
     self.bufferSlider.frame = CGRectMake(CGRectGetMaxX(self.playTimeLbl.frame), (height - kSliderHeight)/2.f, CGRectGetMinX(self.totalDurationLbl.frame)-CGRectGetMaxX(self.playTimeLbl.frame), kSliderHeight);
 }
@@ -251,7 +251,9 @@ static const CGFloat kTimeLabelFontSize = 12.f;
 
 - (void)sliderValueChanged:(UISlider *)sender{
     
-    [self seekTo:sender.value];
+    if(self.valueChangedBlock){
+        self.valueChangedBlock(sender.value);
+    }
 }
 
 

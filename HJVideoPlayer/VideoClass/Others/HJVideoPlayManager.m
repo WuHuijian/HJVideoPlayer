@@ -20,6 +20,9 @@
 /** 是否为本地视频*/
 @property (nonatomic ,assign) BOOL            isLocalVideo;
 
+/** 缓冲是否已暂停 */
+@property (nonatomic, assign) BOOL bufferPaused;
+
 
 /** 播放地址 */
 @property (nonatomic, copy) NSString * videoUrl;
@@ -117,6 +120,9 @@ ServiceSingletonM(HJVideoPlayManager)
 
 - (void)play
 {
+    if (self.bufferPaused) {
+        [self recoverBuffer];
+    }
     [self.player play];
     [self setIsPlaying:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPlayVideo object:nil];
@@ -130,6 +136,24 @@ ServiceSingletonM(HJVideoPlayManager)
     [self setIsPlaying:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationPauseVideo object:nil];
     NSLog(@"暂停播放！");
+}
+
+
+- (void)cancelBuffer{
+    
+    [self.playerItem cancelPendingSeeks];
+    [self.playerItem.asset cancelLoading];
+    [self.player replaceCurrentItemWithPlayerItem:nil];
+    [self setBufferPaused:YES];
+}
+
+
+- (void)recoverBuffer{
+    
+    if (self.playerItem) {
+        [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+        [self setBufferPaused:NO];
+    }
 }
 
 
@@ -263,6 +287,7 @@ ServiceSingletonM(HJVideoPlayManager)
     }
 
 }
+
 - (AVPlayer *)player
 {
     if(!_player){
@@ -283,7 +308,7 @@ ServiceSingletonM(HJVideoPlayManager)
 - (void)monitoringPlayback:(AVPlayerItem *)playerItem
 {
     //视频总时间
-    self.totalDuration = playerItem.duration.value / playerItem.duration.timescale;
+    self.totalDuration = (float)playerItem.duration.value / playerItem.duration.timescale;
     //视频准备播放回调
     if (self.readyBlock) {
         self.readyBlock(self.totalDuration);

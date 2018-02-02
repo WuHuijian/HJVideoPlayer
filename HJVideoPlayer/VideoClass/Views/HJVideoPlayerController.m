@@ -122,6 +122,8 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [self cancelTimer];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     //关闭屏幕旋转
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     delegate.orientationMask = UIInterfaceOrientationMaskPortrait;
@@ -138,7 +140,6 @@ static const NSInteger maxSecondsForBottom = 5.f;
 - (void)dealloc{
 
     NSLog(@"播放器已销毁");
-    [self cancelTimer];
     [kVideoPlayerManager reset];
 }
 
@@ -163,7 +164,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     
     if (_bottomView) {
         [self.bottomView setProgress:0];
-        [self.bottomView setMaximumValue:1];
+        [self.bottomView setMaximumValue:0];
         [self.bottomView setBufferValue:0];
     }
     
@@ -274,7 +275,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
     //看是否正在计时，若是则结束计时 否则开始计时
     if (self.timer) {
     
-        [self cancelTimer];
+        [self cancelTimerAndHideViews];
         
     }else{
         [self setSecondsForBottom:maxSecondsForBottom];
@@ -299,9 +300,17 @@ static const NSInteger maxSecondsForBottom = 5.f;
     }
 }
 
-- (void)cancelTimer{
+
+- (void)cancelTimerAndHideViews{
     
     [self hideSomeViews];
+    
+    [self cancelTimer];
+}
+
+
+- (void)cancelTimer{
+
     
     if (!self.timer) {
         return;
@@ -346,7 +355,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         self.secondsForBottom --;
         NSLog(@"隐藏底部栏:%zd",self.secondsForBottom);
         if (self.secondsForBottom <= 0) {
-            [self cancelTimer];
+            [self cancelTimerAndHideViews];
         }
 }
 
@@ -444,6 +453,15 @@ static const NSInteger maxSecondsForBottom = 5.f;
     });
 }
 
+
+- (void)pausePlayAndBuffer{
+
+    [self pause];
+    
+    [kVideoPlayerManager cancelBuffer];
+}
+
+
 #pragma mark - 事件响应
 - (void)applicationDidEnterBackground {
 
@@ -512,6 +530,10 @@ static const NSInteger maxSecondsForBottom = 5.f;
                 [UIDevice rotateToOrientation:UIInterfaceOrientationPortrait];
             }
             [weakSelf changeFullScreen:isFull];
+        };
+        
+        _bottomView.valueChangedBlock = ^(float value) {
+            [kVideoPlayerManager seekToTime:value];
         };
     }
     return _bottomView;
@@ -647,7 +669,7 @@ static const NSInteger maxSecondsForBottom = 5.f;
         [kVideoPlayerManager seekToTime:self.maskView.fastForwardView.currentDuration];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             self.playStatus = self.prePlayStatus;
-            [self cancelTimer];
+            [self cancelTimerAndHideViews];
         });
     }
     [self setMoveDirection:MoveDirection_none];

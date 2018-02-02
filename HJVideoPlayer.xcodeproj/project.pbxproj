@@ -7,35 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D21D155B2019E49B001D17E5 /* HJVideoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */; };
-		D298D394201F030500AB2DD4 /* HJVideoPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */; };
-		D298D39820207D1300AB2DD4 /* HJVideoConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */; };
-		D298D39E2021905500AB2DD4 /* UIDevice+HJVideoRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D298D39D2021905500AB2DD4 /* UIDevice+HJVideoRotation.m */; };
 		D29B1C64200C404900E37C21 /* HJVideoPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C63200C404900E37C21 /* HJVideoPlayerTests.m */; };
 		D29B1C6F200C404900E37C21 /* HJVideoPlayerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C6E200C404900E37C21 /* HJVideoPlayerUITests.m */; };
 		D29B1CAF200C41BE00E37C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29B1C84200C41BE00E37C21 /* Assets.xcassets */; };
 		D29B1CB1200C41BE00E37C21 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C86200C41BE00E37C21 /* main.m */; };
 		D29B1CB6200C41BE00E37C21 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D29B1C91200C41BE00E37C21 /* Info.plist */; };
-		D29B1CB7200C41BE00E37C21 /* HJViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C95200C41BE00E37C21 /* HJViewFactory.m */; };
-		D29B1CB8200C41BE00E37C21 /* HJVideoTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C97200C41BE00E37C21 /* HJVideoTimeUtil.m */; };
-		D29B1CB9200C41BE00E37C21 /* HJVideoUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C9B200C41BE00E37C21 /* HJVideoUIManager.m */; };
-		D29B1CBA200C41BE00E37C21 /* HJVideoPlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C9C200C41BE00E37C21 /* HJVideoPlayManager.m */; };
-		D29B1CBB200C41BE00E37C21 /* HJVideoMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1C9E200C41BE00E37C21 /* HJVideoMaskView.m */; };
-		D29B1CBC200C41BE00E37C21 /* HJVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA1200C41BE00E37C21 /* HJVideoPlayerController.m */; };
-		D29B1CBD200C41BE00E37C21 /* HJPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA3200C41BE00E37C21 /* HJPlayerView.m */; };
-		D29B1CBE200C41BE00E37C21 /* HJVideoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA5200C41BE00E37C21 /* HJVideoBottomView.m */; };
-		D29B1CBF200C41BE00E37C21 /* HJVideoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D29B1CA6200C41BE00E37C21 /* HJVideoTopView.m */; };
-		D2A44E85201EC21900A2D2C3 /* HJVideoSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A44E84201EC21900A2D2C3 /* HJVideoSettingView.m */; };
-		D2B1A9062022E37E00619703 /* videoImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2B1A9052022E37E00619703 /* videoImages.bundle */; };
-		D2B1A90A2022E43C00619703 /* UIImage+getImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9092022E43C00619703 /* UIImage+getImage.m */; };
-		D2B1A90D2022E45500619703 /* HJBufferSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A90B2022E45500619703 /* HJBufferSlider.m */; };
 		D2B1A9152022E53A00619703 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9112022E53A00619703 /* ViewController.m */; };
 		D2B1A9162022E53A00619703 /* HJVideoListController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9122022E53A00619703 /* HJVideoListController.m */; };
 		D2B1A9172022E53A00619703 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9132022E53A00619703 /* AppDelegate.m */; };
-		D2B1A91A2022E58D00619703 /* AppDelegate+HJVideoRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9192022E58D00619703 /* AppDelegate+HJVideoRotation.m */; };
-		D2B1A91F2022E5B700619703 /* HJFastForwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A91C2022E5B700619703 /* HJFastForwardView.m */; };
-		D2B1A9202022E5B700619703 /* HJCircleLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A91E2022E5B700619703 /* HJCircleLoading.m */; };
-		D2B1A9232022F24700619703 /* HJVideoPlayTimeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9222022F24700619703 /* HJVideoPlayTimeRecord.m */; };
+		D2B1A9B520243D7E00619703 /* videoImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D2B1A98820243D7E00619703 /* videoImages.bundle */; };
+		D2B1A9B620243D7E00619703 /* HJVideoAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2B1A98920243D7E00619703 /* HJVideoAssets.xcassets */; };
+		D2B1A9B720243D7E00619703 /* HJViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A98B20243D7E00619703 /* HJViewFactory.m */; };
+		D2B1A9B820243D7E00619703 /* HJVideoTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A98C20243D7E00619703 /* HJVideoTimeUtil.m */; };
+		D2B1A9B920243D7E00619703 /* UIDevice+HJVideoRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A98E20243D7E00619703 /* UIDevice+HJVideoRotation.m */; };
+		D2B1A9BA20243D7E00619703 /* AppDelegate+HJVideoRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A99220243D7E00619703 /* AppDelegate+HJVideoRotation.m */; };
+		D2B1A9BB20243D7E00619703 /* HJVideoPlayerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A99420243D7E00619703 /* HJVideoPlayerUtil.m */; };
+		D2B1A9BC20243D7E00619703 /* HJVideoUIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A99720243D7E00619703 /* HJVideoUIManager.m */; };
+		D2B1A9BD20243D7E00619703 /* HJVideoPlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A99A20243D7E00619703 /* HJVideoPlayManager.m */; };
+		D2B1A9BE20243D7E00619703 /* UIImage+getImage.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A99B20243D7E00619703 /* UIImage+getImage.m */; };
+		D2B1A9BF20243D7E00619703 /* HJVideoConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A99E20243D7E00619703 /* HJVideoConfigModel.m */; };
+		D2B1A9C020243D7E00619703 /* HJVideoPlayTimeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9A120243D7E00619703 /* HJVideoPlayTimeRecord.m */; };
+		D2B1A9C120243D7E00619703 /* HJVideoMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9A320243D7E00619703 /* HJVideoMaskView.m */; };
+		D2B1A9C220243D7E00619703 /* HJFastForwardView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9A520243D7E00619703 /* HJFastForwardView.m */; };
+		D2B1A9C320243D7E00619703 /* HJVideoSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9A820243D7E00619703 /* HJVideoSettingView.m */; };
+		D2B1A9C420243D7E00619703 /* HJCircleLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9A920243D7E00619703 /* HJCircleLoading.m */; };
+		D2B1A9C520243D7E00619703 /* HJVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9AA20243D7E00619703 /* HJVideoPlayerController.m */; };
+		D2B1A9C620243D7E00619703 /* HJPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9AC20243D7E00619703 /* HJPlayerView.m */; };
+		D2B1A9C720243D7E00619703 /* HJBufferSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9AE20243D7E00619703 /* HJBufferSlider.m */; };
+		D2B1A9C820243D7E00619703 /* HJVideoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9B020243D7E00619703 /* HJVideoBottomView.m */; };
+		D2B1A9C920243D7E00619703 /* HJVideoTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2B1A9B220243D7E00619703 /* HJVideoTopView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,13 +56,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HJVideoAssets.xcassets; sourceTree = "<group>"; };
-		D298D392201F030500AB2DD4 /* HJVideoPlayerUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerUtil.h; sourceTree = "<group>"; };
-		D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerUtil.m; sourceTree = "<group>"; };
-		D298D39620207D1300AB2DD4 /* HJVideoConfigModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoConfigModel.h; sourceTree = "<group>"; };
-		D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoConfigModel.m; sourceTree = "<group>"; };
-		D298D39C2021905500AB2DD4 /* UIDevice+HJVideoRotation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+HJVideoRotation.h"; sourceTree = "<group>"; };
-		D298D39D2021905500AB2DD4 /* UIDevice+HJVideoRotation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+HJVideoRotation.m"; sourceTree = "<group>"; };
 		D29B1C47200C404900E37C21 /* HJVideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HJVideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B1C5F200C404900E37C21 /* HJVideoPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HJVideoPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29B1C63200C404900E37C21 /* HJVideoPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerTests.m; sourceTree = "<group>"; };
@@ -73,49 +66,55 @@
 		D29B1C84200C41BE00E37C21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D29B1C86200C41BE00E37C21 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D29B1C91200C41BE00E37C21 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D29B1C92200C41BE00E37C21 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D29B1C95200C41BE00E37C21 /* HJViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJViewFactory.m; sourceTree = "<group>"; };
-		D29B1C96200C41BE00E37C21 /* HJVideoUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoUIManager.h; sourceTree = "<group>"; };
-		D29B1C97200C41BE00E37C21 /* HJVideoTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoTimeUtil.m; sourceTree = "<group>"; };
-		D29B1C98200C41BE00E37C21 /* HJVideoPlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayManager.h; sourceTree = "<group>"; };
-		D29B1C99200C41BE00E37C21 /* HJViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJViewFactory.h; sourceTree = "<group>"; };
-		D29B1C9A200C41BE00E37C21 /* HJVideoTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoTimeUtil.h; sourceTree = "<group>"; };
-		D29B1C9B200C41BE00E37C21 /* HJVideoUIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoUIManager.m; sourceTree = "<group>"; };
-		D29B1C9C200C41BE00E37C21 /* HJVideoPlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayManager.m; sourceTree = "<group>"; };
-		D29B1C9E200C41BE00E37C21 /* HJVideoMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoMaskView.m; sourceTree = "<group>"; };
-		D29B1C9F200C41BE00E37C21 /* HJPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJPlayerView.h; sourceTree = "<group>"; };
-		D29B1CA0200C41BE00E37C21 /* HJVideoBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoBottomView.h; sourceTree = "<group>"; };
-		D29B1CA1200C41BE00E37C21 /* HJVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerController.m; sourceTree = "<group>"; };
-		D29B1CA2200C41BE00E37C21 /* HJVideoTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoTopView.h; sourceTree = "<group>"; };
-		D29B1CA3200C41BE00E37C21 /* HJPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJPlayerView.m; sourceTree = "<group>"; };
-		D29B1CA4200C41BE00E37C21 /* HJVideoMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoMaskView.h; sourceTree = "<group>"; };
-		D29B1CA5200C41BE00E37C21 /* HJVideoBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoBottomView.m; sourceTree = "<group>"; };
-		D29B1CA6200C41BE00E37C21 /* HJVideoTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoTopView.m; sourceTree = "<group>"; };
-		D29B1CA7200C41BE00E37C21 /* HJVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerController.h; sourceTree = "<group>"; };
-		D29B1CC7200C444000E37C21 /* HJVideoPlayerHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerHeader.h; sourceTree = "<group>"; };
-		D2A44E81201AD24100A2D2C3 /* HJVideoConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoConst.h; sourceTree = "<group>"; };
-		D2A44E83201EC21900A2D2C3 /* HJVideoSettingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoSettingView.h; sourceTree = "<group>"; };
-		D2A44E84201EC21900A2D2C3 /* HJVideoSettingView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoSettingView.m; sourceTree = "<group>"; };
-		D2B1A9052022E37E00619703 /* videoImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = videoImages.bundle; sourceTree = "<group>"; };
-		D2B1A9072022E43B00619703 /* HJSingletonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJSingletonService.h; sourceTree = "<group>"; };
-		D2B1A9082022E43C00619703 /* UIImage+getImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+getImage.h"; sourceTree = "<group>"; };
-		D2B1A9092022E43C00619703 /* UIImage+getImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+getImage.m"; sourceTree = "<group>"; };
-		D2B1A90B2022E45500619703 /* HJBufferSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJBufferSlider.m; sourceTree = "<group>"; };
-		D2B1A90C2022E45500619703 /* HJBufferSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJBufferSlider.h; sourceTree = "<group>"; };
 		D2B1A90F2022E53A00619703 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D2B1A9102022E53A00619703 /* HJVideoListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoListController.h; sourceTree = "<group>"; };
 		D2B1A9112022E53A00619703 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		D2B1A9122022E53A00619703 /* HJVideoListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoListController.m; sourceTree = "<group>"; };
 		D2B1A9132022E53A00619703 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D2B1A9142022E53A00619703 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D2B1A9182022E58D00619703 /* AppDelegate+HJVideoRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+HJVideoRotation.h"; sourceTree = "<group>"; };
-		D2B1A9192022E58D00619703 /* AppDelegate+HJVideoRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+HJVideoRotation.m"; sourceTree = "<group>"; };
-		D2B1A91B2022E5B700619703 /* HJCircleLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCircleLoading.h; sourceTree = "<group>"; };
-		D2B1A91C2022E5B700619703 /* HJFastForwardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJFastForwardView.m; sourceTree = "<group>"; };
-		D2B1A91D2022E5B700619703 /* HJFastForwardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJFastForwardView.h; sourceTree = "<group>"; };
-		D2B1A91E2022E5B700619703 /* HJCircleLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCircleLoading.m; sourceTree = "<group>"; };
-		D2B1A9212022F24700619703 /* HJVideoPlayTimeRecord.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayTimeRecord.h; sourceTree = "<group>"; };
-		D2B1A9222022F24700619703 /* HJVideoPlayTimeRecord.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayTimeRecord.m; sourceTree = "<group>"; };
+		D2B1A98620243D7E00619703 /* HJVideoPlayerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerHeader.h; sourceTree = "<group>"; };
+		D2B1A98820243D7E00619703 /* videoImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = videoImages.bundle; sourceTree = "<group>"; };
+		D2B1A98920243D7E00619703 /* HJVideoAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HJVideoAssets.xcassets; sourceTree = "<group>"; };
+		D2B1A98B20243D7E00619703 /* HJViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJViewFactory.m; sourceTree = "<group>"; };
+		D2B1A98C20243D7E00619703 /* HJVideoTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoTimeUtil.m; sourceTree = "<group>"; };
+		D2B1A98D20243D7E00619703 /* HJVideoPlayerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerUtil.h; sourceTree = "<group>"; };
+		D2B1A98E20243D7E00619703 /* UIDevice+HJVideoRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+HJVideoRotation.m"; sourceTree = "<group>"; };
+		D2B1A98F20243D7E00619703 /* HJVideoUIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoUIManager.h; sourceTree = "<group>"; };
+		D2B1A99020243D7E00619703 /* HJVideoConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoConst.h; sourceTree = "<group>"; };
+		D2B1A99120243D7E00619703 /* HJVideoPlayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayManager.h; sourceTree = "<group>"; };
+		D2B1A99220243D7E00619703 /* AppDelegate+HJVideoRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+HJVideoRotation.m"; sourceTree = "<group>"; };
+		D2B1A99320243D7E00619703 /* UIImage+getImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+getImage.h"; sourceTree = "<group>"; };
+		D2B1A99420243D7E00619703 /* HJVideoPlayerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerUtil.m; sourceTree = "<group>"; };
+		D2B1A99520243D7E00619703 /* HJVideoTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoTimeUtil.h; sourceTree = "<group>"; };
+		D2B1A99620243D7E00619703 /* HJViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJViewFactory.h; sourceTree = "<group>"; };
+		D2B1A99720243D7E00619703 /* HJVideoUIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoUIManager.m; sourceTree = "<group>"; };
+		D2B1A99820243D7E00619703 /* UIDevice+HJVideoRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+HJVideoRotation.h"; sourceTree = "<group>"; };
+		D2B1A99920243D7E00619703 /* HJSingletonService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJSingletonService.h; sourceTree = "<group>"; };
+		D2B1A99A20243D7E00619703 /* HJVideoPlayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayManager.m; sourceTree = "<group>"; };
+		D2B1A99B20243D7E00619703 /* UIImage+getImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+getImage.m"; sourceTree = "<group>"; };
+		D2B1A99C20243D7E00619703 /* AppDelegate+HJVideoRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+HJVideoRotation.h"; sourceTree = "<group>"; };
+		D2B1A99E20243D7E00619703 /* HJVideoConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoConfigModel.m; sourceTree = "<group>"; };
+		D2B1A99F20243D7E00619703 /* HJVideoPlayTimeRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayTimeRecord.h; sourceTree = "<group>"; };
+		D2B1A9A020243D7E00619703 /* HJVideoConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoConfigModel.h; sourceTree = "<group>"; };
+		D2B1A9A120243D7E00619703 /* HJVideoPlayTimeRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayTimeRecord.m; sourceTree = "<group>"; };
+		D2B1A9A320243D7E00619703 /* HJVideoMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoMaskView.m; sourceTree = "<group>"; };
+		D2B1A9A420243D7E00619703 /* HJBufferSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJBufferSlider.h; sourceTree = "<group>"; };
+		D2B1A9A520243D7E00619703 /* HJFastForwardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJFastForwardView.m; sourceTree = "<group>"; };
+		D2B1A9A620243D7E00619703 /* HJPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJPlayerView.h; sourceTree = "<group>"; };
+		D2B1A9A720243D7E00619703 /* HJVideoBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoBottomView.h; sourceTree = "<group>"; };
+		D2B1A9A820243D7E00619703 /* HJVideoSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoSettingView.m; sourceTree = "<group>"; };
+		D2B1A9A920243D7E00619703 /* HJCircleLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCircleLoading.m; sourceTree = "<group>"; };
+		D2B1A9AA20243D7E00619703 /* HJVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoPlayerController.m; sourceTree = "<group>"; };
+		D2B1A9AB20243D7E00619703 /* HJVideoTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoTopView.h; sourceTree = "<group>"; };
+		D2B1A9AC20243D7E00619703 /* HJPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJPlayerView.m; sourceTree = "<group>"; };
+		D2B1A9AD20243D7E00619703 /* HJFastForwardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJFastForwardView.h; sourceTree = "<group>"; };
+		D2B1A9AE20243D7E00619703 /* HJBufferSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJBufferSlider.m; sourceTree = "<group>"; };
+		D2B1A9AF20243D7E00619703 /* HJVideoMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoMaskView.h; sourceTree = "<group>"; };
+		D2B1A9B020243D7E00619703 /* HJVideoBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoBottomView.m; sourceTree = "<group>"; };
+		D2B1A9B120243D7E00619703 /* HJVideoSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoSettingView.h; sourceTree = "<group>"; };
+		D2B1A9B220243D7E00619703 /* HJVideoTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJVideoTopView.m; sourceTree = "<group>"; };
+		D2B1A9B320243D7E00619703 /* HJCircleLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCircleLoading.h; sourceTree = "<group>"; };
+		D2B1A9B420243D7E00619703 /* HJVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJVideoPlayerController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,17 +142,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D298D39520207CF400AB2DD4 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				D298D39620207D1300AB2DD4 /* HJVideoConfigModel.h */,
-				D298D39720207D1300AB2DD4 /* HJVideoConfigModel.m */,
-				D2B1A9212022F24700619703 /* HJVideoPlayTimeRecord.h */,
-				D2B1A9222022F24700619703 /* HJVideoPlayTimeRecord.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		D29B1C3E200C404900E37C21 = {
 			isa = PBXGroup;
 			children = (
@@ -195,85 +183,13 @@
 		D29B1C7C200C41BD00E37C21 /* HJVideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				D29B1C93200C41BE00E37C21 /* VideoClass */,
+				D2B1A98520243D7E00619703 /* VideoClass */,
 				D2B1A90E2022E53A00619703 /* ExampleDemo */,
 				D29B1C84200C41BE00E37C21 /* Assets.xcassets */,
 				D29B1C91200C41BE00E37C21 /* Info.plist */,
 				D29B1C86200C41BE00E37C21 /* main.m */,
-				D29B1C92200C41BE00E37C21 /* ViewController.h */,
 			);
 			path = HJVideoPlayer;
-			sourceTree = "<group>";
-		};
-		D29B1C93200C41BE00E37C21 /* VideoClass */ = {
-			isa = PBXGroup;
-			children = (
-				D29B1CC7200C444000E37C21 /* HJVideoPlayerHeader.h */,
-				D298D39520207CF400AB2DD4 /* Models */,
-				D29B1C94200C41BE00E37C21 /* Others */,
-				D29B1C9D200C41BE00E37C21 /* Views */,
-				D2B1A9042022E37E00619703 /* Resources */,
-				D21D155A2019E49B001D17E5 /* HJVideoAssets.xcassets */,
-			);
-			path = VideoClass;
-			sourceTree = "<group>";
-		};
-		D29B1C94200C41BE00E37C21 /* Others */ = {
-			isa = PBXGroup;
-			children = (
-				D2B1A9182022E58D00619703 /* AppDelegate+HJVideoRotation.h */,
-				D2B1A9192022E58D00619703 /* AppDelegate+HJVideoRotation.m */,
-				D2B1A9072022E43B00619703 /* HJSingletonService.h */,
-				D2B1A9082022E43C00619703 /* UIImage+getImage.h */,
-				D2B1A9092022E43C00619703 /* UIImage+getImage.m */,
-				D2A44E81201AD24100A2D2C3 /* HJVideoConst.h */,
-				D29B1C99200C41BE00E37C21 /* HJViewFactory.h */,
-				D29B1C95200C41BE00E37C21 /* HJViewFactory.m */,
-				D29B1C9A200C41BE00E37C21 /* HJVideoTimeUtil.h */,
-				D29B1C97200C41BE00E37C21 /* HJVideoTimeUtil.m */,
-				D29B1C98200C41BE00E37C21 /* HJVideoPlayManager.h */,
-				D29B1C9C200C41BE00E37C21 /* HJVideoPlayManager.m */,
-				D29B1C96200C41BE00E37C21 /* HJVideoUIManager.h */,
-				D29B1C9B200C41BE00E37C21 /* HJVideoUIManager.m */,
-				D298D392201F030500AB2DD4 /* HJVideoPlayerUtil.h */,
-				D298D393201F030500AB2DD4 /* HJVideoPlayerUtil.m */,
-				D298D39C2021905500AB2DD4 /* UIDevice+HJVideoRotation.h */,
-				D298D39D2021905500AB2DD4 /* UIDevice+HJVideoRotation.m */,
-			);
-			path = Others;
-			sourceTree = "<group>";
-		};
-		D29B1C9D200C41BE00E37C21 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D2B1A91B2022E5B700619703 /* HJCircleLoading.h */,
-				D2B1A91E2022E5B700619703 /* HJCircleLoading.m */,
-				D2B1A91D2022E5B700619703 /* HJFastForwardView.h */,
-				D2B1A91C2022E5B700619703 /* HJFastForwardView.m */,
-				D2B1A90C2022E45500619703 /* HJBufferSlider.h */,
-				D2B1A90B2022E45500619703 /* HJBufferSlider.m */,
-				D29B1CA2200C41BE00E37C21 /* HJVideoTopView.h */,
-				D29B1CA6200C41BE00E37C21 /* HJVideoTopView.m */,
-				D29B1CA0200C41BE00E37C21 /* HJVideoBottomView.h */,
-				D29B1CA5200C41BE00E37C21 /* HJVideoBottomView.m */,
-				D29B1CA4200C41BE00E37C21 /* HJVideoMaskView.h */,
-				D29B1C9E200C41BE00E37C21 /* HJVideoMaskView.m */,
-				D29B1C9F200C41BE00E37C21 /* HJPlayerView.h */,
-				D29B1CA3200C41BE00E37C21 /* HJPlayerView.m */,
-				D29B1CA7200C41BE00E37C21 /* HJVideoPlayerController.h */,
-				D29B1CA1200C41BE00E37C21 /* HJVideoPlayerController.m */,
-				D2A44E83201EC21900A2D2C3 /* HJVideoSettingView.h */,
-				D2A44E84201EC21900A2D2C3 /* HJVideoSettingView.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		D2B1A9042022E37E00619703 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				D2B1A9052022E37E00619703 /* videoImages.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		D2B1A90E2022E53A00619703 /* ExampleDemo */ = {
@@ -287,6 +203,88 @@
 				D2B1A9132022E53A00619703 /* AppDelegate.m */,
 			);
 			path = ExampleDemo;
+			sourceTree = "<group>";
+		};
+		D2B1A98520243D7E00619703 /* VideoClass */ = {
+			isa = PBXGroup;
+			children = (
+				D2B1A98620243D7E00619703 /* HJVideoPlayerHeader.h */,
+				D2B1A98720243D7E00619703 /* Resources */,
+				D2B1A98920243D7E00619703 /* HJVideoAssets.xcassets */,
+				D2B1A98A20243D7E00619703 /* Others */,
+				D2B1A99D20243D7E00619703 /* Models */,
+				D2B1A9A220243D7E00619703 /* Views */,
+			);
+			path = VideoClass;
+			sourceTree = "<group>";
+		};
+		D2B1A98720243D7E00619703 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D2B1A98820243D7E00619703 /* videoImages.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D2B1A98A20243D7E00619703 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				D2B1A98B20243D7E00619703 /* HJViewFactory.m */,
+				D2B1A98C20243D7E00619703 /* HJVideoTimeUtil.m */,
+				D2B1A98D20243D7E00619703 /* HJVideoPlayerUtil.h */,
+				D2B1A98E20243D7E00619703 /* UIDevice+HJVideoRotation.m */,
+				D2B1A98F20243D7E00619703 /* HJVideoUIManager.h */,
+				D2B1A99020243D7E00619703 /* HJVideoConst.h */,
+				D2B1A99120243D7E00619703 /* HJVideoPlayManager.h */,
+				D2B1A99220243D7E00619703 /* AppDelegate+HJVideoRotation.m */,
+				D2B1A99320243D7E00619703 /* UIImage+getImage.h */,
+				D2B1A99420243D7E00619703 /* HJVideoPlayerUtil.m */,
+				D2B1A99520243D7E00619703 /* HJVideoTimeUtil.h */,
+				D2B1A99620243D7E00619703 /* HJViewFactory.h */,
+				D2B1A99720243D7E00619703 /* HJVideoUIManager.m */,
+				D2B1A99820243D7E00619703 /* UIDevice+HJVideoRotation.h */,
+				D2B1A99920243D7E00619703 /* HJSingletonService.h */,
+				D2B1A99A20243D7E00619703 /* HJVideoPlayManager.m */,
+				D2B1A99B20243D7E00619703 /* UIImage+getImage.m */,
+				D2B1A99C20243D7E00619703 /* AppDelegate+HJVideoRotation.h */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		D2B1A99D20243D7E00619703 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D2B1A99E20243D7E00619703 /* HJVideoConfigModel.m */,
+				D2B1A99F20243D7E00619703 /* HJVideoPlayTimeRecord.h */,
+				D2B1A9A020243D7E00619703 /* HJVideoConfigModel.h */,
+				D2B1A9A120243D7E00619703 /* HJVideoPlayTimeRecord.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D2B1A9A220243D7E00619703 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D2B1A9A320243D7E00619703 /* HJVideoMaskView.m */,
+				D2B1A9A420243D7E00619703 /* HJBufferSlider.h */,
+				D2B1A9A520243D7E00619703 /* HJFastForwardView.m */,
+				D2B1A9A620243D7E00619703 /* HJPlayerView.h */,
+				D2B1A9A720243D7E00619703 /* HJVideoBottomView.h */,
+				D2B1A9A820243D7E00619703 /* HJVideoSettingView.m */,
+				D2B1A9A920243D7E00619703 /* HJCircleLoading.m */,
+				D2B1A9AA20243D7E00619703 /* HJVideoPlayerController.m */,
+				D2B1A9AB20243D7E00619703 /* HJVideoTopView.h */,
+				D2B1A9AC20243D7E00619703 /* HJPlayerView.m */,
+				D2B1A9AD20243D7E00619703 /* HJFastForwardView.h */,
+				D2B1A9AE20243D7E00619703 /* HJBufferSlider.m */,
+				D2B1A9AF20243D7E00619703 /* HJVideoMaskView.h */,
+				D2B1A9B020243D7E00619703 /* HJVideoBottomView.m */,
+				D2B1A9B120243D7E00619703 /* HJVideoSettingView.h */,
+				D2B1A9B220243D7E00619703 /* HJVideoTopView.m */,
+				D2B1A9B320243D7E00619703 /* HJCircleLoading.h */,
+				D2B1A9B420243D7E00619703 /* HJVideoPlayerController.h */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,9 +394,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D29B1CAF200C41BE00E37C21 /* Assets.xcassets in Resources */,
-				D21D155B2019E49B001D17E5 /* HJVideoAssets.xcassets in Resources */,
+				D2B1A9B520243D7E00619703 /* videoImages.bundle in Resources */,
+				D2B1A9B620243D7E00619703 /* HJVideoAssets.xcassets in Resources */,
 				D29B1CB6200C41BE00E37C21 /* Info.plist in Resources */,
-				D2B1A9062022E37E00619703 /* videoImages.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,29 +421,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2B1A9BE20243D7E00619703 /* UIImage+getImage.m in Sources */,
+				D2B1A9C320243D7E00619703 /* HJVideoSettingView.m in Sources */,
+				D2B1A9BA20243D7E00619703 /* AppDelegate+HJVideoRotation.m in Sources */,
+				D2B1A9B820243D7E00619703 /* HJVideoTimeUtil.m in Sources */,
+				D2B1A9C720243D7E00619703 /* HJBufferSlider.m in Sources */,
+				D2B1A9C920243D7E00619703 /* HJVideoTopView.m in Sources */,
+				D2B1A9C420243D7E00619703 /* HJCircleLoading.m in Sources */,
+				D2B1A9C120243D7E00619703 /* HJVideoMaskView.m in Sources */,
+				D2B1A9C820243D7E00619703 /* HJVideoBottomView.m in Sources */,
+				D2B1A9BB20243D7E00619703 /* HJVideoPlayerUtil.m in Sources */,
+				D2B1A9C620243D7E00619703 /* HJPlayerView.m in Sources */,
 				D2B1A9172022E53A00619703 /* AppDelegate.m in Sources */,
-				D2B1A90D2022E45500619703 /* HJBufferSlider.m in Sources */,
-				D29B1CBC200C41BE00E37C21 /* HJVideoPlayerController.m in Sources */,
 				D29B1CB1200C41BE00E37C21 /* main.m in Sources */,
-				D2B1A91A2022E58D00619703 /* AppDelegate+HJVideoRotation.m in Sources */,
-				D29B1CBA200C41BE00E37C21 /* HJVideoPlayManager.m in Sources */,
-				D29B1CBE200C41BE00E37C21 /* HJVideoBottomView.m in Sources */,
-				D2B1A9232022F24700619703 /* HJVideoPlayTimeRecord.m in Sources */,
-				D29B1CBB200C41BE00E37C21 /* HJVideoMaskView.m in Sources */,
-				D298D39E2021905500AB2DD4 /* UIDevice+HJVideoRotation.m in Sources */,
-				D2A44E85201EC21900A2D2C3 /* HJVideoSettingView.m in Sources */,
-				D2B1A9202022E5B700619703 /* HJCircleLoading.m in Sources */,
-				D29B1CB7200C41BE00E37C21 /* HJViewFactory.m in Sources */,
+				D2B1A9C520243D7E00619703 /* HJVideoPlayerController.m in Sources */,
+				D2B1A9BD20243D7E00619703 /* HJVideoPlayManager.m in Sources */,
+				D2B1A9BF20243D7E00619703 /* HJVideoConfigModel.m in Sources */,
 				D2B1A9162022E53A00619703 /* HJVideoListController.m in Sources */,
-				D29B1CB8200C41BE00E37C21 /* HJVideoTimeUtil.m in Sources */,
-				D298D394201F030500AB2DD4 /* HJVideoPlayerUtil.m in Sources */,
+				D2B1A9B920243D7E00619703 /* UIDevice+HJVideoRotation.m in Sources */,
+				D2B1A9B720243D7E00619703 /* HJViewFactory.m in Sources */,
 				D2B1A9152022E53A00619703 /* ViewController.m in Sources */,
-				D2B1A90A2022E43C00619703 /* UIImage+getImage.m in Sources */,
-				D29B1CB9200C41BE00E37C21 /* HJVideoUIManager.m in Sources */,
-				D29B1CBF200C41BE00E37C21 /* HJVideoTopView.m in Sources */,
-				D29B1CBD200C41BE00E37C21 /* HJPlayerView.m in Sources */,
-				D2B1A91F2022E5B700619703 /* HJFastForwardView.m in Sources */,
-				D298D39820207D1300AB2DD4 /* HJVideoConfigModel.m in Sources */,
+				D2B1A9BC20243D7E00619703 /* HJVideoUIManager.m in Sources */,
+				D2B1A9C220243D7E00619703 /* HJFastForwardView.m in Sources */,
+				D2B1A9C020243D7E00619703 /* HJVideoPlayTimeRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
